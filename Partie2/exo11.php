@@ -14,11 +14,18 @@
 
     <?php
         $date = "2018-02-23";
-
-        function formaterDateFR($date){
-            return date_create($date)->format('l j F Y');
+        $fmt = new IntlDateFormatter(
+            'fr_FR',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::NONE,
+            'Europe/Paris',
+            IntlDateFormatter::GREGORIAN
+        );
+        setlocale(LC_ALL, 'fr_FR');
+        function formaterDateFR($date, $fmt){
+            return datefmt_format(date_create($date)->format('l j F Y'), $fmt);
         }
-        echo formaterDateFR($date);
+        echo formaterDateFR($date, $fmt);
     ?>
     
 </body>
