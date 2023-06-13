@@ -13,13 +13,12 @@
     <h2>Résultat</h2>
 
     <?php
-        $timezone = 'Europe/Paris';
         $date = "2018-02-23";
 
-        function formaterDateFR($date, $timezone){
-            return date_create($date, new DateTimeZone()->)->format('l j F Y');
+        function formaterDateFR($date){
+            return date_create($date)->format('l j F Y');
         }
-        var_dump(formaterDateFR($date, $timezone));
+        echo formaterDateFR($date);
     ?>
     
 </body>

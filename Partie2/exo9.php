@@ -13,7 +13,11 @@
     <h2>Résultat</h2>
 
     <?php
-        $elements = ["Monsieur","Madame","Mademoiselle"];
+        $elements = [
+            "Monsieur",
+            "Madame",
+            "Mademoiselle"
+        ];
 
         function afficherRadio($elements){
             $result = "<div>";

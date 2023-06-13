@@ -14,7 +14,11 @@
 
     <?php
 
-        $elements = ["Monsieur","Madame","Mademoiselle"];
+        $elements = [
+            "Monsieur",
+            "Madame",
+            "Mademoiselle"
+        ];
 
         function alimenterListeDeroulante($elements){
             $result = "<select name='genre'>";

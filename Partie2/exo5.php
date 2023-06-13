@@ -13,7 +13,11 @@
     <h2>Résultat</h2>
 
     <?php
-        $nomsInput = ["Nom","Prénom","Ville"];
+        $nomsInput = [
+            "Nom",
+            "Prénom",
+            "Ville"
+        ];
 
         function createTextInputs($array) {
             $result = "";
