@@ -50,7 +50,7 @@
         function afficherFormation($formations){
             $result = "";
             foreach ($formations as $key) {
-                $result .= "<label for='$key'>$key</label><input type='radio' name='$key'></input><br>";
+                $result .= "<label for='$key'>$key</label><input type='radio' name='formation'></input><br>";
             }
             $result .= "<button type='submit'>Valider";
             return $result . "<br>";
@@ -60,7 +60,7 @@
             $result .= afficherSexe($sexe);
             $result .= afficherInfos($infos);
             $result .= afficherFormation($formations);
-            return $result;
+            return $result . "</div>";
         }
 
         echo afficherFormulaire($infos, $sexe, $formations, $result);
