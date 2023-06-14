@@ -14,19 +14,15 @@
 
     <?php
         $elements = [
-            "choix 1"=>"non", 
-            "choix 2"=>"oui",
-            "choix 3"=>"oui"
+            "choix 1"=>"", 
+            "choix 2"=>"checked",
+            "choix 3"=>"checked"
         ];
 
         function genererCheckbox($elements){
-            $result = "";
+            $result = "<div>";
             foreach ($elements as $key => $value) {
-                if($value == "oui"){
-                    $result .= "<div><input type='checkbox' checked>$key</input>";
-                }else{
-                    $result .= "<input type='checkbox'>$key</input>";
-                }
+                $result .= "<label for='$key'><input type='checkbox' $value>$key</input>";
             }
             return $result . "</div>";
         }

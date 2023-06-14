@@ -30,26 +30,40 @@
             "adresse-mail",
             "ville"
         ];
+        $result = "<div>";
 
-        function afficherRadio($sexe, $formations, $infos){
-            $result = "<div>";
-            foreach ($infos as $key) {
-                $result .= "<p>$key</p>";
-                $result .= "<input type='text' placeholder='$key'>";
-            }
+        function afficherSexe($sexe){
+            $result = "";
             $result .= "<select name='genre'>";
             foreach ($sexe as $key) {
                 $result .= "<option value='$key'>$key</option>";
             }
-            foreach ($formations as $key) {
-                $result .= "<input type='radio'>$key</input>";
+            return $result . "</select><br>";
+        }
+        function afficherInfos($infos){
+            $result = "";
+            foreach ($infos as $key) {
+                $result .= "<label for='$key'>$key<br></label><input type='text' placeholder='$key' name='$key'></input><br>";
             }
-            $result .= "<button type='submit'>Valider
-                            </div>";
+            return $result;
+        }
+        function afficherFormation($formations){
+            $result = "";
+            foreach ($formations as $key) {
+                $result .= "<label for='$key'>$key</label><input type='radio' name='$key'></input><br>";
+            }
+            $result .= "<button type='submit'>Valider";
+            return $result . "<br>";
+        }
+
+        function afficherFormulaire($infos, $sexe, $formations, $result){
+            $result .= afficherSexe($sexe);
+            $result .= afficherInfos($infos);
+            $result .= afficherFormation($formations);
             return $result;
         }
 
-        echo afficherRadio($sexe, $formations, $infos);
+        echo afficherFormulaire($infos, $sexe, $formations, $result);
 
     ?>
     

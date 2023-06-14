@@ -22,7 +22,7 @@
         function afficherRadio($elements){
             $result = "<div>";
             foreach ($elements as $key) {
-                $result .= "<input type='radio'>$key</input>";
+                $result .= "<label for='radio'>$key<input type='radio' name='radio'></input>";
             }
             return $result . "</div>";
         }

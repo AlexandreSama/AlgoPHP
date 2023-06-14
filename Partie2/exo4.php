@@ -31,11 +31,11 @@
                             <th>LIEN WIKI</th>
                         </tr>
                     </thead><tbody>";
-            foreach ($capitales as $key => $value) {
+            foreach ($capitales as $pays => $capitale) {
                 $result .= "<tr>
-                        <td>$key</td>
-                        <td>$value</td>
-                        <td><a href='https://fr.wikipedia.org/wiki/$value' target=_blank>Lien</a></td>
+                        <td>$pays</td>
+                        <td>$capitale</td>
+                        <td><a href='https://fr.wikipedia.org/wiki/$capitale' target=_blank>Lien</a></td>
                     </tr>";
             }
             $result .= "</tbody></table>";

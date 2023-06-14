@@ -22,8 +22,7 @@
         function createTextInputs($array) {
             $result = "";
             foreach ($array as $key) {
-                $result .= "<p>$key</p>";
-                $result .= "<input type='text' placeholder='$key'>";
+                $result .= "<label for='$key'>$key</label><input type='text' placeholder='$key' name='$key'>";
             }
             return $result;
         }

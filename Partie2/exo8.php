@@ -21,7 +21,7 @@
             $i = 1;
             while ($i <= $time) {
                 $result .= "<img src='$url'>";
-                $i = $i +1;
+                $i++;
             }
             return $result;
         }

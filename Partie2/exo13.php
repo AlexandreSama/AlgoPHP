@@ -15,53 +15,111 @@
     <?php
         class Voiture{
             private string $marque;
-            private string $modèle;
+            private string $modele;
             private int $nbPortes;
             private int $vitesseActuelle;
+            private int $vehicleState;
 
-            public function __construct(string $marque, string $modèle, int $nbPortes, int $vitesseActuelle, int $vehicleState) {
+            public function __construct(string $marque, string $modele, int $nbPortes) {
                 $this->marque = $marque;
-                $this->modèle = $modèle;
+                $this->modele = $modele;
                 $this->nbPortes = $nbPortes;
-                $this->vitesseActuelle = $vitesseActuelle;
-                $this->vehicleState = $vehicleState
+                $this->vitesseActuelle = 0;
+                $this->vehicleState = 0;
             }
 
-            public function getMarque(): string {
+            public function getMarque(){
                 return $this->marque;
             }
 
-            public function getModèle(): string {
-                return $this->modèle;
+            public function getModele(){
+                return $this->modele;
             }
 
-            public function getNbPortes(): int {
+            public function getNbPortes(){
                 return $this->nbPortes;
             }
 
-            public function getVitesseActuelle(): int {
+            public function getVitesseActuelle() {
                 return $this->vitesseActuelle;
             }
+            public function getVehicleState(){
+                return $this->vehicleState;
+            }
 
-            public function setMarque(string $marque): string{
+            public function getVehicleInfos(){
+                $infos = "";
+                if($this->getVehicleState() == 1){
+                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est démarré <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle() . " Km / h";
+                }else{
+                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est à l'arrêt <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle() . " Km / h";
+                }
+                return $infos;
+            }
+
+
+            public function setMarque(string $marque){
                 $this->marque = $marque;
             }
-            public function setModèle(string $modèle): string{
-                $this->modèle = $modèle;
+            public function setModele(string $modele){
+                $this->modele = $modele;
             }
-            public function setNbPortes(int $nbPortes): int{
+            public function setNbPortes(int $nbPortes){
                 $this->nbPortes = $nbPortes;
             }
-            public function setVitesseActuelle(): int{
-                $this->vitesseActuelle = 0;
+            public function setVehicleState(){
+                $state = "";
+                if($this->getVehicleState() == 1){
+                    $this->vehicleState = 0;
+                    $state = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " est stoppé <br>";
+                }else{
+                    $this->vehicleState = 1;
+                    $state =  "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " démarre <br>";
+                }
+                return $state;
             }
-
+            public function setAcceleration(int $newSpeed){
+                $acceleration = "";
+                if($this->getVehicleState() == 1){
+                    $this->vitesseActuelle = $this->vitesseActuelle + $newSpeed;
+                    $acceleration = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " accélére de " . $this->vitesseActuelle . " Km/h<br>";
+                }else{
+                    $acceleration = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " veut accélérer de " . $newSpeed . " Km/h mais le véhicule n'est pas démarré ! <br>";
+                }
+                return $acceleration;
+            }
+            public function setFrein(int $speedBrake){
+                $currentSpeed = "";
+                if($this->vitesseActuelle - $speedBrake >= 0){
+                    $this->vitesseActuelle = $this->vitesseActuelle - $speedBrake;
+                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " veut freiner de " . $speedBrake . " Km/h<br>";
+                }else{
+                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " freine de " . $speedBrake . " et cale <br>";
+                }
+                return $currentSpeed;
+            }
             
 
             public function __toString(){
-                return $this->getMarque().''. $this->getModèle().''. $this->getNbPortes().''. $this->getVitesseActuel
+                return $this->getMarque().''. $this->getModele().''. $this->getNbPortes().''. $this->getVitesseActuelle();
             }
         }
+
+        $vehicle1 = new Voiture('Peugeot', '408', 5);
+        $vehicle2 = new Voiture('Citroen', 'C4', 3);
+        echo $vehicle1->setVehicleState();
+        echo $vehicle1->setAcceleration(50);
+        echo $vehicle2->setVehicleState();
+        echo $vehicle2->setVehicleState();
+        echo $vehicle2->setAcceleration(20);
+        echo "La vitesse du véhicule " . $vehicle1->getMarque() . " " . $vehicle1->getModele() . " est de : " . $vehicle1->getVitesseActuelle() . " Km / h <br>";
+        echo "La vitesse du véhicule " . $vehicle2->getMarque() . " " . $vehicle2->getModele() . " est de : " . $vehicle2->getVitesseActuelle() . " Km / h <br>";
+        echo $vehicle1->setFrein(19);
+        echo "La vitesse du véhicule " . $vehicle1->getMarque() . " " . $vehicle1->getModele() . " est de : " . $vehicle1->getVitesseActuelle() . " Km / h <br><br>";
+        echo "Infos véhicule 1 <br> *************************************** <br>";
+        echo $vehicle1->getVehicleInfos() . "<br><br>";
+        echo "Infos véhicule 2 <br> *************************************** <br>";
+        echo $vehicle2->getVehicleInfos();
     ?>
     
 </body>
