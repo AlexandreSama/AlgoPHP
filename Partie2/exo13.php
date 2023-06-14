@@ -41,7 +41,7 @@
             }
 
             public function getVitesseActuelle() {
-                return $this->vitesseActuelle;
+                return "La vitesse du véhicule " . $this->getMarque() . " " . $this->getModele() . " est de : " . $this->vitesseActuelle . " Km / h";
             }
             public function getVehicleState(){
                 return $this->vehicleState;
@@ -49,11 +49,16 @@
 
             public function getVehicleInfos(){
                 $infos = "";
+
                 if($this->getVehicleState() == 1){
-                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est démarré <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle() . " Km / h";
+
+                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est démarré <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle();
+                    
                 }else{
-                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est à l'arrêt <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle() . " Km / h";
+
+                    $infos = "Nom et modèle du véhicule : " . $this->getMarque() . " " . $this->getModele() . " <br> Nombre de porte : " . $this->getNbPortes() . " <br> Le véhicule " . $this->getMarque() . " est à l'arrêt <br> Sa vitesse actuelle est de : " . $this->getVitesseActuelle();
                 }
+
                 return $infos;
             }
 
@@ -69,33 +74,48 @@
             }
             public function setVehicleState(){
                 $state = "";
+
                 if($this->getVehicleState() == 1){
+
                     $this->vehicleState = 0;
-                    $state = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " est stoppé <br>";
+                    $state = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " est stoppé";
+
                 }else{
+
                     $this->vehicleState = 1;
-                    $state =  "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " démarre <br>";
+                    $state =  "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " démarre";
                 }
+
                 return $state;
             }
             public function setAcceleration(int $newSpeed){
                 $acceleration = "";
+
                 if($this->getVehicleState() == 1){
+
                     $this->vitesseActuelle = $this->vitesseActuelle + $newSpeed;
-                    $acceleration = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " accélére de " . $this->vitesseActuelle . " Km/h<br>";
+                    $acceleration = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " accélére de " . $this->vitesseActuelle . " Km/h";
+
                 }else{
-                    $acceleration = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " veut accélérer de " . $newSpeed . " Km/h mais le véhicule n'est pas démarré ! <br>";
+
+                    $acceleration = "Le véhicule " . $this->getMarque() . " " .  $this->getModele() . " veut accélérer de " . $newSpeed . " Km/h mais le véhicule n'est pas démarré !";
                 }
+
                 return $acceleration;
             }
             public function setFrein(int $speedBrake){
                 $currentSpeed = "";
+
                 if($this->vitesseActuelle - $speedBrake >= 0){
+
                     $this->vitesseActuelle = $this->vitesseActuelle - $speedBrake;
-                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " veut freiner de " . $speedBrake . " Km/h<br>";
+                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " veut freiner de " . $speedBrake . " Km/h";
+
                 }else{
-                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " freine de " . $speedBrake . " et cale <br>";
+
+                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " freine de " . $speedBrake . " et cale";
                 }
+
                 return $currentSpeed;
             }
             
@@ -107,15 +127,18 @@
 
         $vehicle1 = new Voiture('Peugeot', '408', 5);
         $vehicle2 = new Voiture('Citroen', 'C4', 3);
-        echo $vehicle1->setVehicleState();
-        echo $vehicle1->setAcceleration(50);
-        echo $vehicle2->setVehicleState();
-        echo $vehicle2->setVehicleState();
-        echo $vehicle2->setAcceleration(20);
-        echo "La vitesse du véhicule " . $vehicle1->getMarque() . " " . $vehicle1->getModele() . " est de : " . $vehicle1->getVitesseActuelle() . " Km / h <br>";
-        echo "La vitesse du véhicule " . $vehicle2->getMarque() . " " . $vehicle2->getModele() . " est de : " . $vehicle2->getVitesseActuelle() . " Km / h <br>";
-        echo $vehicle1->setFrein(19);
-        echo "La vitesse du véhicule " . $vehicle1->getMarque() . " " . $vehicle1->getModele() . " est de : " . $vehicle1->getVitesseActuelle() . " Km / h <br><br>";
+        echo $vehicle1->setVehicleState() . "<br>";
+        echo $vehicle1->setAcceleration(50) . "<br>";
+
+        echo $vehicle2->setVehicleState() . "<br>";
+        echo $vehicle2->setVehicleState() . "<br>";
+        echo $vehicle2->setAcceleration(20) . "<br>";
+
+        echo $vehicle1->getVitesseActuelle() . "<br>";
+        echo $vehicle2->getVitesseActuelle() . "<br>";
+        echo $vehicle1->setFrein(19) . "<br>";
+        echo $vehicle1->getVitesseActuelle() . "<br><br>";
+
         echo "Infos véhicule 1 <br> *************************************** <br>";
         echo $vehicle1->getVehicleInfos() . "<br><br>";
         echo "Infos véhicule 2 <br> *************************************** <br>";

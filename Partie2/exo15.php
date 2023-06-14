@@ -13,7 +13,10 @@
     <h2>Résultat</h2>
 
     <?php
-        $emailArray = ["elan@elan-formation.fr", "contact@elan"];
+        $emailArray = [
+            "elan@elan-formation.fr",
+            "contact@elan"
+        ];
         // Valider l'email
         foreach ($emailArray as $email) {
             if(filter_var($email, FILTER_VALIDATE_EMAIL)){
