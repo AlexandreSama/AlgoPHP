@@ -9,16 +9,19 @@
     <h1>Exercice 14</h1>
 
     <p>Créer une classe Voiture possédant 2 propriétés (marque et modèle) ainsi qu’une classe VoitureElec
-qui hérite (extends) de la classe Voiture et qui a une propriété supplémentaire (autonomie).
-Instancier une voiture « classique » et une voiture « électrique » ayant les caractéristiques
-suivantes :
-Peugeot 408 : $v1 = new Voiture("Peugeot","408");
-BMW i3 150 : $ve1 = new VoitureElec("BMW","I3",100);
-Votre programme de test devra afficher les informations des 2 voitures de la façon suivante : </p>
+    qui hérite (extends) de la classe Voiture et qui a une propriété supplémentaire (autonomie).
+    Instancier une voiture « classique » et une voiture « électrique » ayant les caractéristiques
+    suivantes :
+    Peugeot 408 : $v1 = new Voiture("Peugeot","408");
+    BMW i3 150 : $ve1 = new VoitureElec("BMW","I3",100);
+    Votre programme de test devra afficher les informations des 2 voitures de la façon suivante : </p>
 
     <h2>Résultat</h2>
 
     <?php
+    
+        /* The class "Voiture" defines a car object with properties for brand and model, as well as methods for
+        getting and setting those properties. */
         class Voiture{
             private string $marque;
             private string $modele;
@@ -51,6 +54,8 @@ Votre programme de test devra afficher les informations des 2 voitures de la fa�
             
         }
 
+        /* The class VoitureElec extends the class Voiture and adds a private property for autonomy and methods
+        to get and set it. */
         class VoitureElec extends Voiture{
             private int $autonomie;
 

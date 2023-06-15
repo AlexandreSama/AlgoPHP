@@ -15,36 +15,42 @@
     <?php
     echo "Affichage : <br>";
     class Personne {
-        //Variables
+        //Variables de la class. On peut soit les mettrent en private pour qu'elles
+        //Restent utilisable uniquement dans cet classe, en public pour qu'elles
+        //Soit utilisables hors de la class, ou en protected pour qu'elles soit
+        //Utilisable uniquement dans la class et avec le bon parent !
         private string $nom;
         private string $prenom;
         private DateTime $dateDeNaissance;
 
-        //Constructor
+        //Le Constructor permet de construire l'objet avec les variables cités plus haut. On les types 
+        //Pour éviter de mauvaises surprises.
         public function __construct(string $nom, string $prenom, string $dateDeNaissance) {
             $this->nom = $nom;
             $this->prenom = $prenom;
             $this->dateDeNaissance = new DateTime($dateDeNaissance);
         }
 
-        //Setters
+        //Les Setters permettent d'insérer ou de modifier les variables 
+        //D'un objet déjà crée sans devoir tout réecrire.
         function set_name(string $name){
             $this->nom = $name;
         }
 
-        function set_prenom($prenom){
+        function set_prenom(string $prenom){
             $this->prenom = $prenom;
         }
 
-        function set_dateDeNaissance($dateDeNaissance){
+        function set_dateDeNaissance(string $dateDeNaissance){
             $this->dateDeNaissance = $dateDeNaissance;
         }
 
-        //Getters
+        //Les Getters permettent de récupérer une information spécifique d'un objet sans
+        //Devoir récupérer toutes les informations de l'objet.
         function get_name():string {
             return $this->nom;
         }
-        function get_prenom() {
+        function get_prenom():string {
             return $this->prenom;
         }
 
@@ -57,7 +63,9 @@
             return date_diff($this->dateDeNaissance, $now)->format('%y');
         }
 
-        //Renvoi le résultat complet
+        //Cet fonction renvoi toutes les informations des Getters sous forme de string.
+        //Utile si l'on veut récupérer toutes les informations d'un objet sans devoir
+        //Appeler chaque Getter.
         public function __toString()
         {
             return $this->get_name() . ' ' . $this->get_prenom() . ' a ' . $this->get_age() . ' ans <br>';

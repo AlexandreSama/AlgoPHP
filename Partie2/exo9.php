@@ -8,7 +8,7 @@
 <body>
     <h1>Exercice 9</h1>
 
-    <p>9Créer une fonctionpersonnalisée permettant d’afficher des boutons radio avec un tableau de valeurs en paramètre("Monsieur","Madame","Mademoiselle").</p>
+    <p>9Créer une fonction personnalisée permettant d’afficher des boutons radio avec un tableau de valeurs en paramètre ("Monsieur","Madame","Mademoiselle").</p>
 
     <h2>Résultat</h2>
 
