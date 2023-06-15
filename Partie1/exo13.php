@@ -19,7 +19,7 @@
             echo $value . " ";
         }
         echo "<br>";
-        $moyenne = array_sum($notes); / count($notes);
+        $moyenne = array_sum($notes) / count($notes);
         echo "Sa moyenne est donc de : " . round($moyenne,2)
     ?>
     

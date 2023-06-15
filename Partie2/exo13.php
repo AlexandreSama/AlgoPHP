@@ -144,7 +144,7 @@
 
         echo $vehicle2->setVehicleState() . "<br>";
         echo $vehicle2->setVehicleState() . "<br>";
-        // echo $vehicle2->setVehicleState();
+        echo $vehicle2->setVehicleState();
         echo $vehicle2->setAcceleration(20) . "<br>";
         echo $vehicle2->setFrein(21) . "<br>";
 
