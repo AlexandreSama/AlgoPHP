@@ -16,16 +16,17 @@
             $this->comptes = [];
         }
 
-        
-
         /**
-         * Get the value of nom
+         * Set the value of ville
+         *
+         * @return  void
          */ 
-        public function getNom()
+        public function setVille($ville)
         {
-            return $this->nom;
+            $this->ville = $ville;
         }
 
+        
         /**
          * Set the value of nom
          *
@@ -34,14 +35,6 @@
         public function setNom($nom)
         {
             $this->nom = $nom;
-        }
-
-        /**
-         * Get the value of prenom
-         */ 
-        public function getPrenom()
-        {
-            return $this->prenom;
         }
 
         /**
@@ -55,14 +48,6 @@
         }
 
         /**
-         * Get the value of DateDeNaissance
-         */ 
-        public function getDateDeNaissance()
-        {
-            return $this->DateDeNaissance;
-        }
-
-        /**
          * Set the value of DateDeNaissance
          *
          * @return  void
@@ -72,11 +57,23 @@
             $this->DateDeNaissance = $DateDeNaissance;
         }
 
-        public function calculerAge(){
-            $now = new DateTime();
-            return date_diff($this->DateDeNaissance, $now)->format('%y');
+        /**
+         * Get the value of nom
+         */ 
+        public function getNom()
+        {
+            return $this->nom;
         }
 
+        /**
+         * Get the value of prenom
+         */ 
+        public function getPrenom()
+        {
+            return $this->prenom;
+        }
+
+        
         /**
          * Get the value of ville
          */ 
@@ -86,14 +83,18 @@
         }
 
         /**
-         * Set the value of ville
-         *
-         * @return  void
+         * Get the value of DateDeNaissance
          */ 
-        public function setVille($ville)
+        public function getDateDeNaissance()
         {
-            $this->ville = $ville;
+            return $this->DateDeNaissance;
         }
+
+        public function calculerAge(){
+            $now = new DateTime();
+            return date_diff($this->DateDeNaissance, $now)->format('%y');
+        }
+
         /**
          * Add an account to a titulaire
          *
@@ -104,6 +105,11 @@
             echo "Le compte a bien été ajouté ! <br><br>";
         }
 
+        /**
+         * Show informations of the titulaire
+         *
+         * @return  void
+         */ 
         public function showInfos(){
             echo "Nom / Prenom : " . $this->getNom() . " / " . $this->getPrenom() . " <br>";
             echo "Date de naissance / Age : " . $this->getDateDeNaissance()->format('Y-m-d') . " / " . $this->calculerAge() . " ans <br>";
@@ -112,7 +118,7 @@
             foreach ($this->comptes as $compte) {
                 echo "Etat du compte n°$i : <br>";
                 echo "Type de compte : " . $compte->libelle . " <br>";
-                echo "Solde du compte : " . $compte->solde . " €<br>";
+                echo "Solde du compte : " . $compte->solde . " " . $compte->devise . " <br>";
                 echo "Devise du compte : " . $compte->devise . " <br><br>";
                 $i++;
             } 

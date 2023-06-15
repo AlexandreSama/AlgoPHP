@@ -12,8 +12,8 @@
 
         $titulaire1 = new Titulaire("Doe", "John", "1980-07-20", "Selestat");
 
-        $compte1 = new Compte('Livret A', $titulaire1);
-        $compte2 = new Compte('Livret B', $titulaire1);
+        $compte1 = new Compte('Livret A', "€", $titulaire1);
+        $compte2 = new Compte('Livret B', "$", $titulaire1);
 
         //On ajoute un compte au titulaire
         $titulaire1->addAccount($compte1);
