@@ -61,7 +61,7 @@
         }
 
         public function __toString(){
-            return $this->getTitre().' '. $this->getAnnee().' '. $this->getNbPage().' '. $this->getPrice().' '. $this->getAuteur();
+            return $this->getTitre().' ('. $this->getAnnee().') : '. $this->getNbPage().' pages / '. $this->getPrice().' €';
         }
     }
 

@@ -20,7 +20,7 @@
         $livre4 = new Livre("Shining", 1977, 447, 16, $auteur);
 
 
-        echo "Livres de " . $auteur . "<br><br>";
+        echo "<h3>Livres de $auteur </h3>";
 
         echo $auteur->getBibliographie();
         
