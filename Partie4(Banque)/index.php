@@ -13,11 +13,8 @@
         $titulaire1 = new Titulaire("Doe", "John", "1980-07-20", "Selestat");
 
         $compte1 = new Compte('Livret A', "€", $titulaire1);
-        $compte2 = new Compte('Livret B', "$", $titulaire1);
+        $compte2 = new Compte('Compte courant', "$", $titulaire1);
 
-        //On ajoute un compte au titulaire
-        $titulaire1->addAccount($compte1);
-        $titulaire1->addAccount($compte2);
 
         //On montre les infos du titulaire
         $titulaire1->showInfos();
@@ -33,12 +30,16 @@
         echo "<br>";
 
         //On envoie de la monnaie au compte 1 a partir du compte 2 et on retire de l'argent du compte 2
-        $compte2->sendMoney($compte1, 45);
-        $compte2->withDraw(80);
+        $compte2->sendMoney($compte1, 300);
+        $compte1->sendMoney($compte2, 45);
+        $compte2->withDraw(200);
+        $compte1->withDraw(20);
         echo "<br>";
 
-        //On demande les infos du compte 1
+        //On demande les infos du compte 1 et du compte 2
         $compte1->showInfos();
+        echo "<br><br>";
+        $compte2->showInfos();
     ?>
 </body>
 </html>

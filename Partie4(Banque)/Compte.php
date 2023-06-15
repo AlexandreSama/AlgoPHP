@@ -12,6 +12,7 @@
             $this->solde = 0;
             $this->devise = $devise;
             $this->titulaire = $titulaire;
+            $this->titulaire->addAccount($this);
         }
 
         /**
@@ -82,10 +83,19 @@
          * @return  void
          */ 
         public function sendMoney($compteTo, $moneyToSend){
-            $compteTo->solde = $compteTo->solde + $moneyToSend;
-            echo "Le compte " . $compteTo->libelle . " a reçu " . $moneyToSend . " € du compte " . $this->libelle . "<br>";
-            echo "Solde du " . $this->libelle . " " . $this->solde . " " . $this->devise . " <br>";
-            echo "Solde du " . $compteTo->libelle . " " . $compteTo->solde . " " . $compteTo->devise . " <br><br>";
+            if($compteTo->getSolde() >= 0){
+                if($this->solde - $moneyToSend >= 0){
+                    $compteTo->solde = $compteTo->solde + $moneyToSend;
+                    $this->solde = $this->solde - $moneyToSend;
+                    echo "Le compte : " . $compteTo->libelle . " a reçu " . $moneyToSend . " € du compte : " . $this->libelle . "<br>";
+                    echo "Solde du " . $this->libelle . " : " . $this->solde . " " . $this->devise . " <br>";
+                    echo "Solde du " . $compteTo->libelle . " : " . $compteTo->solde . " " . $compteTo->devise . " <br><br>";
+                }else{
+                    echo "Impossible d'envoyer " . $moneyToSend . " " . $this->devise . " sur le compte : " . $this->libelle . " ! Vous seriez débiteur. <br>";
+                }
+            }else{
+                echo "Impossible d'envoyer " . $moneyToSend . " " . $this->devise . " sur le compte : " . $this->libelle . " ! Ce compte est débiteur !. <br>";
+            }
         }
 
         /**
@@ -94,9 +104,13 @@
          * @return  void
          */ 
         public function withDraw($moneyToWithdraw){
-            $this->solde = $this->solde - $moneyToWithdraw;
-            echo $this->titulaire . " a retiré " . $moneyToWithdraw . " " . $this->devise . " sur le compte " . $this->libelle . " <br>";
-            echo "Nouveau solde du compte : " . $this->solde . " " . $this->devise . "<br>";
+            if($this->solde - $moneyToWithdraw >= 0){
+                $this->solde = $this->solde - $moneyToWithdraw;
+                echo $this->titulaire . " a retiré " . $moneyToWithdraw . " " . $this->devise . " sur le compte : " . $this->libelle . " <br>";
+                echo "Nouveau solde du compte : " . $this->solde . " " . $this->devise . "<br>";
+            }else{
+                echo "Impossible de retirer " . $moneyToWithdraw . " " . $this->devise . " sur le compte : " . $this->libelle . " ! Vous seriez débiteur. <br>";
+            }
         }
         /**
          * Credit money to an account
@@ -105,7 +119,7 @@
          */ 
         public function credit($moneyToCredit){
             $this->solde = $this->solde + $moneyToCredit;
-            echo $this->titulaire . " a ajouté " . $moneyToCredit . " " . $this->devise . " sur le compte " . $this->libelle . " <br>";
+            echo $this->titulaire . " a ajouté " . $moneyToCredit . " " . $this->devise . " sur le compte : " . $this->libelle . " <br>";
             echo "Nouveau solde du compte : " . $this->solde . " " . $this->devise . "<br>";
 
         }
