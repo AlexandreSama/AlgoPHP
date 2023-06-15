@@ -22,8 +22,8 @@
     
         class Voiture{
 
-            private string $marque;
-            private string $modele;
+            protected string $marque;
+            protected string $modele;
 
             public function __construct(string $marque, string $modele) {
                 $this->marque = $marque;

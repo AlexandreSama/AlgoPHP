@@ -114,14 +114,18 @@
             public function setFrein(int $speedBrake){
                 $currentSpeed = "";
 
-                if($this->vitesseActuelle - $speedBrake >= 0){
+                if($this->getVehicleState() == 1){
+                    if($this->vitesseActuelle - $speedBrake >= 0){
 
-                    $this->vitesseActuelle = $this->vitesseActuelle - $speedBrake;
-                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " veut freiner de " . $speedBrake . " Km/h";
-
+                        $this->vitesseActuelle = $this->vitesseActuelle - $speedBrake;
+                        $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " veut freiner de " . $speedBrake . " Km/h";
+    
+                    }else{
+    
+                        $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " freine de " . $speedBrake . " et cale";
+                    }
                 }else{
-
-                    $currentSpeed = "Le véhicule " . $this->getMarque() . " " . $this->getModele() . " freine de " . $speedBrake . " et cale";
+                    $currentSpeed = "Il faut démarrer le véhicule avant de vouloir freiner !";
                 }
 
                 return $currentSpeed;
@@ -140,7 +144,9 @@
 
         echo $vehicle2->setVehicleState() . "<br>";
         echo $vehicle2->setVehicleState() . "<br>";
+        // echo $vehicle2->setVehicleState();
         echo $vehicle2->setAcceleration(20) . "<br>";
+        echo $vehicle2->setFrein(21) . "<br>";
 
         echo $vehicle1->getVitesseActuelle() . "<br>";
         echo $vehicle2->getVitesseActuelle() . "<br>";
