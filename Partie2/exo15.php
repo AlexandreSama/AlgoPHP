@@ -17,7 +17,7 @@
             "elan@elan-formation.fr",
             "contact@elan"
         ];
-        // Valider l'email
+        // Valider l'email avec un filtre prédéfini par PHP (extension)
         foreach ($emailArray as $email) {
             if(filter_var($email, FILTER_VALIDATE_EMAIL)){
                 echo "L'adresse $email est valide <br>";

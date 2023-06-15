@@ -20,9 +20,8 @@
 
     <?php
     
-        /* The class "Voiture" defines a car object with properties for brand and model, as well as methods for
-        getting and setting those properties. */
         class Voiture{
+
             private string $marque;
             private string $modele;
 
