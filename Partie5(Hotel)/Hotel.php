@@ -140,6 +140,19 @@
             }
             echo "Total : " . $result;
         }
+
+        public function checkReservation(){
+            $i = 0;
+            foreach ($this->reservations as $key => $reservation) {
+                var_dump($reservation->date_fin->format('d-m-Y') . "<br>");
+                var_dump($this->reservations[$i]->date_debut->format('d-m-Y') . "<br>");
+                $i++;
+                if($reservation->date_fin->format('d-m-Y') == $this->reservations[$i]->date_debut->format('d-m-Y')){
+                    unset($this->reservations[$i]);
+                    echo "ERREUR !";
+                }
+            }
+        }
     }
 
 ?>

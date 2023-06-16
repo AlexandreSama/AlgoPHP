@@ -41,6 +41,16 @@
             echo "Hotel : " . $this->chambre->hotel->getNom() . ' / Chambre : ' . $this->chambre->getNumber() . ' (2 lits - ' . $this->chambre->getPrice() . ' $ - Wifi : ' . $this->chambre->getWifi() . ') du : ' . $this->date_debut->format('d-m-Y') . ' au ' . $this->date_fin->format('d-m-Y') . ' <br>';
         }
 
+        public function cancelReservation(){
+            foreach ($this->chambre->hotel->reservations as $key => $reservation) {
+                if($reservation->chambre->number == $this->chambre->number){
+                    unset($this->chambre->hotel->reservations[$key]);
+                }
+            }
+            echo "La réservation a bien été annulé";
+        }
+
+        
     }
 
 ?>

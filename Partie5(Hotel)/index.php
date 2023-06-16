@@ -31,6 +31,7 @@
         $reservation1 = new Reserver('01-01-2021', '01-01-2021', $chambre1, $client1);
         $reservation2 = new Reserver('11-03-2021', '15-03-2021', $chambre2, $client2);
         $reservation3 = new Reserver('01-04-2021', '01-04-2021', $chambre3, $client2);
+        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre3, $client2);
 
         $hotel1->showInfos();
         $hotel1->showReservations();
@@ -43,6 +44,10 @@
 
         $hotel1->showRooms();
 
+        // $reservation3->cancelReservation();
+        $hotel1->checkReservation();
+
+        // ne pas pouvoir réserver dans les mêmes dates
     ?>
 </body>
 </html>
