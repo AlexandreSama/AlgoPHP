@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php
+
+        require './Chambre.php';
+        require './Client.php';
+        require './Hotel.php';
+        require './Reserver.php';
+
+        $client1 = new Client('GIBELLO', 'Virgile');
+        $client2 = new Client('MURMANN', 'Micka');
+
+        $hotel1 = new Hotel('Hilton', '10 route de la Gare', 'STRASBOURG', 67600);
+        $hotel2 = new Hotel('Regent', '61 Rue Dauphine', 'Paris', 75006);
+
+        $chambre1 = new Chambre(17, 300, true, $hotel1);
+        $chambre2 = new Chambre(3, 120, false, $hotel1); 
+        $chambre3 = new Chambre(4, 120, false, $hotel1);
+        $chambre4 = new Chambre(5, 400, true, $hotel1);
+        $chambre4 = new Chambre(6, 400, true, $hotel1);
+        $chambre4 = new Chambre(7, 400, true, $hotel1);
+        $chambre4 = new Chambre(8, 400, true, $hotel1);
+
+
+        $reservation1 = new Reserver('01-01-2021', '01-01-2021', $chambre1, $client1);
+        $reservation2 = new Reserver('11-03-2021', '15-03-2021', $chambre2, $client2);
+        $reservation3 = new Reserver('01-04-2021', '01-04-2021', $chambre3, $client2);
+
+        $hotel1->showInfos();
+        $hotel1->showReservations();
+        $hotel2->showReservations();
+
+        $reservation2->showInfos();
+        $reservation3->showInfos() . '<br>';
+        $hotel1->calculerPrixChambre($client2);
+
+
+        $hotel1->showRooms();
+
+    ?>
+</body>
+</html>
