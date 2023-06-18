@@ -142,14 +142,15 @@
         }
 
         public function checkReservation(){
-            $i = 0;
+            $temp1 = "";
+            $temp2 = 0;
             foreach ($this->reservations as $key => $reservation) {
-                var_dump($reservation->date_fin->format('d-m-Y') . "<br>");
-                var_dump($this->reservations[$i]->date_debut->format('d-m-Y') . "<br>");
-                $i++;
-                if($reservation->date_fin->format('d-m-Y') == $this->reservations[$i]->date_debut->format('d-m-Y')){
-                    unset($this->reservations[$i]);
-                    echo "ERREUR !";
+                if($temp1 == $reservation->date_debut->format('d-m-Y') || $temp2 == $reservation->chambre->number){
+                    unset($this->reservations[$key]);
+                    echo "Une réservation a été supprimé car elle chevauchait une autre réservation ! <br><br>";
+                }else{
+                    $temp1 = $reservation->date_fin->format('d-m-Y');
+                    $temp2 = $reservation->chambre->number;
                 }
             }
         }

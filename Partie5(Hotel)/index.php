@@ -23,15 +23,15 @@
         $chambre2 = new Chambre(3, 120, false, $hotel1); 
         $chambre3 = new Chambre(4, 120, false, $hotel1);
         $chambre4 = new Chambre(5, 400, true, $hotel1);
-        $chambre4 = new Chambre(6, 400, true, $hotel1);
-        $chambre4 = new Chambre(7, 400, true, $hotel1);
-        $chambre4 = new Chambre(8, 400, true, $hotel1);
+        $chambre5 = new Chambre(6, 400, true, $hotel1);
+        $chambre6 = new Chambre(7, 400, true, $hotel1);
+        $chambre7 = new Chambre(8, 400, true, $hotel1);
 
 
         $reservation1 = new Reserver('01-01-2021', '01-01-2021', $chambre1, $client1);
         $reservation2 = new Reserver('11-03-2021', '15-03-2021', $chambre2, $client2);
         $reservation3 = new Reserver('01-04-2021', '01-04-2021', $chambre3, $client2);
-        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre3, $client2);
+        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre4, $client2);
 
         $hotel1->showInfos();
         $hotel1->showReservations();
@@ -44,8 +44,11 @@
 
         $hotel1->showRooms();
 
-        // $reservation3->cancelReservation();
+        // $reservation4->cancelReservation();
         $hotel1->checkReservation();
+        $hotel1->showReservations();
+
+
 
         // ne pas pouvoir réserver dans les mêmes dates
     ?>

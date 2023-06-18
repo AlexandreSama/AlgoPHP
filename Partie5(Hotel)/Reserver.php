@@ -43,14 +43,16 @@
 
         public function cancelReservation(){
             foreach ($this->chambre->hotel->reservations as $key => $reservation) {
-                if($reservation->chambre->number == $this->chambre->number){
+                if($reservation->chambre->number == $this->chambre->number && $reservation->client->getNom() == $this->client->getNom()){
                     unset($this->chambre->hotel->reservations[$key]);
                 }
             }
-            echo "La réservation a bien été annulé";
+            echo "La réservation a bien été annulé <br><br>";
         }
 
-        
+        public function checkReservation(){
+
+        }
     }
 
 ?>
