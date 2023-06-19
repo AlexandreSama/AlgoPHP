@@ -31,7 +31,7 @@
         $reservation1 = new Reserver('01-01-2021', '01-01-2021', $chambre1, $client1);
         $reservation2 = new Reserver('11-03-2021', '15-03-2021', $chambre2, $client2);
         $reservation3 = new Reserver('01-04-2021', '01-04-2021', $chambre3, $client2);
-        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre4, $client2);
+        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre3, $client2);
 
         $hotel1->showInfos();
         $hotel1->showReservations();
@@ -41,16 +41,17 @@
         $reservation3->showInfos() . '<br>';
         $hotel1->calculerPrixChambre($client2);
 
-
         $hotel1->showRooms();
 
+        //Annuler une réservation
         // $reservation4->cancelReservation();
+
+        //Supprimer une réservation car la date de début chevauche
+        //La date de fin d'une autre réservation et car c'est la même chambre
         $hotel1->checkReservation();
+
         $hotel1->showReservations();
 
-
-
-        // ne pas pouvoir réserver dans les mêmes dates
     ?>
 </body>
 </html>
