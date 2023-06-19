@@ -23,12 +23,12 @@
                 echo "<p class='card-text'>Aucun joueurs !</p>";
                 echo "</div></div>";
             }else{
-                $test = "";
-                foreach ($this->joueurs as $key => $value) {
-                    foreach ($value->debut_saison as $saison) {
-                        $test = $saison->format('Y');
+                foreach ($this->joueurs as $value) {
+                    print_r($value->club->nom . "<br>");
+                    print_r($this->nom . "<br>");
+                    if($value->club->nom == $this->nom){
+                        echo "<p class='card-text'>" .  $value->prenom . " " . $value->nom . " (" . $value->debut_saison[0]->format('Y') . ") </p>";
                     }
-                    echo "<p class='card-text'>" .  $value->prenom . " " . $value->nom . " (" . $test . ") </p>";
                 }
             }
             echo "</div></div>";

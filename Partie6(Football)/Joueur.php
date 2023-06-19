@@ -5,8 +5,8 @@
         public string $prenom;
         public DateTime $dateDeNaissance;
         public string $age;
-        public array $clubs;
-        public array $debut_saison;
+        public Club $club;
+        public DateTime $debut_saison;
         public array $nationalites;
 
         public function __construct(string $nom, string $prenom, string $dateDeNaissance, Nationalite $nationalite, array $clubs, array $debut_saison)
@@ -16,12 +16,15 @@
             $this->dateDeNaissance = new DateTime($dateDeNaissance);
             $this->age = date_diff($this->dateDeNaissance, new DateTime())->format('%y');
             $this->nationalites[] = $nationalite;
-            foreach ($debut_saison as $saison) {
-                $this->debut_saison[] = new DateTime($saison);
+            foreach ($debut_saison as $key => $value) {
+                $this->debut_saison = new DateTime($value);
+                print_r($this->debut_saison->format('y') . '<br><br>');
             }
             foreach ($clubs as $club) {
-                $this->clubs[] = $club;
+                $this->club = $club;
                 $club->joueurs[] = $this;
+                var_dump($this);
+                print_r('<br><br>');
             }
         }
 
@@ -31,7 +34,7 @@
                 foreach ($this->nationalites as $nationalite) {
                         echo "<p class='card-text'>" .  $nationalite->nom . " - " . $this->age . " ans</p>";
                 }
-                foreach ($this->clubs as $key => $value ) {
+                foreach ($this->club as $key => $value ) {
                         echo "<p class='card-text'>" .  $value->nom . " (" .  $this->debut_saison[$key]->format('Y') . ")</p>";
                 }
                 echo "</div></div>";
