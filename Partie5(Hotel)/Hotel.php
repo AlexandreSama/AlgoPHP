@@ -108,7 +108,7 @@
                     echo $reservation->client->nom . " " . $reservation->client->prenom . " - Chambre " . $reservation->chambre->number . " - du " . $reservation->date_debut->format('d-m-Y') . " au " . $reservation->date_fin->format('d-m-Y') . "<br>";
                 }
             }else{
-                echo "Aucune réservation !<br>";
+                echo "Aucune réservation !<br><br>";
             }
         }
 
@@ -121,7 +121,11 @@
                 echo "<tr>";
                 echo "<td>" . $Chambre->number . "</td>";
                 echo "<td>" . $Chambre->price . "</td>";
-                echo "<td>" . $Chambre->wifi . "</td>";
+                if($Chambre->wifi == 1){
+                    echo "<td>OUI</td>";
+                }else{
+                    echo "<td>NON</td>";
+                }
                 if($Chambre->state == false){
                     echo "<td style='background-color: red;'>Réservé</td>";
                 }else{
@@ -138,10 +142,14 @@
                     $result = $result + intval(date_diff($reservation->date_debut, $reservation->date_fin)->format('%d')) * $reservation->chambre->price;
                 }
             }
-            echo "Total : " . $result;
+            echo "Total : " . $result . "<br><br>";
         }
 
         public function checkReservation(){
+            //Deux variables temporaires
+            //Qui contiendrons la date de fin
+            //et le numéro de chambre de 
+            //la réservation d'avant
             $temp1 = "";
             $temp2 = 0;
             foreach ($this->reservations as $key => $reservation) {

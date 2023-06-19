@@ -49,10 +49,6 @@
             }
             echo "La réservation a bien été annulé <br><br>";
         }
-
-        public function checkReservation(){
-
-        }
     }
 
 ?>
