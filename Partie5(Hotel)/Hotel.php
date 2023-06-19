@@ -113,18 +113,18 @@
         }
 
         public function showRooms(){
-            echo "<table><thead><tr><th colspan='1'>CHAMBRE</th>";
-            echo "<th colspan='1'>PRIX</th><th colspan='1'>WIFI</th>";
-            echo "<th colspan='1'>ETAT</th></tr></thead>";
+            echo "<table class='table'><thead><tr><th scope='col'>CHAMBRE</th>";
+            echo "<th scope='col'>PRIX</th><th scope='col'>WIFI</th>";
+            echo "<th scope='col'>ETAT</th></tr></thead>";
             echo "<tbody></tbody>";
             foreach ($this->chambre as $Chambre) {
                 echo "<tr>";
                 echo "<td>" . $Chambre->number . "</td>";
                 echo "<td>" . $Chambre->price . "</td>";
                 if($Chambre->wifi == 1){
-                    echo "<td>OUI</td>";
+                    echo "<td><i class='fa-solid fa-xmark'></i></td>";
                 }else{
-                    echo "<td>NON</td>";
+                    echo "<td><i class='fa-solid fa-check'></i></td>";
                 }
                 if($Chambre->state == false){
                     echo "<td style='background-color: red;'>Réservé</td>";
@@ -150,10 +150,12 @@
             //Qui contiendrons la date de fin
             //et le numéro de chambre de 
             //la réservation d'avant
+
             $temp1 = "";
             $temp2 = 0;
             foreach ($this->reservations as $key => $reservation) {
                 if($temp1 == $reservation->date_debut->format('d-m-Y') && $temp2 == $reservation->chambre->number){
+                    $reservation->chambre->state = 1;
                     unset($this->reservations[$key]);
                     echo "Une réservation a été supprimé car elle chevauchait une autre réservation ! <br><br>";
                 }else{

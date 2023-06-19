@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/eec634434d.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
     <?php
@@ -34,17 +37,19 @@
         $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre3, $client2);
 
         $hotel1->showInfos();
+
         $hotel1->showReservations();
         $hotel2->showReservations();
 
         $reservation2->showInfos();
         $reservation3->showInfos() . '<br>';
+
         $hotel1->calculerPrixChambre($client2);
 
         $hotel1->showRooms();
 
         //Annuler une réservation
-        // $reservation4->cancelReservation();
+        // $reservation3->cancelReservation();
 
         //Supprimer une réservation car la date de début chevauche
         //La date de fin d'une autre réservation et car c'est la même chambre
@@ -52,6 +57,10 @@
 
         $hotel1->showReservations();
 
+        $hotel1->showRooms();
+
+
     ?>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
