@@ -16,15 +16,12 @@
             $this->dateDeNaissance = new DateTime($dateDeNaissance);
             $this->age = date_diff($this->dateDeNaissance, new DateTime())->format('%y');
             $this->nationalites[] = $nationalite;
-            foreach ($debut_saison as $key => $value) {
-                $this->debut_saison = new DateTime($value);
-                print_r($this->debut_saison->format('y') . '<br><br>');
-            }
             foreach ($clubs as $club) {
+                print_r($debut_saison);
+                $this->debut_saison = new DateTime($debut_saison[0]);
+                array_splice($debut_saison, 0);
                 $this->club = $club;
                 $club->joueurs[] = $this;
-                var_dump($this);
-                print_r('<br><br>');
             }
         }
 
