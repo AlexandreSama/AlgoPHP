@@ -145,7 +145,7 @@
             $temp1 = "";
             $temp2 = 0;
             foreach ($this->reservations as $key => $reservation) {
-                if($temp1 == $reservation->date_debut->format('d-m-Y') || $temp2 == $reservation->chambre->number){
+                if($temp1 == $reservation->date_debut->format('d-m-Y') && $temp2 == $reservation->chambre->number){
                     unset($this->reservations[$key]);
                     echo "Une réservation a été supprimé car elle chevauchait une autre réservation ! <br><br>";
                 }else{
