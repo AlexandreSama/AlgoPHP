@@ -44,6 +44,7 @@
         public function cancelReservation(){
             foreach ($this->chambre->hotel->reservations as $key => $reservation) {
                 if($reservation->chambre->number == $this->chambre->number && $reservation->client->getNom() == $this->client->getNom()){
+                    $this->chambre->state = 1;
                     unset($this->chambre->hotel->reservations[$key]);
                 }
             }

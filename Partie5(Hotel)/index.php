@@ -34,7 +34,7 @@
         $reservation1 = new Reserver('01-01-2021', '01-01-2021', $chambre1, $client1);
         $reservation2 = new Reserver('11-03-2021', '15-03-2021', $chambre2, $client2);
         $reservation3 = new Reserver('01-04-2021', '01-04-2021', $chambre3, $client2);
-        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre3, $client2);
+        $reservation4 = new Reserver('01-04-2021', '05-01-2021', $chambre6, $client2);
 
         $hotel1->showInfos();
 
@@ -49,7 +49,7 @@
         $hotel1->showRooms();
 
         //Annuler une réservation
-        // $reservation3->cancelReservation();
+        $reservation3->cancelReservation();
 
         //Supprimer une réservation car la date de début chevauche
         //La date de fin d'une autre réservation et car c'est la même chambre
@@ -62,5 +62,4 @@
 
     ?>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
