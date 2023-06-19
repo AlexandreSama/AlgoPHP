@@ -128,7 +128,7 @@
                     echo "<td>Disponible</td>";
                 }
             }
-            echo "</tr></tbody></table>";
+            echo "</tr></tbody></table><br>";
         }
 
         public function calculerPrixChambre(Client $client){
