@@ -16,7 +16,7 @@
         public function showFilms(){
             echo "<h3>Films auquel " . $this->prenom . " " . $this->nom . " jouent : </h3><br><br>";
             foreach ($this->films as $value) {
-                echo $value->titre . '<br>';
+                echo $value->titre . " / Notes : " . $value->note . "<br>";
             }
         }
 
