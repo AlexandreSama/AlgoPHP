@@ -24,8 +24,7 @@
                 foreach ($this->nationalites as $nationalite) {
                         echo "<p class='card-text'>" .  $nationalite->nom . " - " . $this->age . " ans</p>";
                 }
-                foreach ($this->clubs as $key => $value ) {
-                        // print_r($value->joueurs[0]->debut_saison->format('Y'));
+                foreach ($this->clubs as $value ) {
                         echo "<p class='card-text'>" .  $value->nomClub . " (" .  $value->getDebut_Saison($this->nom)->format('Y') . ")</p>";
                 }
                 echo "</div></div>";
