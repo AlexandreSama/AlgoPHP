@@ -1,0 +1,58 @@
+I. Général :
+
+1) PHP est un langage de programmation orienté objet. Il est le plus souvent utilisé pour créer des pages web dynamiques en passant par des serveurs (Apache, Nginx, etc...)
+2) La portée d'une variable signifie de quel parti du script une variable sera utilisable (Ex : Une variable dans une fonction sera uniquement utilisable dans cet fonction)
+3) Une Superglobal est une variable prédéfini pouvant être utilisé n'importe ou et a n'importe quel moment dans un script. Il en existe 6. Ex : echo $_GET['Prenom'] permet d'afficher
+un le résultat de l'inpur 'Prenom'.
+4) Un tableau est une sorte de collection d'éléments reliés par une clé (key) numérique. 
+5) L'on récupère une date comme ceci : 
+$now = new DateTime();
+Et l'on peut la manipuler comme ceci : 
+$nowClear = $now->format('d-M-Y');
+
+6) Un tableau associatif est comme un tableau classique mais a la place d'une clé numérique, celle-ci est remplacé par une clé string (Ex : ['Test' => 22])
+7) une session permet de garder en mémoire des informations. On peut s'en servir pour garder une personne connecté sur son site.
+8) 
+
+II. programmation orienté objet :
+
+1) POO veut dire programmation Orienté Objet. Cela veut dire que nous construisons notre code autour de ce que l'on appelle des Objets, voir des Class ou des Entités.
+2) les Propriétés sont des variables qui sont propres a l'Entité.
+3) Une méthod (Method) est une fonction propre a l'entité.
+4) 
+5) lorsque l'on étends une classe a une autre, la première devient le parent de la seconde. Et la seconde hérite des propriétés et des methodes du parent.
+6) 
+7) Une méthode ou une propriété statique veut dire qu'elle aura toujours la même valeur pour n'importe quel instance.
+8)
+9) 
+
+III. SQL :
+
+1) une Base de Données permet de stocker et trouver des informations de façon structurés de différentes natures.
+2) Structured Query Language
+3)
+4) Il nous faudrait le mot de passe, l'adresse ip de la machine contenant la base de données, le nom d'utilisateur et surtout le nom de la base de données;
+5) 
+6)
+7) On peut récupérer les données graçe au $_GET[] ou au $_POST[] de PHP.
+
+IV. Sécurité : 
+
+1) Une injection SQL est une ou plusieurs lignes de code écrite généralement dans un formulaire, que le code va lire et interprété sans qu'on le veuille.
+2)
+3)
+4)
+
+V. Architecture : 
+
+1) Le design pattern définissent des manières de procéder qui permettent de résoudre des problèmes récurrents
+2) MVC veut dire Model View Controller
+3) Le Controller est la pour orchestrer le Model et la View.
+4) le Manager est la pour communiquer les changements aux Views de façon synchronisé.
+
+VI. Modélisation : 
+
+1) 
+2)
+3)
+4)
