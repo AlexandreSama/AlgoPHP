@@ -1,28 +1,21 @@
 <?php
 
-    Class Joueur{
+    class Joueur{
         public string $nom;
         public string $prenom;
         public DateTime $dateDeNaissance;
         public string $age;
-        public Club $club;
-        public DateTime $debut_saison;
         public array $nationalites;
+        public DateTime $debut_saison;
+        public array $clubs;
 
-        public function __construct(string $nom, string $prenom, string $dateDeNaissance, Nationalite $nationalite, array $clubs, array $debut_saison)
+        public function __construct(string $nom, string $prenom, string $dateDeNaissance, Nationalite $nationalite)
         {
             $this->nom = $nom;
             $this->prenom = $prenom;
             $this->dateDeNaissance = new DateTime($dateDeNaissance);
             $this->age = date_diff($this->dateDeNaissance, new DateTime())->format('%y');
             $this->nationalites[] = $nationalite;
-            foreach ($clubs as $club) {
-                print_r($debut_saison);
-                $this->debut_saison = new DateTime($debut_saison[0]);
-                array_splice($debut_saison, 0);
-                $this->club = $club;
-                $club->joueurs[] = $this;
-            }
         }
 
         public function showClubs(){
@@ -31,14 +24,15 @@
                 foreach ($this->nationalites as $nationalite) {
                         echo "<p class='card-text'>" .  $nationalite->nom . " - " . $this->age . " ans</p>";
                 }
-                foreach ($this->club as $key => $value ) {
-                        echo "<p class='card-text'>" .  $value->nom . " (" .  $this->debut_saison[$key]->format('Y') . ")</p>";
+                foreach ($this->clubs as $key => $value ) {
+                        // print_r($value->joueurs[0]->debut_saison->format('Y'));
+                        echo "<p class='card-text'>" .  $value->nomClub . " (" .  $value->getDebut_Saison($this->nom)->format('Y') . ")</p>";
                 }
                 echo "</div></div>";
         }
 
         public function addNationalite(Nationalite $nationalite){
-                $this->nationalites[] = $nationalite;
+            $this->nationalites[] = $nationalite;
         }
 
         /**
@@ -66,20 +60,26 @@
         }
 
         /**
-         * Get the value of debut_saison
-         */ 
-        public function getDebut_saison()
-        {
-                return $this->debut_saison;
-        }
-
-        /**
          * Get the value of nationalite
          */ 
         public function getNationalite()
         {
                 return $this->nationalites;
         }
+
+
+        /**
+         * Set the value of debut_saison
+         *
+         * @return  self
+         */ 
+        public function setDebut_saison($debut_saison)
+        {
+                $this->debut_saison = new DateTime($debut_saison);
+
+                return $this;
+        }
     }
+
 
 ?>

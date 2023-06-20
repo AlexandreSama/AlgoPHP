@@ -15,7 +15,8 @@
             echo "<div class='card' style='width: 18rem;'><div class='card-body'>";
             echo "<h5 class='card-title'>" . $this->nom . "</h5>";
             foreach ($this->clubs as $club) {
-                echo "<p class='card-text'>" . $club->nom . "</p>";
+                // var_dump($club);
+                echo "<p class='card-text'>" . $club->nomClub . "</p>";
             }
             echo "</div></div>";
         }

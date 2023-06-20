@@ -34,10 +34,19 @@
         $juv = new Club('Juventus', '01-11-1897', $italie);
 
         //On créer les joueurs
-        $joueur1 = new Joueur('Messi', 'Lionel', '24-06-1987', $espagnol, [$fc, $psg], ['01-01-2004', '01-01-2021']);
-        $joueur2 = new Joueur('Mbappe', 'Killian', '20-12-1998', $française, [$psg], ['01-01-2017']);
-        $joueur3 = new Joueur('Ronaldo', 'Christiano', '05-02-1985', $espagnol, [$rm, $mu, $juv], ['01-01-2009', '01-01-2021', '01-01-2018']);
-        $joueur4 = new Joueur('Junior', 'Neymar', '05-02-1992', $italienne, [$fc, $psg], ['01-01-2013', '01-01-2017']);
+        $joueur1 = new Joueur('Messi', 'Lionel', '24-06-1987', $espagnol);
+        $joueur2 = new Joueur('Mbappe', 'Killian', '20-12-1998', $française);
+        $joueur3 = new Joueur('Ronaldo', 'Christiano', '05-02-1985', $espagnol);
+        $joueur4 = new Joueur('Junior', 'Neymar', '05-02-1992', $italienne);
+
+
+        $psg->addJoueur($joueur1, '01-01-2017');
+        $psg->addJoueur($joueur4, '01-01-2021');
+        $fc->addJoueur($joueur1, '01-01-2004');
+        $fc->addJoueur($joueur4, '01-01-2013');
+        $psg->addJoueur($joueur2, '01-01-2017');
+        $juv->addJoueur($joueur3, '01-01-2018');
+
 
         echo "Clubs de football : <br>";
         echo "<div class='row'>";
