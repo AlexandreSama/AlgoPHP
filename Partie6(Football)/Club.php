@@ -19,9 +19,7 @@
             echo "<h5 class='card-title'>" . $this->nomClub . "</h5>";
             echo "<p class='card-text'>" . $this->pays->nom . " - " . $this->date_creation->format('Y') .  "</p>";
             if(isset($this->joueurs)){
-                // $i = 0; 
                 foreach ($this->joueurs as $value) {
-                    // var_dump($value);
                     echo "<p class='card-text'>" .  $value->prenom . " " . $value->nom . " (" . $value->debut_saison->format('Y') . ") </p>";
                 }
                 echo "</div></div>";
