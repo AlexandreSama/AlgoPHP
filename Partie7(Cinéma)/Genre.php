@@ -13,8 +13,8 @@
         /**
          * This function adds a Film object to an array of films.
          * 
-         * @param Film film The parameter `` is an instance of the `Film` class. The `addFilms` function
-         * adds this instance to an array of films called ``.
+         * @param Film film The parameter is an instance of the `Film` class. The `addFilms` function
+         * adds this instance to an array of films called.
          */
         public function addFilms(Film $film){
             $this->films[] = $film;
