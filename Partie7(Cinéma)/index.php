@@ -62,5 +62,7 @@
         //On affiche les acteurs ayant joué le même rôle
         $genre4->showActorsWithSameRole('Batman');
     ?>
+
+    <button><a href="./code.md">Voir le code</a></button>
 </body>
 </html>
