@@ -22,8 +22,8 @@
         }
 
         public function showActorsWithSameRole(string $role){
-            echo "<h3>Acteurs ayant joué le role de $role : </h3><br>";
-            foreach ($this->films as $key => $value) {
+            echo "<h3>Acteurs ayant joué le role de $role : </h3>";
+            foreach ($this->films as $value) {
                 foreach ($value->casting as $key => $value) {
                     echo "Acteur : <br>";
                     echo $key . '<br><br>';
