@@ -15,7 +15,7 @@
         }
 
         public function showFilmsByGenre(){
-            echo "<h3>Films dans le genre " . $this->nom . " : </h3><br>";
+            echo "<h3>Films dans le genre " . $this->nom . " : </h3>";
             foreach ($this->films as $value) {
                 echo $value->titre . " / Notes : " . $value->note . "<br>";
             }
