@@ -14,5 +14,3 @@
             $this->date_naissance = new DateTime($date_naissance);
         }
     }
-
-?>
