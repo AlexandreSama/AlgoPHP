@@ -63,6 +63,6 @@
         $genre4->showActorsWithSameRole('Batman');
     ?>
 
-    <button><a href="https://github.com/AlexandreSama/AlgoPHP/blob/main/Partie7(Cin%C3%A9ma)/code.md">Voir le code</a></button>
+    <button><a href="https://github.com/AlexandreSama/AlgoPHP/blob/main/Partie7(Cin%C3%A9ma)/code.md" target="__blank">Voir le code</a></button>
 </body>
 </html>
