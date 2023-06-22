@@ -25,15 +25,9 @@
             $this->casting = [];
         }
 
-        // public function addGenre(Genre $genre){
-        //     $this->genre[] = $genre;
-        //     $genre->addFilms($this);
-        // }
-
-        // public function addCasting(Acteur $acteur, string $nom_personnage){
-        //     $this->casting[] = [$nom_personnage => $acteur];
-        // }
-
+        /**
+         * The function displays the actors and their corresponding characters in a movie.
+         */
         public function showActors(){
             echo "<h3>Acteurs du film " . $this->titre . " :</h3>";
             foreach ($this->casting as $key => $value) {
