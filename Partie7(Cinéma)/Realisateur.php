@@ -24,9 +24,12 @@
          */
         public function showFilms(){
             echo "<h3>Films du réalisateur " . $this->prenom . " " . $this->nom . " :</h3>";
+            echo "<div class='card' style='width: 24rem;'>";
+            echo "<div class='card-body'>";
             foreach ($this->films as $value) {
-                echo $value->titre . " / Note : " . $value->note . "<br>";
+                echo "<p class='card-text'>" . $value->titre . " / Note : " . $value->note . "</p>";
             }
+            echo " </div></div>";
         }
     }
 

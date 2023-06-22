@@ -25,9 +25,12 @@
          */
         public function showFilmsByGenre(){
             echo "<h3>Films dans le genre " . $this->nom . " : </h3>";
+            echo "<div class='card' style='width: 24rem;'>";
+            echo "<div class='card-body'>";
             foreach ($this->films as $value) {
-                echo $value->titre . " / Notes : " . $value->note . "<br>";
+                echo "<p class='card-text'>" . $value->titre . " / Notes : " . $value->note . "</p>";
             }
+            echo " </div></div>";
         }
 
         /**
@@ -38,12 +41,15 @@
          */
         public function showActorsWithSameRole(string $role){
             echo "<h3>Acteurs ayant joué le role de $role : </h3>";
+            echo "<div class='card' style='width: 24rem;'>";
+            echo "<div class='card-body'>";
             foreach ($this->films as $value) {
                 foreach ($value->casting as $key => $value) {
                     echo "Acteur : <br>";
-                    echo $key . '<br><br>';
+                    echo "<p class='card-text'>" . $key . '</p>';
                 }
             }
+            echo " </div></div>";
         }
     }
 

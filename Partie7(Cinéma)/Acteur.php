@@ -25,9 +25,13 @@
          */
         public function showFilms(){
             echo "<h3>Films auquel " . $this->prenom . " " . $this->nom . " jouent : </h3>";
+            echo "<div class='card' style='width: 24rem;'>";
+            echo "<div class='card-body'>";
             foreach ($this->films as $value) {
-                echo $value->titre . " / Notes : " . $value->note . "<br>";
+                echo "<p class='card-text'>" . $value->titre . " / Notes : " . $value->note . "</p>";
             }
+            echo " </div></div>";
+
         }
 
     }

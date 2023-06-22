@@ -30,12 +30,15 @@
          */
         public function showActors(){
             echo "<h3>Acteurs du film " . $this->titre . " :</h3>";
+            echo "<div class='card' style='width: 24rem;'>";
+            echo "<div class='card-body'>";
             foreach ($this->casting as $key => $value) {
                 echo "Personnage : <br>";
-                echo $value . '<br>';
+                echo "<p class='card-text'>" . $value . '</p>';
                 echo "Acteur : <br>";
-                echo $key . '<br><br>';
+                echo "<p class='card-text'>" . $key . '</p>';
             }
+            echo " </div></div>";
         }
 
     }
