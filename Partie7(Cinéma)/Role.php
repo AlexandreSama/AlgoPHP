@@ -12,7 +12,7 @@
             $this->film = $film;
             $this->acteur = $acteur;
             $acteur->addFilmToActor($this->film);
-            $this->film->addCasting($this);
+            $this->film->casting += [$acteur->prenom . " " . $acteur->nom => $nom_personnage];
         }
     }
 

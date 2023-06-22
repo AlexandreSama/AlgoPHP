@@ -30,19 +30,17 @@
         //     $genre->addFilms($this);
         // }
 
-        public function addCasting(Role $role){
-            $this->casting[] = $role;
-        }
+        // public function addCasting(Acteur $acteur, string $nom_personnage){
+        //     $this->casting[] = [$nom_personnage => $acteur];
+        // }
 
         public function showActors(){
             echo "<h3>Acteurs du film " . $this->titre . " :</h3>";
-            foreach ($this->casting as $value) {
-                // var_dump($value);
+            foreach ($this->casting as $key => $value) {
                 echo "Personnage : <br>";
-                echo $value->nom_personnage . '<br>';
+                echo $value . '<br>';
                 echo "Acteur : <br>";
-                echo $value->acteur->prenom . " " . $value->acteur->nom . '<br><br>';
-
+                echo $key . '<br><br>';
             }
         }
 
