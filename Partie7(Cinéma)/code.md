@@ -1,4 +1,4 @@
-# Code PHP utilisé :
+# Code PHP utilisé (avec Bootstrap pour le style):
 
 ## Personne : 
 
