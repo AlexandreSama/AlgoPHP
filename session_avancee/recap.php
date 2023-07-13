@@ -20,11 +20,11 @@ session_start();
         <div class="dropdown-menu">
             <a class="dropdown-item" href="./index.php">Ajout produit</a>
             <?php
-                if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
-                    echo "<p class='dropdown-item disabled '>Aucun produit en session !</p>";
-                }else{
-                    echo "<p class='dropdown-item disabled '>" . count($_SESSION['products']) . " produits !</p>";
-                }
+            if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
+                echo "<p class='dropdown-item disabled '>Aucun produit en session !</p>";
+            } else {
+                echo "<p class='dropdown-item disabled '>" . count($_SESSION['products']) . " produits !</p>";
+            }
             ?>
         </div>
     </div>

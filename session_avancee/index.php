@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +20,11 @@ session_start();
         <div class="dropdown-menu">
             <a class="dropdown-item" href="./recap.php">Récapitulatif</a>
             <?php
-                if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
-                    echo "<p class='dropdown-item disabled '>Aucun produit en session !</p>";
-                }else{
-                    echo "<p class='dropdown-item disabled '>" . count($_SESSION['products']) . " produits !</p>";
-                }
+            if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
+                echo "<p class='dropdown-item disabled '>Aucun produit en session !</p>";
+            } else {
+                echo "<p class='dropdown-item disabled '>" . count($_SESSION['products']) . " produits !</p>";
+            }
             ?>
         </div>
     </div>
