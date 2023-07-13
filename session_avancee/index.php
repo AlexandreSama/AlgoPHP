@@ -13,6 +13,12 @@ session_start();
 </head>
 
 <body>
+    <?php
+    // if(isset($_SESSION['errors'][0])){
+    //     echo "<p style='color: red;'>" . $_SESSION['errors'][0] . "</p>";
+    //     unset($_SESSION['errors'][0]);
+    // }
+    ?>
     <div class="btn-group">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
             Menu

@@ -32,7 +32,8 @@ session_start();
     if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
         echo "<p>Aucun produit en session !</p>";
     } else {
-        echo "<table class='table table-striped'>",
+        echo "<form action='recapTraitement.php' method='get'>",
+        "<table class='table table-striped'>",
         "<thead>",
         "<tr>",
         "<th scope='col'>#</th>",
@@ -50,24 +51,57 @@ session_start();
             "<td>" . $index . "</td>",
             "<td>" . $product['name'] . "</td>",
             "<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
-            "<td>" . $product['qtt'] . "</td>",
+            "<td class='qtt'> <button type='button' class='removeQTT' value='-'>-</button>" . $product['qtt'] . "<button type='button' class='addQTT' value='+'>+</button></td>",
             "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
-            "<td><input type='checkbox' class='Product' aria-label='Checkbox for following text input'></td>",
+            "<td><input type='checkbox' class='Product' aria-label='Checkbox for following text input' name='product[]' value='" . $index . "'></td>",
             "</tr>";
             $totalGeneral += $product['total'];
         }
         echo   "<tr>",
         "<td colspan=4>Total général : </td>",
         "<td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong></td>",
-        "<td><button type='button' class='btn btn-success'>Success</button>",
+        "<td><button type='submit' class='btn btn-success'>Success</button>",
         "</tr>",
         "</tbody>",
-        "</table>";
+        "</table>",
+        "</form>";
     }
     ?>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./recap.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.removeQTT').click(function() {
+            var clickBtnValue = $(this).val();
+            var test = parseInt($(this).parent().parent()[0].children[0].innerHTML);
+            var ajaxurl = 'recapTraitement.php',
+                data = {
+                    'action': clickBtnValue,
+                    'index': test
+                };
+            $.post(ajaxurl, data, function(response) {
+                $(document).ajaxStop(function() {
+                    window.location = window.location;
+                });
+            });
+        });
+        $('.addQTT').click(function() {
+            var clickBtnValue = $(this).val();
+            var test = parseInt($(this).parent().parent()[0].children[0].innerHTML);
+            var ajaxurl = 'recapTraitement.php',
+                data = {
+                    'action': clickBtnValue,
+                    'index': test
+                };
+            $.post(ajaxurl, data, function(response) {
+                $(document).ajaxStop(function() {
+                    window.location = window.location;
+                });
+            });
+        });
+    });
+</script>
 
 </html>
