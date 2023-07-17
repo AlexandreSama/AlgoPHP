@@ -17,6 +17,8 @@ function saveProduct()
             ];
 
             $_SESSION['products'][] = $product;
+        }else{
+            throw new Exception("Erreur ! N'oubliez pas de remplir le nom, le prix et la quantité du produit !");
         }
     } else {
         //On donne une nouvelle Exception
