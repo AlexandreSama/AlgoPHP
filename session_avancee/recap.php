@@ -13,28 +13,55 @@ session_start();
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Poppy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./index.php">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./recap.php">Récapitulatif</a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </button>
+                    <ul class="dropdown-menu text-center">
+                        <?php
+                        if (!isset($_SESSION['products'])) {
+                            echo "<li><p><strong>Aucun produit !</strong></p></li>";
+                        } else {
+                            foreach ($_SESSION['products'] as $index => $product) {
+                                echo "<li class='product_basket'><p>" . $product['name'] . " | " . $product['qtt'] . "x</p></li>";
+                            }
+                        }
+                        ?>
+                        <li><a class="dropdown-item" href="./recap.php">Voir le récapitulatif</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <?php
+    //S'il y a une erreur ou un message de succès, on l'affiche puis on le supprime
+    if (isset($_SESSION['removed']) && !empty($_SESSION['removed'])) {
+        echo '<script type="text/javascript"> alert("' . end($_SESSION['removed']) . '");</script>';
+        unset($_SESSION['removed'][0]);
+    }
+    ?>
     <div class="container text-center">
         <div class="row align-items-center">
             <div class="col-12">
                 <h1>Récapitulatif des produits !</h1>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                        Menu
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="./index.php">Ajout produit</a>
-                        <?php
-                        if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
-                            echo "<p class='dropdown-item disabled'>Aucun produit en session !</p>";
-                        } else {
-                            echo "<p class='dropdown-item disabled'>" . count($_SESSION['products']) . " produits !</p>";
-                        }
-                        ?>
-                    </div>
-                </div>
                 <?php
                 if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
-                    echo "<p><strong>Aucun produit en session !</strong></p>";
+                    echo "<p class='no-product'><strong>Aucun produit en session !</strong></p>";
                 } else {
                     echo "<form action='recapTraitement.php' method='get'>",
                     "<table class='table table-striped'>",
@@ -55,7 +82,7 @@ session_start();
                         "<td>" . $index . "</td>",
                         "<td>" . $product['name'] . "</td>",
                         "<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
-                        "<td class='qtt'> <button type='button' class='removeQTT' value='-'>-</button>" . $product['qtt'] . "<button type='button' class='addQTT' value='+'>+</button></td>",
+                        "<td class='qtt'> <button type='button' class='removeQTT btn btn-primary ' value='-'>-</button>" . $product['qtt'] . "<button type='button' class='addQTT btn btn-primary' value='+'>+</button></td>",
                         "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
                         "<td><input type='checkbox' class='Product' aria-label='Checkbox for following text input' name='product[]' value='" . $index . "'></td>",
                         "</tr>";
@@ -74,7 +101,9 @@ session_start();
             </div>
         </div>
     </div>
+    </div>
 </body>
+<script src="https://kit.fontawesome.com/eec634434d.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -5,11 +5,20 @@
     function removeProduct(){
         $products = $_GET['product'];
 
-        if(count($products) >= 1 ){
+        if(count($products) == 1 ){
 
             foreach ($products as $product) {
                 unset($_SESSION['products'][$product]);
             }
+            $_SESSION['removed'][] = 'Le produit a bien été supprimé !';
+
+        }else if (count($products) >= 2){
+
+            foreach ($products as $product) {
+                unset($_SESSION['products'][$product]);
+            }
+
+            $_SESSION['removed'][] = 'Les produits ont bien été supprimé ! ';
         }
     }
 
