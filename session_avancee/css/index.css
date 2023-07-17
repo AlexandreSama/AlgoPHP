@@ -1,0 +1,20 @@
+html{
+    height: 100%;
+}
+body{
+    background-image: url('../images/wallpaper.png');
+    backdrop-filter: blur(5px);
+    height: 100%;
+}
+form, h1{
+    color: white;
+}
+.container, .row{
+    height: 100%;
+}
+.col-12{
+    height: 35%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}

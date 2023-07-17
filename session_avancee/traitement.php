@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// var_dump($_POST['submit']);
 function saveProduct()
 {
     if (isset($_POST['submit'])) {
@@ -9,33 +8,30 @@ function saveProduct()
         $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
-        if($name && $price && $qtt){
+        if ($name && $price && $qtt) {
             $product = [
                 "name" => $name,
                 "price" => $price,
                 "qtt" => $qtt,
-                "total" => $price*$qtt
+                "total" => $price * $qtt
             ];
 
             $_SESSION['products'][] = $product;
         }
     } else {
+        //On donne une nouvelle Exception
         throw new Exception("Erreur ! Veuillez enregistrer un produit et ne pas venir sur cet page de vous-même !");
     }
 }
 
-function removeProduct(){
-    if(isset($_GET['submit'])){
-        var_dump($_GET['submit']);
-    }
-}
-
+//On essaye la fonction, et si tout se passe bien, on renvoi a l'accueil avec un petit message
 try {
+
     saveProduct();
-    removeProduct();
-    header("location:recap.php");
+    $_SESSION['success'][] = 'Le produit a bien été ajouté !';
+    header("location:index.php");
 } catch (Exception $e) {
-    // print_r($e->getMessage());
-    $_SESSION['errors'] = $e->getMessage();
+    //Si ca ne fonctionne pas, on donne une erreur quand l'on renvois a l'accueil
+    $_SESSION['errors'][] = $e->getMessage();
     header("location:index.php");
 }
