@@ -5,7 +5,8 @@ Général :
 3) Une variable associe un nom a une valeur. En PHP, une variable est préfixé du signe $
 4) La portée d'une variable signifie jusqu'a ou une variable peut être lu dans notre code
 5) Une constante est une variable qui a une valeur fixe, inchangé comparé a une variable classique qui change de valeur.
-6) Les superglobales sont des variables que l'ont peut utiliser a n'importe quel moment dans notre code. Il en existe 9. On peut utiliser la superglobal $_POST lors d'un formulaire
+6) Les superglobales sont des variables que l'ont peut utiliser a n'importe quel moment dans notre code. Il en existe 9. On peut utiliser la superglobal $_POST lors d'une inscription
+et $_GET pour récupérer des informations. Il y a aussi le $_SESSION pour garder en mémoire des informations d'un utilisateur.
 7) boolean ($test = true;), char ($test = 'blabla';), byte / short / int / long ($test = 654864165;), float / double ($test = 45.32586;)
 8) Oui, il existe aussi le tableau associatifs et les tableaux multidimensionnels
 9) if, switch, ternaire, for, foreach, while, do... while
