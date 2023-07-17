@@ -6,7 +6,7 @@ Général :
 4) La portée d'une variable signifie jusqu'a ou une variable peut être lu dans notre code
 5) Une constante est une variable qui a une valeur fixe, inchangé comparé a une variable classique qui change de valeur.
 6) Les superglobales sont des variables que l'ont peut utiliser a n'importe quel moment dans notre code. Il en existe 9. On peut utiliser la superglobal $_POST lors d'une inscription
-et $_GET pour récupérer des informations. Il y a aussi le $_SESSION pour garder en mémoire des informations d'un utilisateur.
+et $_GET pour récupérer des informations depuis le serveur Web. Il y a aussi le $_SESSION pour garder en mémoire des informations d'un utilisateur.
 7) boolean ($test = true;), char ($test = 'blabla';), byte / short / int / long ($test = 654864165;), float / double ($test = 45.32586;)
 8) Oui, il existe aussi le tableau associatifs et les tableaux multidimensionnels
 9) if, switch, ternaire, for, foreach, while, do... while
@@ -69,6 +69,55 @@ POO :
 15) 
 16) On appelle cela des accesseurs et des mutateurs
 17) 
+
+Architecture : 
+
+1) C'est un environnement de communication entre une machine client et une machine serveur. GET, POST, PUT, etc... 
+On utilise l'acronyme HTTP. La différence entre HTTP et HTTPS est que la connexion est plus sécurisé
+2)
+3) MVC veut dire Model View Controller, c'est un modèle se servant d'un controlleur pour gérer la vue
+4)Model -> Données / View -> Interface Utilisateur / Controller -> Gestion des événements et synchronisation
+5)Il y a une meilleur organisation du code, une diminution de la complexité a la conception et une conception clair et efficace grace à la séparation des données de la vue et du contrôleur
+6) Il existe le MVVM (Model View View Model)
+7) une API est une interface qui connecte des services entre eux. Le REST permet de faire communiquer plusieurs appareils sur le même réseau
+
+Modélisation / Base de données : 
+
+1) La Modélisation de Données est le processus de représentation des flux de données. C'est une méthode d'analyse et de conception des systèmes sur la séparation des données et des traitements
+2) a
+3) Ca a pour bur d'écrire de façon formelle les données qui seront utilisés par le systèmes
+4) C'est une représentation textuelle de la base de données consécutive au travail d'analyse MCD
+5) le type Entité désigne un ensemble d'entités, le type Relation fournit un accès a des points de données liées les uns aux autres. La Cardinalité représente le nombre minimum et maximum d'instances autorisés à la relation.
+La Clé Etrangère est une contrainte qui garanti l'intégrité référentielle entre deux tables. La clé Primaire permet d'identifié de manière unique
+6) 
+7)C'est un ensemble de données structurés accessible depuis un logiciel
+8) SQL => Langage de programmation permettant de manipuler des données dans une BD. MySQL => Système de gestion relationnel utilisant SQL. SGBD
+9) Tables, 
+10)
+11)
+12)
+13)
+14)
+15)
+16)
+17)
+
+Symfony : 
+
+1)
+2)
+3)
+4)
+5)
+6)
+7)
+8)
+9)
+10)
+
+Sécurité : 
+
+1) 
 
 English : 
 
