@@ -1,4 +1,4 @@
-Général :
+**Général :**
 
 1) Il faut un serveur Apache et un serveur MySQL. Pour cela, on peut utiliser Laragon ou Xamp
 
@@ -46,7 +46,7 @@ développement. Git est un programme permettant de faire un contrôle de version
 17) CMS veut dire Content Management System, c'est un logiciel permettant de créer, 
 gérer et modifier son site web facilement. On peut citer Wordpress ou Joomla
 
-Front-End : 
+**Front-End :**
 
 1) HTML signifie 'HyperText Markup Langage' => 'Langage de balises pour l'hypertexte', 
 c'est ce qu'on utilise pour créer et représenter le contenu d'une page web
@@ -92,7 +92,7 @@ informations depuis le serveur alors que POST permet d'envoyer les informations 
 dans le formulaire
 
 
-UX/UI :
+**UX/UI :**
 
 1) UX veut dire 'Expérience Utilisateur' et UI veut dire 'Interface Utilisateur'.
 L'UI va se consacrer a l'ergonomie et a la facilité de compréhension du site alors que l'UX
@@ -113,7 +113,7 @@ L'UI va se consacrer a l'ergonomie et a la facilité de compréhension du site a
 d'écran correspondant aux smartphones avant d'avoir une version bureau
 
 
-POO : 
+**POO :**
 
 1) La POO est une autre façon d'imaginer, de construire et d'organiser son code.
 
@@ -155,7 +155,7 @@ string. Oui
 17) 
 
 
-Architecture : 
+**Architecture :**
 
 1) C'est un environnement de communication entre une machine client et une machine serveur. 
 GET, POST, PUT, etc... 
@@ -181,7 +181,7 @@ contrôleur.
 communiquer plusieurs appareils sur le même réseau.
 
 
-Modélisation / Base de données : 
+**Modélisation / Base de données :**
 
 1) La Modélisation de Données est le processus de représentation des flux de données. 
 C'est une méthode d'analyse et de conception des systèmes sur la séparation des données 
@@ -226,7 +226,7 @@ MySQL => Système de gestion relationnel utilisant SQL. SGBD
 17)
 
 
-Symfony : 
+**Symfony :**
 
 1)
 
@@ -249,12 +249,12 @@ Symfony :
 10)
 
 
-Sécurité : 
+**Sécurité :**
 
 1) 
 
 
-English : 
+**English :**
 
 1) a
 
