@@ -12,7 +12,7 @@ function saveProduct()
             //On créer un identifiant unique pour chaque fichier
             $uniqueName = uniqid('', true);
             $tmpName = $_FILES['file']['tmp_name'];
-            //Ce qui donne : 64dsfb4684df4gd.test.png
+            //Ce qui donne par exemple : 64dsfb4684df4gd.test.png
             $nameFile = $uniqueName.".".$_FILES['file']['name'];
             move_uploaded_file($tmpName, './images/products/'.$nameFile);
         }
@@ -47,5 +47,3 @@ try {
     $_SESSION['errors'][] = $e->getMessage();
     header("location:index.php");
 }
-
-?>

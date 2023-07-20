@@ -82,7 +82,7 @@ session_start();
                     </div>
                     <div class="form-group mb-3">
                         <label for="file"><strong>Image du produit</strong></label>
-                        <input type="file" class="form-control" id="inputImage"  name="file">
+                        <input type="file" class="form-control" id="inputImage" name="file">
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Enregistrer le produit</button>
                 </form>

@@ -2,8 +2,13 @@
 
     session_start();
 
-    function removeProduct(){
-        $products = $_GET['product'];
+    /**
+     * The function removes one or multiple products from the session and adds a message to the 'removed'
+     * session variable.
+     * 
+     * @param $products an array of product IDs that need to be removed from the session.
+     */
+    function removeProduct($products){
 
         if(count($products) == 1 ){
 
@@ -20,11 +25,12 @@
 
             $_SESSION['removed'][] = 'Les produits ont bien été supprimé ! ';
         }
+        
     }
 
     if(isset($_GET['product'])){
 
-        removeProduct();
+        removeProduct($_GET['product']);
         header("location:recap.php");
 
     }else{
@@ -33,6 +39,8 @@
 
     }
 
+    /* This code block is checking if the `['action']` variable is set. If it is set, it performs
+    different actions based on the value of `['action']`. */
     if (isset($_POST['action'])) {
 
         switch ($_POST['action']) {
@@ -52,4 +60,3 @@
         }
 
     }
-?>
