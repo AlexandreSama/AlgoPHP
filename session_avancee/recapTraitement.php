@@ -6,7 +6,7 @@
      * The function removes one or multiple products from the session and adds a message to the 'removed'
      * session variable.
      * 
-     * @param $products an array of product IDs that need to be removed from the session.
+     * @param array $products an array of product IDs that need to be removed from the session.
      */
     function removeProduct($products){
 
@@ -28,6 +28,10 @@
         
     }
 
+    /* This code block is checking if the `['product']` variable is set. If it is set, it calls the
+    `removeProduct()` function passing `['product']` as the argument to remove the specified
+    product(s) from the session. After removing the product(s), it redirects the user to the "recap.php"
+    page. */
     if(isset($_GET['product'])){
 
         removeProduct($_GET['product']);
