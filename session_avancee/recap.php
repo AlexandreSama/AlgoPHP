@@ -38,7 +38,7 @@ session_start();
                             echo "<li><p><strong>Aucun produit !</strong></p></li>";
                         } else {
                             foreach ($_SESSION['products'] as $index => $product) {
-                                echo "<li class='product_basket'><p>" . $product['name'] . " || " . $product['qtt'] . "x</p></li>";
+                                echo "<li class='product_basket'><a href='/AlgoPHP/session_avancee/images/products/" . $product['file'] . "'>" . $product['name'] . "</a> || " . $product['qtt'] . "</li>";
                             }
                         }
                         ?>

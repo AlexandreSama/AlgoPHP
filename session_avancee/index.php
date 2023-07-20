@@ -39,7 +39,7 @@ session_start();
                                 echo "<li><p><strong>Aucun produit !</strong></p></li>";
                             } else {
                                 foreach ($_SESSION['products'] as $index => $product) {
-                                    echo "<li class='product_basket'><p>" . $product['name'] . " || " . $product['qtt'] . "x</p></li>";
+                                    echo "<li class='product_basket'><a href='/AlgoPHP/session_avancee/images/products/" . $product['file'] . "'>" . $product['name'] . "</a> || " . $product['qtt'] . "</li>";
                                 }
                             }
                             ?>
@@ -53,11 +53,15 @@ session_start();
         //S'il y a une erreur ou un message de succès, on l'affiche puis on le supprime
         if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
             echo '<script type="text/javascript"> alert("' . end($_SESSION['errors']) . '");</script>';
-            unset($_SESSION['errors'][0]);
+            foreach ($_SESSION['errors'] as $key => $message) {
+                unset($_SESSION['errors'][$key]);
+            }
         }
         if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
             echo '<script type="text/javascript"> alert("' . end($_SESSION['success']) . '");</script>';
-            unset($_SESSION['success'][0]);
+            foreach ($_SESSION['success'] as $key => $message) {
+                unset($_SESSION['success'][$key]);
+            }
         }
         ?>
         <div class="row align-items-center">
