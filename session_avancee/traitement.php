@@ -11,17 +11,13 @@ function saveProduct()
     $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
-    if ($name && $price && $qtt) {
-        if(isset($_FILES['file'])){
-            //On créer un identifiant unique pour chaque fichier
-            $uniqueName = uniqid('', true);
-            $tmpName = $_FILES['file']['tmp_name'];
-            //Ce qui donne par exemple : 64dsfb4684df4gd.test.png
-            $nameFile = $uniqueName.".".$_FILES['file']['name'];
-            move_uploaded_file($tmpName, './images/products/'.$nameFile);
-        }else{
-            throw new Exception("Erreur ! N'oubliez pas de mettre une image valide pour le produit !");
-        }
+    if ($name && $price && $qtt && isset($_FILES['file'])) {
+        //On créer un identifiant unique pour chaque fichier
+        $uniqueName = uniqid('', true);
+        $tmpName = $_FILES['file']['tmp_name'];
+        //Ce qui donne par exemple : 64dsfb4684df4gd.test.png
+        $nameFile = $uniqueName.".".$_FILES['file']['name'];
+        move_uploaded_file($tmpName, './images/products/'.$nameFile);
 
         $product = [
             "name" => $name,
@@ -33,7 +29,7 @@ function saveProduct()
 
         $_SESSION['products'][] = $product;
     }else{
-        throw new Exception("Erreur ! N'oubliez pas de remplir le nom, le prix et la quantité du produit !");
+        throw new Exception("Erreur ! N'oubliez pas de remplir le nom, le prix , la quantité et d'envoyer une image du produit !");
     }
 }
 

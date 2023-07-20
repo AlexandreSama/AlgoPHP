@@ -12,12 +12,10 @@
 
         if(count($products) == 1 ){
 
-            foreach ($products as $product) {
-                unset($_SESSION['products'][$product]);
-            }
+            unset($_SESSION['products'][$products[0]]);
             $_SESSION['removed'][] = 'Le produit a bien été supprimé !';
 
-        }else if (count($products) >= 2){
+        }else {
 
             foreach ($products as $product) {
                 unset($_SESSION['products'][$product]);
@@ -35,10 +33,6 @@
     if(isset($_GET['product'])){
 
         removeProduct($_GET['product']);
-        header("location:recap.php");
-
-    }else{
-
         header("location:recap.php");
 
     }
