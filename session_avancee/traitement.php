@@ -9,8 +9,11 @@ function saveProduct()
         $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
         if(isset($_FILES['file'])){
+            //On créer un identifiant unique pour chaque fichier
+            $uniqueName = uniqid('', true);
             $tmpName = $_FILES['file']['tmp_name'];
-            $nameFile = $_FILES['file']['name'];
+            //Ce qui donne : 64dsfb4684df4gd.test.png
+            $nameFile = $uniqueName.".".$_FILES['file']['name'];
             move_uploaded_file($tmpName, './images/products/'.$nameFile);
         }
 
