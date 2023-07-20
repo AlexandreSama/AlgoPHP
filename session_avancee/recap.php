@@ -80,7 +80,7 @@ session_start();
                     foreach ($_SESSION['products'] as $index => $product) {
                         echo "<tr>",
                         "<td>" . $index . "</td>",
-                        "<td><a href='/AlgoPHP/session_avancee/images/products/" . $product['file'] . "'>" . $product['name'] . "</a></td>",
+                        "<td><a target='_blank' href='/AlgoPHP/session_avancee/images/products/" . $product['file'] . "'>" . $product['name'] . "</a></td>",
                         "<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
                         "<td class='qtt'> <button type='button' class='removeQTT btn btn-primary ' value='-'>-</button>" . $product['qtt'] . "<button type='button' class='addQTT btn btn-primary' value='+'>+</button></td>",
                         "<td>" . number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€</td>",
