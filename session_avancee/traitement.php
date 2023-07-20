@@ -8,11 +8,18 @@ function saveProduct()
         $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
+        if(isset($_FILES['file'])){
+            $tmpName = $_FILES['file']['tmp_name'];
+            $nameFile = $_FILES['file']['name'];
+            move_uploaded_file($tmpName, './images/products/'.$nameFile);
+        }
+
         if ($name && $price && $qtt) {
             $product = [
                 "name" => $name,
                 "price" => $price,
                 "qtt" => $qtt,
+                "file" => $nameFile,
                 "total" => $price * $qtt
             ];
 
@@ -37,3 +44,5 @@ try {
     $_SESSION['errors'][] = $e->getMessage();
     header("location:index.php");
 }
+
+?>

@@ -63,7 +63,7 @@ session_start();
         <div class="row align-items-center">
             <div class="col-12">
                 <h1>Ajouter un produit !</h1>
-                <form action="traitement.php" method="post">
+                <form action="traitement.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                         <label for="exampleInputEmail1"><strong>Nom du produit</strong></label>
                         <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp" placeholder="Entrez le nom du produit" name="name">
@@ -75,6 +75,10 @@ session_start();
                     <div class="form-group mb-3">
                         <label for="exampleInputPassword1"><strong>Quantité désirée</strong></label>
                         <input type="number" class="form-control" id="inputQTT" placeholder="Entrez la quantité du produit" value="1" min='1' name="qtt">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="file"><strong>Image du produit</strong></label>
+                        <input type="file" class="form-control" id="inputImage"  name="file">
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Enregistrer le produit</button>
                 </form>
