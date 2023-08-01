@@ -9,11 +9,12 @@ class FilmController
     {
         $dao = new DAO();
 
-        $sql = 'SELECT id_film, titre_film, date_format(annee_sortie, "%Y") year, duree_min, synopsis, note, affiche 
+        $sql = 'SELECT id_film, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche 
                 FROM film
-                ORDER BY annee_sortie DESC';
+                ORDER BY date_sortie DESC';
 
         $films = $dao->executeRequest($sql);
+        $orders = $films->fetchAll(PDO::FETCH_ASSOC);
         require 'view/film/listFilms.php';
     }
 
@@ -21,10 +22,10 @@ class FilmController
     {
         $dao = new DAO();
 
-        $sql = 'SELECT id_film, titre_film, date_format(annee_sortie, "%Y") year, duree_min, synopsis, note, affiche, r.nom AS realNom, r.prenom AS realPrenom,
+        $sql = 'SELECT id_film, titre, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche, r.nom AS realNom, r.prenom AS realPrenom,
         a.nom AS actorNom, a.prenom AS actorPrenom
         FROM film f
-        LEFT JOIN realisateur r ON r.id_realisateur = f.realisateur_id
+        LEFT JOIN realisateur r ON r.id_realisateur = f.id_realisateur
         LEFT JOIN casting c ON c.film_id = f.id_film
         LEFT JOIN acteur a ON a.id_acteur = c.acteur_id
         WHERE f.id_film = ' . $id;
@@ -77,7 +78,7 @@ class FilmController
             $nameFile = $uniqueName . "." . $_FILES['affiche']['name'];
             move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
 
-            $sql = "INSERT INTO film (titre_film, annee_sortie, duree_min, synopsis, note, affiche, realisateur_id) VALUES (:title, :date_sortie, :duree, :synopsis, :note, :namefile, :realisateur_id)";
+            $sql = "INSERT INTO film (titre, date_sortie, duree, synopsis, note, affiche, id_realisateur) VALUES (:title, :date_sortie, :duree, :synopsis, :note, :namefile, :realisateur_id)";
             $params = array(':title' => $title, ':date_sortie' => $date_sortie, ':duree' => $duree, ':synopsis' => $synopsis, ':note' => $note, ':namefile' => $nameFile, ':realisateur_id' => $realisateur);
             $status = $dao->executeRequest($sql, $params);
 
@@ -88,7 +89,7 @@ class FilmController
     public function showFormDeleteFilm(){
         $dao = new DAO();
 
-        $sql = 'SELECT f.titre_film AS titre, f.id_film AS id FROM film f';
+        $sql = 'SELECT f.titre AS titre, f.id_film AS id FROM film f';
 
         $films = $dao->executeRequest($sql);
         require 'view/film/deleteFilm.php';

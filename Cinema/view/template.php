@@ -35,7 +35,7 @@
                                     <a class="dropdown-item" href="index.php?action=showFormView">Ajouter un film</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="index.php?action=showFormDeleteFilm">Modifier ...</a>
+                                    <a class="dropdown-item" href="index.php?action=showFormDeleteFilm">Supprimer un film</a>
                                 </li>
                             </ul>
                         </li>

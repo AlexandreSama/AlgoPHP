@@ -8,12 +8,12 @@ class HomeController
     {
         $dao = new DAO();
 
-        $sql = "SELECT id_film, title, DATE_FORMAT(date_release, '%Y') dateRealease, TIME_FORMAT(SEC_TO_TIME(duration*60),'%H:%i') duration, note, picture 
+        $sql = "SELECT id_film, titre, DATE_FORMAT(date_sortie, '%Y') date_sortie, TIME_FORMAT(SEC_TO_TIME(duree*60),'%H:%i') duree, note, affiche 
         FROM film
-        ORDER BY date_release DESC
+        ORDER BY date_sortie DESC
         LIMIT 5";
 
-        $sql2 = "SELECT id_film, title, DATE_FORMAT(date_release, '%Y') dateRealease, TIME_FORMAT(SEC_TO_TIME(duration*60),'%H:%i') duration, note, picture
+        $sql2 = "SELECT id_film, titre, DATE_FORMAT(date_sortie, '%Y') date_sortie, TIME_FORMAT(SEC_TO_TIME(duree*60),'%H:%i') duree, note, affiche
         FROM film
         ORDER BY note DESC
         LIMIT 5";
