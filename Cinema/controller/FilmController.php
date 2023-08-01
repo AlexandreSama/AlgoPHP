@@ -85,8 +85,7 @@ class FilmController
             // $sql1 = "SELECT f.id_film FROM film WHERE titre_film = " . $title;
             // $status1 = $dao->executeRequest($sql1);
             // $sql2 = "INSERT INTO casting ()"
-
-            require 'view/film/addFilm.php';
+            $this->listFilms();
         }
     }
 

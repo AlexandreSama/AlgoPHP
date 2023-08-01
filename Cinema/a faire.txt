@@ -1,0 +1,6 @@
+1) Page du réalisateur (ses films)
+2) CSS
+3) Page d'un acteur (ses films + infos + rôle)
+4) Page d'édition d'un film, acteur, réalisateur
+5) Page d'accueil, les cinq films les plus récents + les 3 mieux notés
+6) bouton admin navbar
