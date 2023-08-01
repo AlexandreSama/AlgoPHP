@@ -1,6 +1,6 @@
 <?php
 // var_dump($films);
-$url = '../../../cinema/public/images/';
+$url = '../../../AlgoPHP/cinema/public/images/';
 ob_start(); //def : Enclenche la temporisation de sortie
 ?>
 
@@ -35,12 +35,30 @@ ob_start(); //def : Enclenche la temporisation de sortie
                 <div class="mb-3">
                     <label for="realChoose" class="form-label">Réalisateur du film : </label>
                     <select class="form-select" aria-label="Default select example" id="realChoose" name='realisateur'>
-                        <?php 
-                            while($realisateur = $realisateurs->fetch()){
-                                echo '<option value="'. $realisateur['id'] .'">'. $realisateur['prenom'] . " " . $realisateur['nom'] .'</option>';
-                            }
+                        <?php
+                        while ($info = $data->fetch()) {
+                            echo '<option value="' . $info['idReal'] . '">' . $info['prenomReal'] . " " . $info['nomReal'] . '</option>';
+                        }
                         ?>
                     </select>
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="actor" class="form-label">Acteur du film : </label>
+                    <select class="form-select" aria-label="Default select example" id="actor" name='acteur'>
+                        <?php
+                        while ($infos = $data2->fetch()) {
+                            echo '<option value="' . $infos['idActeur'] . '">' . $infos['acteurPrenom'] . " " . $infos['acteurNom'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <label for="actor" class="form-label">Genre du film : </label>
+                    <select class="form-select" aria-label="Default select example" id="actor" name='genre'>
+                        <?php
+                        while ($infos = $data3->fetch()) {
+                            echo '<option value="' . $infos['genreID'] . '">' . $infos['genreNom'] . '</option>';
+                        }
+                        ?>
+                    </select> -->
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

@@ -1,6 +1,6 @@
 <?php
 // var_dump($films);
-$url = '../../../cinema/public/uploads/';
+$url = '../../../AlgoPHP/cinema/public/uploads/';
 ob_start(); //def : Enclenche la temporisation de sortie
 ?>
 
