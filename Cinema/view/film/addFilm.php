@@ -42,24 +42,6 @@ ob_start(); //def : Enclenche la temporisation de sortie
                         ?>
                     </select>
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="actor" class="form-label">Acteur du film : </label>
-                    <select class="form-select" aria-label="Default select example" id="actor" name='acteur'>
-                        <?php
-                        while ($infos = $data2->fetch()) {
-                            echo '<option value="' . $infos['idActeur'] . '">' . $infos['acteurPrenom'] . " " . $infos['acteurNom'] . '</option>';
-                        }
-                        ?>
-                    </select>
-                    <label for="actor" class="form-label">Genre du film : </label>
-                    <select class="form-select" aria-label="Default select example" id="actor" name='genre'>
-                        <?php
-                        while ($infos = $data3->fetch()) {
-                            echo '<option value="' . $infos['genreID'] . '">' . $infos['genreNom'] . '</option>';
-                        }
-                        ?>
-                    </select> -->
-                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
