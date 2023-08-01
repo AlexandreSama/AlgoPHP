@@ -68,8 +68,6 @@ class FilmController
         $synopsis = filter_input(INPUT_POST, 'synopsis', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $realisateur = filter_input(INPUT_POST, 'realisateur', FILTER_VALIDATE_INT);
-        // $acteur = filter_input(INPUT_POST, 'acteur', FILTER_VALIDATE_INT);
-        // $genre = filter_input(INPUT_POST, 'genre', FILTER_VALIDATE_INT);
 
         if ($title && $date_sortie && $duree && $synopsis && $note && $realisateur && isset($_FILES['affiche'])) {
 
@@ -82,9 +80,7 @@ class FilmController
             $sql = "INSERT INTO film (titre_film, annee_sortie, duree_min, synopsis, note, affiche, realisateur_id) VALUES (:title, :date_sortie, :duree, :synopsis, :note, :namefile, :realisateur_id)";
             $params = array(':title' => $title, ':date_sortie' => $date_sortie, ':duree' => $duree, ':synopsis' => $synopsis, ':note' => $note, ':namefile' => $nameFile, ':realisateur_id' => $realisateur);
             $status = $dao->executeRequest($sql, $params);
-            // $sql1 = "SELECT f.id_film FROM film WHERE titre_film = " . $title;
-            // $status1 = $dao->executeRequest($sql1);
-            // $sql2 = "INSERT INTO casting ()"
+
             $this->listFilms();
         }
     }
