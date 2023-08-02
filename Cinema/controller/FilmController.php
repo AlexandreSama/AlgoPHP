@@ -172,13 +172,13 @@ class FilmController
         $date_sortie = date('Y-m-d', $dateRaw);
         
         var_dump($realisateur);
-        // $sql = "UPDATE film SET titre = :titre, synopsis = :synopsis, note = :note, duree = :duree, id_realisateur = :id_realisateur WHERE id_film = " . $id;
+        $sql = "UPDATE film SET titre = :titre, synopsis = :synopsis, note = :note, duree = :duree, id_realisateur = :id_realisateur WHERE id_film = " . $id;
 
-        // $params = array(':titre' => $titre, ':synopsis' => $synopsis, ':note' => $note, ':duree' => $duree, ':id_realisateur' => $realisateur);
+        $params = array(':titre' => $titre, ':synopsis' => $synopsis, ':note' => $note, ':duree' => $duree, ':id_realisateur' => strval($realisateur));
 
-        // var_dump($params);
-        // $test = $dao->executeRequest($sql, $params);
-        // var_dump($test);
-        // $this->detailFilm($id);
+        var_dump($params);
+        $test = $dao->executeRequest($sql, $params);
+        var_dump($test);
+        $this->detailFilm($id);
     }
 }
