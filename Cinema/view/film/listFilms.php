@@ -5,43 +5,22 @@ $url = '../../../AlgoPHP/cinema/public/uploads/';
 ob_start(); //def : Enclenche la temporisation de sortie
 ?>
 
-
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+<div class="container-fluid mt-5">
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
         <?php
-        $i = 1;
-        foreach ($orders as $val) {
-            echo '<li data-target="#carouselExampleIndicators" data-slide-to="' . $i . '"></li>';
-            $i++;
-        }
-        ?>
-    </ol>
-    <div class="carousel-inner">
-        <?php
-        $j = 0;
         foreach ($orders as $value) {
-            if ($j == 0) {
-                echo '<div class="carousel-item active">
-                <img src="' . $url . $value['affiche'] . '" class="d-block w-100" alt="testasasas">
-                </div>';
-                $j++;
-            } else {
-                echo '<div class="carousel-item">
-                <img src="' . $url . $value['affiche'] . '" class="d-block w-100" alt="testasasas">
+            echo '<div class="col holderFilmCard">
+                <div class="card filmCard">
+                <a href="index.php?action=detailFilm&id=' . $value['id_film'] . '" class="linkDetail"><img src="' . $url . $value['affiche'] .'" class="card-img-top" alt="' . $value['titre'] . '"></img></a>
+                    <div class="card-body">
+                        <h5 class="card-title">' . $value['titre'] . '</h5>
+                        <p class="card-text">' . $value['synopsis'] . '</p>
+                    </div>
+                </div>
             </div>';
-            }
         }
         ?>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
 
 <?php

@@ -1,5 +1,6 @@
 <?php
 $filmUsed = $film->fetch();
+$real = $realisateur->fetch();
 $url = '../../../AlgoPHP/cinema/public/uploads/';
 ob_start(); //def : Enclenche la temporisation de sortie
 ?>
@@ -8,10 +9,12 @@ ob_start(); //def : Enclenche la temporisation de sortie
     <div class="row">
         <div class="col-12 mainContent">
             <?php
-                echo "<div class='col-12 holder'style='background-image:url(" . $url.$filmUsed['affiche'] ."); background-attachment: fixed;'></div>";
+                echo "<div class='col-12 holder'>
+                    <img src='" . $url.$filmUsed['affiche'] ."' class='test'>
+                </div>";
             ?>
             <div class="col-12 d-flex flex-column">
-                <h1 class="centerText"><?= $filmUsed['titre_film']; ?></h1>
+                <h1 class="centerText"><?= $filmUsed['titre']; ?></h1>
                 <div class="col-12 d-flex flex-row">
                     <div class="col-6 text-center text-white">
                         <h3>Les infos : </h3>
@@ -22,14 +25,18 @@ ob_start(); //def : Enclenche la temporisation de sortie
                                 }
                             ?>
                         </p>
-                        <p>Durée : <?= $filmUsed['duree_min'] ?>min</p>
+                        <p>Durée : <?= $filmUsed['duree'] ?>min</p>
                         <p>Date de sortie : <?= $filmUsed['year'] ?></p>
-                        <p>Réalisé par : <?= $filmUsed['realPrenom'] . " " . $filmUsed['realNom'] ?></p>
+                        <p>Réalisé par : <?= $real['realPrenom'] . " " . $real['realNom'] ?></p>
                         <p>Avec : 
                         <?php
-                        echo  $filmUsed['actorPrenom'] . " " . $filmUsed['actorNom'] . ", ";
-                        while ($info = $film->fetch()) {
-                            echo  $info['actorPrenom'] . " " . $info['actorNom'];
+                        // echo  $ordersActeur['actorPrenom'] . " " . $ordersActeur['actorNom'] . ", ";
+                        // while ($info = $acteurs->fetch()) {
+                        //     echo  $info['actorPrenom'] . " " . $info['actorNom'];
+                        // }
+                        foreach ($ordersActeur as $value) {
+                            echo  '<a href="index.php?action=detailActor&id=' . $value['idActeur'] . '">'
+                             . $value['acteurPrenom'] . " " . $value['acteurNom'] . '</a>';
                         }
                         ?>
                         </p>

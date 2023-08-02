@@ -8,18 +8,21 @@ class HomeController
     {
         $dao = new DAO();
 
-        $sql = "SELECT id_film, titre, DATE_FORMAT(date_sortie, '%Y') date_sortie, TIME_FORMAT(SEC_TO_TIME(duree*60),'%H:%i') duree, note, affiche 
-        FROM film
-        ORDER BY date_sortie DESC
-        LIMIT 5";
+        $sql = 'SELECT id_film, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche 
+                FROM film
+                ORDER BY date_sortie DESC
+                LIMIT 5';
 
-        $sql2 = "SELECT id_film, titre, DATE_FORMAT(date_sortie, '%Y') date_sortie, TIME_FORMAT(SEC_TO_TIME(duree*60),'%H:%i') duree, note, affiche
-        FROM film
-        ORDER BY note DESC
-        LIMIT 5";
+        $sql2 = 'SELECT id_film, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche
+                FROM film f
+                WHERE f.note > (SELECT AVG(f.note) FROM film f)
+                LIMIT 5';
 
         $films = $dao->executeRequest($sql);
-        $notes = $dao->executeRequest($sql2);
+        $filmsUpNote = $dao->executeRequest($sql2);
+        $orders1 = $films->fetchAll(PDO::FETCH_ASSOC);
+        $orders2 = $filmsUpNote->fetchAll(PDO::FETCH_ASSOC);
+
         require 'view/home/home.php';
     }
 }

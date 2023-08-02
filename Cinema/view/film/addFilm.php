@@ -26,7 +26,7 @@ ob_start(); //def : Enclenche la temporisation de sortie
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Note du film</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" name='note'>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name='note' step=".01">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Affiche du film</label>
@@ -54,6 +54,6 @@ ob_start(); //def : Enclenche la temporisation de sortie
 
 
 <?php
-$title = "List of Films";
+$title = "Ajouter un film";
 $content = ob_get_clean(); //def : Exécute successivement ob_get_contents() et ob_end_clean(). Lit le contenu courant du tampon de sortie puis l'efface
 require "view/template.php";

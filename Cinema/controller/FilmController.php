@@ -22,23 +22,36 @@ class FilmController
     {
         $dao = new DAO();
 
-        $sql = 'SELECT id_film, titre, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche, r.nom AS realNom, r.prenom AS realPrenom,
-        a.nom AS actorNom, a.prenom AS actorPrenom
+        $sqlFilm = 'SELECT id_film, titre, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche
         FROM film f
-        LEFT JOIN realisateur r ON r.id_realisateur = f.id_realisateur
-        LEFT JOIN casting c ON c.film_id = f.id_film
-        LEFT JOIN acteur a ON a.id_acteur = c.acteur_id
         WHERE f.id_film = ' . $id;
 
-        $sql2 = 'SELECT g.libelle AS genreFilm
+        $sqlActeurs = 'SELECT p.id_personne AS idActeur, p.nom AS acteurNom, p.prenom AS acteurPrenom
+        FROM film f
+        INNER JOIN casting c ON c.id_film = f.id_film
+        INNER JOIN acteur a ON a.id_acteur = c.id_acteur
+        INNER JOIN personne p ON p.id_personne = a.id_personne
+        WHERE f.id_film = ' . $id;
+
+        $sqlReal = 'SELECT p.nom AS realNom, p.prenom AS realPrenom
+        FROM film f
+        INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
+        INNER JOIN personne p ON p.id_personne = r.id_personne
+        WHERE f.id_film = ' . $id;
+
+        $sqlGenre = 'SELECT g.libelle AS genreFilm
         FROM genre g
         LEFT JOIN posseder p ON p.genre_id = g.id_genre
         LEFT JOIN film f ON p.film_id = f.id_film
         WHERE f.id_film = ' . $id;
 
         $param = array('id' => $id);
-        $film = $dao->executeRequest($sql, $param);
-        $genreFilm = $dao->executeRequest($sql2, $param);
+
+        $film = $dao->executeRequest($sqlFilm, $param);
+        $acteurs = $dao->executeRequest($sqlActeurs, $param);
+        $realisateur = $dao->executeRequest($sqlReal, $param);
+        $genreFilm = $dao->executeRequest($sqlGenre, $param);
+        $ordersActeur = $acteurs->fetchAll(PDO::FETCH_ASSOC);
         require 'view/film/detailFilm.php';
     }
 
@@ -46,15 +59,21 @@ class FilmController
     {
         $dao = new DAO();
 
-        $sql = 'SELECT r.nom AS nomReal, r.prenom AS prenomReal, r.id_realisateur AS idReal
-        FROM realisateur r, genre g, acteur a';
-        $sql2 = 'SELECT a.id_acteur AS idActeur, a.nom AS acteurNom, a.prenom AS acteurPrenom
-        FROM acteur a';
+        $sql = 'SELECT p.nom AS nomReal, p.prenom AS prenomReal, r.id_realisateur AS idReal
+        FROM realisateur r
+        LEFT JOIN personne p ON p.id_personne = r.id_personne';
+
+        $sql2 = 'SELECT a.id_acteur AS idActeur, p.nom AS acteurNom, p.prenom AS acteurPrenom
+        FROM acteur a
+        LEFT JOIN personne p ON p.id_personne = a.id_personne';
+
         $sql3 = 'SELECT g.id_genre AS genreID, g.libelle AS genreNom
         FROM genre g';
+
         $data = $dao->executeRequest($sql);
         $data2 = $dao->executeRequest($sql2);
         $data3 = $dao->executeRequest($sql3);
+
         require 'view/film/addFilm.php';
     }
 

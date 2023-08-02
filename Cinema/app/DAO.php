@@ -10,7 +10,7 @@ class DAO
     public function __construct()
     {
         $db_host = "localhost";
-        $db_name = "cinema";
+        $db_name = "cinema_alex";
         $db_user = "root";
         $db_pass = "";
 

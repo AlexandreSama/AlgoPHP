@@ -3,6 +3,7 @@
 require_once "controller/FilmController.php";
 
 require_once "controller/HomeController.php";
+require_once "controller/ActorController.php";
 
 
 // Appel de la function autoload pour charger automatiquement tout les controllers crées
@@ -14,6 +15,7 @@ spl_autoload_register(function ($class_name) {
 
 $ctrFilm = new FilmController();
 $ctrHome = new HomeController();
+$ctrActor = new ActorController();
 
 if (isset($_GET['action'])) {
 
@@ -37,6 +39,10 @@ if (isset($_GET['action'])) {
             break;
         case 'deleteFilm':
             $ctrFilm->deleteFilm();
+            break;
+        case 'detailActor':
+            $id = $_GET['id'];
+            $ctrActor->detailActor($id);
             break;
     }
 } else {
