@@ -44,6 +44,10 @@ if (isset($_GET['action'])) {
             $id = $_GET['id'];
             $ctrActor->detailActor($id);
             break;
+        case 'detailRealisator':
+            $id = $_GET['id'];
+            $ctrActor->detailRealisator($id);
+            break;
     }
 } else {
     //Si l'url de contient pas d'action enregistrer, ont fait appel au constructeur homepage, pour afficher la page d'acceuil par défaut

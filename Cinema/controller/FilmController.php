@@ -26,14 +26,14 @@ class FilmController
         FROM film f
         WHERE f.id_film = ' . $id;
 
-        $sqlActeurs = 'SELECT p.id_personne AS idActeur, p.nom AS acteurNom, p.prenom AS acteurPrenom
+        $sqlActeurs = 'SELECT a.id_acteur AS idActeur, p.nom AS acteurNom, p.prenom AS acteurPrenom
         FROM film f
         INNER JOIN casting c ON c.id_film = f.id_film
         INNER JOIN acteur a ON a.id_acteur = c.id_acteur
         INNER JOIN personne p ON p.id_personne = a.id_personne
         WHERE f.id_film = ' . $id;
 
-        $sqlReal = 'SELECT p.nom AS realNom, p.prenom AS realPrenom
+        $sqlReal = 'SELECT r.id_realisateur AS realID, p.nom AS realNom, p.prenom AS realPrenom
         FROM film f
         INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
         INNER JOIN personne p ON p.id_personne = r.id_personne
@@ -51,7 +51,7 @@ class FilmController
         $acteurs = $dao->executeRequest($sqlActeurs, $param);
         $realisateur = $dao->executeRequest($sqlReal, $param);
         $genreFilm = $dao->executeRequest($sqlGenre, $param);
-        $ordersActeur = $acteurs->fetchAll(PDO::FETCH_ASSOC);
+        
         require 'view/film/detailFilm.php';
     }
 

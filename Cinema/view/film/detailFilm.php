@@ -27,14 +27,15 @@ ob_start(); //def : Enclenche la temporisation de sortie
                         </p>
                         <p>Durée : <?= $filmUsed['duree'] ?>min</p>
                         <p>Date de sortie : <?= $filmUsed['year'] ?></p>
-                        <p>Réalisé par : <?= $real['realPrenom'] . " " . $real['realNom'] ?></p>
+                        <!-- <p>Réalisé par : <?= $real['realPrenom'] . " " . $real['realNom'] ?></p> -->
+                        <p>Realisé par : 
+                            <?php
+                            echo '<a href="index.php?action=detailRealisator&id=' . $real['realID'] . '">' . $real['realPrenom'] . " " . $real['realNom'] . '</a>'
+                            ?>
+                        </p>
                         <p>Avec : 
                         <?php
-                        // echo  $ordersActeur['actorPrenom'] . " " . $ordersActeur['actorNom'] . ", ";
-                        // while ($info = $acteurs->fetch()) {
-                        //     echo  $info['actorPrenom'] . " " . $info['actorNom'];
-                        // }
-                        foreach ($ordersActeur as $value) {
+                        while($value = $acteurs->fetch()){
                             echo  '<a href="index.php?action=detailActor&id=' . $value['idActeur'] . '">'
                              . $value['acteurPrenom'] . " " . $value['acteurNom'] . '</a>';
                         }

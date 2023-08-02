@@ -21,7 +21,7 @@ ob_start(); //def : Enclenche la temporisation de sortie
                 <ul>
                     <?php
                     foreach ($ordersFilms as $value) {
-                        echo '<p>' . $value['titre'] .' <br><span>Dans le rôle de : ' . $value['nom'] .'</span></p>';
+                        echo '<p>' . $value['titre'] . '</p>';
                     }
                     ?>
                 </ul>
@@ -31,6 +31,6 @@ ob_start(); //def : Enclenche la temporisation de sortie
 </div>
 
 <?php
-$title = "Detail de l'acteur";
+$title = "Detail du réalisateur";
 $content = ob_get_clean(); //def : Exécute successivement ob_get_contents() et ob_end_clean(). Lit le contenu courant du tampon de sortie puis l'efface
 require "view/template.php";
