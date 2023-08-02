@@ -25,6 +25,7 @@ class ActorController
         $acteur = $dao->executeRequest($sqlActeur, $param);
         $films = $dao->executeRequest($sqlFilms, $param);
         $ordersFilms = $films->fetchAll(PDO::FETCH_ASSOC);
+        $idActeur = $id;
         
         require 'view/actor/detailActor.php';
     }

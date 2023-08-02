@@ -16,7 +16,7 @@ ob_start(); //def : Enclenche la temporisation de sortie
                 <p>Genre : <?= $acteurUsed['sexe'] ?></p>
                 <p>Date de naissance : <?= $acteurUsed['date_naissance'] ?></p>
             </div>
-            <div class="col-6">
+            <div class="col-5">
                 <p>Filmographie : </p>
                 <ul>
                     <?php
@@ -25,6 +25,13 @@ ob_start(); //def : Enclenche la temporisation de sortie
                     }
                     ?>
                 </ul>
+            </div>
+            <div class="col-6">
+                    <button type="button" class="btn btn-danger">
+                        <?php
+                            echo '<a href="index.php?action=modifyActorView&id=' . $id . '">Modifier cet acteur !</a>';
+                        ?>
+                    </button>
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
 <?php
 
 require_once "controller/FilmController.php";
-
 require_once "controller/HomeController.php";
 require_once "controller/ActorController.php";
+require_once "controller/ModifyController.php";
 
 
 // Appel de la function autoload pour charger automatiquement tout les controllers crées
@@ -16,6 +16,7 @@ spl_autoload_register(function ($class_name) {
 $ctrFilm = new FilmController();
 $ctrHome = new HomeController();
 $ctrActor = new ActorController();
+$ctrModify = new ModifyController();
 
 if (isset($_GET['action'])) {
 
@@ -48,6 +49,24 @@ if (isset($_GET['action'])) {
             $id = $_GET['id'];
             $ctrActor->detailRealisator($id);
             break;
+        case 'modifyActorView':
+            $id = $_GET['id'];
+            $ctrModify->modifyActorView($id);
+            break;
+        case 'modifyFilmView':
+            $id = $_GET['id'];
+            $ctrFilm->modifyFilmView($id);
+            break;
+        case 'modifyRealView':
+            $ctrModify->modifyRealView();
+            break;
+        case 'modifyActor': 
+            $ctrModify->modifyActor();
+            break;
+        case 'modifyFilm':
+            $ctrFilm->modifyFilm();
+            break;
+
     }
 } else {
     //Si l'url de contient pas d'action enregistrer, ont fait appel au constructeur homepage, pour afficher la page d'acceuil par défaut

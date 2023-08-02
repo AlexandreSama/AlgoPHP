@@ -51,6 +51,7 @@ class FilmController
         $acteurs = $dao->executeRequest($sqlActeurs, $param);
         $realisateur = $dao->executeRequest($sqlReal, $param);
         $genreFilm = $dao->executeRequest($sqlGenre, $param);
+        $idFilm = $id;
         
         require 'view/film/detailFilm.php';
     }
@@ -132,6 +133,52 @@ class FilmController
             $status = $dao->executeRequest($sql2);
             require 'view/film/deleteFilm.php';
         }
+    }
 
+    public function modifyFilmView($id){
+
+        $dao = new DAO();
+
+        $sql = 'SELECT f.id_film, titre, date_sortie, duree, synopsis, note, r.id_realisateur, p.nom, p.prenom
+                FROM film f
+                INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
+                INNER JOIN personne p ON p.id_personne = r.id_personne
+                WHERE f.id_film = ' . $id;
+
+        $sql2 = 'SELECT p.nom, p.prenom, p.id_personne
+                FROM personne p
+                INNER JOIN realisateur r ON r.id_personne = p.id_personne';
+
+        $film = $dao->executeRequest($sql);
+        $orders1 = $film->fetchAll(PDO::FETCH_ASSOC);
+        $realisateurs = $dao->executeRequest($sql2);
+        $orders2 = $realisateurs->fetchAll(PDO::FETCH_ASSOC);
+        $idFilm = $id;
+
+        require 'view/modify/modifyFilm.php';
+    }
+
+    public function modifyFilm(){
+
+        $dao = new DAO();
+
+        $id = filter_input(INPUT_POST, "idFilm", FILTER_VALIDATE_INT);
+        $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+        $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
+        $dateRaw = strtotime($_POST['date_sortie']);
+        $date_sortie = date('Y-m-d', $dateRaw);
+        
+        var_dump($realisateur);
+        // $sql = "UPDATE film SET titre = :titre, synopsis = :synopsis, note = :note, duree = :duree, id_realisateur = :id_realisateur WHERE id_film = " . $id;
+
+        // $params = array(':titre' => $titre, ':synopsis' => $synopsis, ':note' => $note, ':duree' => $duree, ':id_realisateur' => $realisateur);
+
+        // var_dump($params);
+        // $test = $dao->executeRequest($sql, $params);
+        // var_dump($test);
+        // $this->detailFilm($id);
     }
 }

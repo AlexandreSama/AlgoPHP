@@ -44,13 +44,13 @@
                 </div>
                 <div>
                     <div class="dropdown dropstart">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-hammer"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Modifier un film</a></li>
-                            <li><a class="dropdown-item" href="#">Modifier un acteur</a></li>
-                            <li><a class="dropdown-item" href="#">Modifier un réalisateur</a></li>
+                            <li><a class="dropdown-item" href="index.php?action=modifyFilmView">Modifier un film</a></li>
+                            <!-- <li><a class="dropdown-item" href="index.php?action=modifyActorView">Modifier un acteur</a></li> -->
+                            <li><a class="dropdown-item" href="index.php?action=modifyRealView">Modifier un réalisateur</a></li>
                         </ul>
                     </div>
                 </div>
