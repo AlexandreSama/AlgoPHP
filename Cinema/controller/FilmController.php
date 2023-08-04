@@ -24,33 +24,34 @@ class FilmController
 
         $sqlFilm = 'SELECT id_film, titre, titre, date_format(date_sortie, "%Y") year, duree, synopsis, note, affiche
         FROM film f
-        WHERE f.id_film = ' . $id;
+        WHERE f.id_film = :id';
 
         $sqlActeurs = 'SELECT a.id_acteur AS idActeur, p.nom AS acteurNom, p.prenom AS acteurPrenom
         FROM film f
         INNER JOIN casting c ON c.id_film = f.id_film
         INNER JOIN acteur a ON a.id_acteur = c.id_acteur
         INNER JOIN personne p ON p.id_personne = a.id_personne
-        WHERE f.id_film = ' . $id;
+        WHERE f.id_film = :id';
 
         $sqlReal = 'SELECT r.id_realisateur AS realID, p.nom AS realNom, p.prenom AS realPrenom
         FROM film f
         INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
         INNER JOIN personne p ON p.id_personne = r.id_personne
-        WHERE f.id_film = ' . $id;
+        WHERE f.id_film = :id';
 
         $sqlGenre = 'SELECT g.libelle AS genreFilm
         FROM genre g
-        LEFT JOIN posseder p ON p.genre_id = g.id_genre
-        LEFT JOIN film f ON p.film_id = f.id_film
-        WHERE f.id_film = ' . $id;
+        LEFT JOIN appartiens a ON a.id_genre = g.id_genre
+        LEFT JOIN film f ON a.id_film = f.id_film
+        WHERE f.id_film = :id';
 
-        $param = array('id' => $id);
+        $param = array(':id' => $id);
 
         $film = $dao->executeRequest($sqlFilm, $param);
         $acteurs = $dao->executeRequest($sqlActeurs, $param);
         $realisateur = $dao->executeRequest($sqlReal, $param);
         $genreFilm = $dao->executeRequest($sqlGenre, $param);
+
         $idFilm = $id;
         
         require 'view/film/detailFilm.php';
@@ -145,14 +146,9 @@ class FilmController
                 INNER JOIN personne p ON p.id_personne = r.id_personne
                 WHERE f.id_film = ' . $id;
 
-        $sql2 = 'SELECT p.nom, p.prenom, p.id_personne
-                FROM personne p
-                INNER JOIN realisateur r ON r.id_personne = p.id_personne';
-
         $film = $dao->executeRequest($sql);
         $orders1 = $film->fetchAll(PDO::FETCH_ASSOC);
-        $realisateurs = $dao->executeRequest($sql2);
-        $orders2 = $realisateurs->fetchAll(PDO::FETCH_ASSOC);
+
         $idFilm = $id;
 
         require 'view/modify/modifyFilm.php';
@@ -167,14 +163,13 @@ class FilmController
         $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
-        $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
+        // $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
         $dateRaw = strtotime($_POST['date_sortie']);
         $date_sortie = date('Y-m-d', $dateRaw);
         
-        var_dump($realisateur);
-        $sql = "UPDATE film SET titre = :titre, synopsis = :synopsis, note = :note, duree = :duree, id_realisateur = :id_realisateur WHERE id_film = " . $id;
+        $sql = "UPDATE film SET titre = :titre, synopsis = :synopsis, note = :note, duree = :duree WHERE id_film = " . $id;
 
-        $params = array(':titre' => $titre, ':synopsis' => $synopsis, ':note' => $note, ':duree' => $duree, ':id_realisateur' => strval($realisateur));
+        $params = array(':titre' => $titre, ':synopsis' => $synopsis, ':note' => $note, ':duree' => $duree);
 
         var_dump($params);
         $test = $dao->executeRequest($sql, $params);

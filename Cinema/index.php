@@ -58,13 +58,17 @@ if (isset($_GET['action'])) {
             $ctrFilm->modifyFilmView($id);
             break;
         case 'modifyRealView':
-            $ctrModify->modifyRealView();
+            $id = $_GET['id'];
+            $ctrModify->modifyRealView($id);
             break;
         case 'modifyActor': 
             $ctrModify->modifyActor();
             break;
         case 'modifyFilm':
             $ctrFilm->modifyFilm();
+            break;
+        case 'modifyReal':
+            $ctrModify->modifyReal();
             break;
 
     }

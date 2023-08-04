@@ -51,21 +51,6 @@ ob_start(); //def : Enclenche la temporisation de sortie
                     }
                     ?>
                 </div>
-                <div class="mb-3 holderInputModify">
-                    <select class="form-select" aria-label="Default select example" name='realisateur'>
-                        <?php
-                        $i = 0;
-                        foreach ($orders2 as $value) {
-                            if ($i == 0) {
-                                echo '<option selected value="' . $value['id_personne'] . '">' . $value['nom'] . " " . $value['prenom'] . '</option>';
-                                $i++;
-                            } else {
-                                echo '<option value="' . $value['id_personne'] . '">' . $value['nom'] . " " . $value['prenom'] . '</option>';
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

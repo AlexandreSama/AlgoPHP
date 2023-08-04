@@ -1,3 +1,5 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700');
+
 * {
   padding: 0;
   margin: 0;
@@ -83,4 +85,12 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+
+.afficheHolder{
+  height: 550px;
+}
+.affiche{
+  width: 100%;
+  height: 100%;
 }
