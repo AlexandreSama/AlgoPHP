@@ -21,11 +21,15 @@ ob_start(); //def : Enclenche la temporisation de sortie
                         <li class="mb-3"><a href="#!"><i class="fa-solid fa-signature display-25 me-3 text-secondary"></i>Genre : <?= $acteurUsed['sexe'] ?></a></li>
                         <li class="mb-3"><a href="#!"><i class="fa-solid fa-signature display-25 me-3 text-secondary"></i>Date de naissance : <?= $acteurUsed['date_naissance'] ?></a></li>
                     </ul>
-                    <ul class="social-icon-style2 ps-0">
-                        <?php
-                        echo '<li><a href="index.php?action=modifyRealView&id=' . $id . '" class="rounded-3"><i class="fa-solid fa-hammer"></i>Modifier</a></li>';
-                        ?>
-                    </ul>
+                    <?php
+                        foreach ($test as $value) {
+                            if($value['id_role_staff'] == 1){
+                                echo '<ul class="social-icon-style2 ps-0">
+                                <li><a href="index.php?action=modifyRealView&id=' . $id . '" class="rounded-3"><i class="fa-solid fa-hammer"></i>Modifier</a></li>
+                                </ul>';
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>

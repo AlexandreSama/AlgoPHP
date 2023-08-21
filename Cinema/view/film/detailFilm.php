@@ -48,11 +48,15 @@ ob_start(); //def : Enclenche la temporisation de sortie
                             echo "<p>" . $filmUsed['synopsis'] . "</p>"
                         ?>
                     </div>
-                    <button type="button" class="btn btn-danger">
-                        <?php
-                            echo '<a href="index.php?action=modifyFilmView&id=' . $idFilm . '">Modifier cet acteur !</a>';
-                        ?>
-                    </button>
+                    <?php
+                        foreach ($test as $value) {
+                            if($value['id_role_staff'] == 1){
+                                echo '<button type="button" class="btn btn-danger">
+                                <a href="index.php?action=modifyFilmView&id=' . $idFilm . '">Modifier cet acteur !</a>
+                                </button>';
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>

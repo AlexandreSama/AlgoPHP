@@ -27,6 +27,7 @@ class ActorController
         $ordersFilms = $films->fetchAll(PDO::FETCH_ASSOC);
         $idActeur = $id;
         
+        $test = $dao->getUser();
         require 'view/actor/detailActor.php';
     }
 
@@ -49,6 +50,9 @@ class ActorController
         $films = $dao->executeRequest($sqlFilms, $param);
         $ordersFilms = $films->fetchAll(PDO::FETCH_ASSOC);
         
+
+        $test = $dao->getUser();
+
         require 'view/realisator/detailRealisator.php';
     }
 }

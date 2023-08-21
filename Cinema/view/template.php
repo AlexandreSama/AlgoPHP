@@ -27,7 +27,23 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?action=listFilms">Tout les films</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <?php
+                            foreach ($test as $value) {
+                                if($value['id_role_staff'] == 1){
+                                    echo '<li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="index.php?action=showFormDeleteFilm">Supprimer un film</a>
+                                        </li>
+                                    </ul>
+                                </li>';
+                                }
+                            }
+                        ?>
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Actions
                             </a>
@@ -36,7 +52,7 @@
                                     <a class="dropdown-item" href="index.php?action=showFormDeleteFilm">Supprimer un film</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 <?php
 $url = '../../../AlgoPHP/cinema/public/uploads/';
-
 ob_start(); //def : Enclenche la temporisation de sortie
 ?>
 

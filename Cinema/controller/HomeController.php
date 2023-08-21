@@ -23,6 +23,7 @@ class HomeController
         $orders1 = $films->fetchAll(PDO::FETCH_ASSOC);
         $orders2 = $filmsUpNote->fetchAll(PDO::FETCH_ASSOC);
 
+        $test = $dao->getUser();
         require 'view/home/home.php';
     }
 }

@@ -15,6 +15,9 @@ class FilmController
 
         $films = $dao->executeRequest($sql);
         $orders = $films->fetchAll(PDO::FETCH_ASSOC);
+
+        $test = $dao->getUser();
+
         require 'view/film/listFilms.php';
     }
 
@@ -53,6 +56,8 @@ class FilmController
         $genreFilm = $dao->executeRequest($sqlGenre, $param);
 
         $idFilm = $id;
+
+        $test = $dao->getUser();
         
         require 'view/film/detailFilm.php';
     }
@@ -75,6 +80,9 @@ class FilmController
         $data = $dao->executeRequest($sql);
         $data2 = $dao->executeRequest($sql2);
         $data3 = $dao->executeRequest($sql3);
+
+        $test = $dao->getUser();
+
 
         require 'view/film/addFilm.php';
     }
@@ -150,6 +158,9 @@ class FilmController
         $orders1 = $film->fetchAll(PDO::FETCH_ASSOC);
 
         $idFilm = $id;
+
+        $test = $dao->getUser();
+
 
         require 'view/modify/modifyFilm.php';
     }

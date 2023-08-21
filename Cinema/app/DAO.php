@@ -36,4 +36,12 @@ class DAO
         }
         return $resultat;
     }
+
+    public function getUser(){
+        $sql = 'SELECT *
+        FROM utilisateur u
+        INNER JOIN role_staff rs ON rs.id = u.id_role_staff';
+
+        return $this->executeRequest($sql);
+    }
 }

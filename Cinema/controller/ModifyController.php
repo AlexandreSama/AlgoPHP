@@ -17,6 +17,9 @@ class ModifyController
         $orders = $acteur->fetchAll(PDO::FETCH_ASSOC);
 
         $idActeur = $id;
+
+        $test = $dao->getUser();
+
         // var_dump($acteur);
         require 'view/modify/modifyActor.php';
     }
@@ -52,6 +55,9 @@ class ModifyController
         $idReal = $id;
         $realisateurs = $dao->executeRequest($sql);
         $orders = $realisateurs->fetchAll(PDO::FETCH_ASSOC);
+
+        $test = $dao->getUser();
+
 
         require 'view/modify/modifyReal.php';
     }
