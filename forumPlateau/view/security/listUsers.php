@@ -8,5 +8,5 @@ $users = $result["data"]['users'];
 <?php
 
 foreach ($users as $value) {
-    echo $value->getUsername();
+    echo $value->getUsername() . " " . $value->getEmail();
 }

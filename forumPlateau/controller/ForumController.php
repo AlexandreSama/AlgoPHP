@@ -15,7 +15,7 @@
 
             $topicManager = new TopicManager();
             $topics = $topicManager->findAll(["creationDate", "DESC"]);
-            
+            var_dump($topics);
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
