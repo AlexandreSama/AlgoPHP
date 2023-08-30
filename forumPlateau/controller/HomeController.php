@@ -14,7 +14,7 @@
         public function index(){
             
             return [
-                "view" => VIEW_DIR."security/test.php"
+                "view" => VIEW_DIR."home.php"
             ];
         }
 
