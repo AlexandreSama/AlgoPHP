@@ -1,5 +1,13 @@
 index.php a la racine car controlleur frontal et routeur. Permet d'ouvrir/récupérer une session
-HTTP => HyperText TransfertPoint
+HTTP => HyperText Transfert Point
+Abstraite => Récupérer des méthodes de cet class qui sont réutiliser plusieurs fois
+Autoloader => Cherche et donne le chemin physique d'une class
+Implements => Oblige une class a avoir le/les noms de fonctions de la class implémenté
+\ => Class native de php
+
+
+
+
 
 Visiteur peut lire mais pas écrire
 (Sujets plus likés)

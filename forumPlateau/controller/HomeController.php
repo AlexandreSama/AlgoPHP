@@ -13,27 +13,24 @@
 
         public function index(){
             
-           
-                return [
-                    "view" => VIEW_DIR."home.php"
-                ];
-            }
-            
-        
-   
-        public function users(){
-            $this->restrictTo("ROLE_USER");
+            return [
+                "view" => VIEW_DIR."security/test.php"
+            ];
+        }
 
-            $manager = new UserManager();
-            $users = $manager->findAll(['inscriptionDate', 'DESC']);
+        public function listUsers(){
+
+            $userManager = new UserManager();
+            $users = $userManager->findAll(['inscriptionDate', 'DESC']);
 
             return [
-                "view" => VIEW_DIR."security/users.php",
+                "view" => VIEW_DIR."security/listUsers.php",
                 "data" => [
                     "users" => $users
                 ]
             ];
         }
+            
 
         public function forumRules(){
             
