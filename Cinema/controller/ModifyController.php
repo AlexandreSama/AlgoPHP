@@ -80,4 +80,8 @@ class ModifyController
         $test = $dao->executeRequest($sql);
         $this->modifyActorView($id);
     }
+
+    public function modifyGenre(){
+        
+    }
 }

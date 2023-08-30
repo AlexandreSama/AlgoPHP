@@ -70,17 +70,11 @@ if (isset($_GET['action'])) {
         case 'modifyReal':
             $ctrModify->modifyReal();
             break;
-
+        case 'modifyGenre':
+            $ctrModify->modifyGenre();
+            break;
     }
 } else {
     //Si l'url de contient pas d'action enregistrer, ont fait appel au constructeur homepage, pour afficher la page d'acceuil par défaut
     $ctrHome->homePage();
 }
-
-// if(isset($_POST['action'])){
-//     switch ($_POST['action']) {
-//         case 'addFilm':
-//             $ctrFilm->addFilm();
-//             break;
-//     }
-// }
