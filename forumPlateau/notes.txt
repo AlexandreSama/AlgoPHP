@@ -1,0 +1,10 @@
+index.php a la racine car controlleur frontal et routeur. Permet d'ouvrir/récupérer une session
+HTTP => HyperText TransfertPoint
+
+Visiteur peut lire mais pas écrire
+(Sujets plus likés)
+Lock un sujet
+Administration => Posts, Utilisateurs
+Page d'accueil only CSS (Pas Bootstrap) => Ergonomies avant tout !
+
+Quand utilisateur créer un Topic => Premier post est celui de l'utilisateur

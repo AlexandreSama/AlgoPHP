@@ -1,18 +1,29 @@
 <?php
+    //Je lui dit que je range la class Topic dans un chemin virtuel
     namespace Model\Entities;
 
+    //J'appelle la class Entity qui se trouve dans le chemin virtuel App
     use App\Entity;
 
-    final class Topic extends Entity{
+    //final => Ne peut pas être en héritage(ne peut pas avoir d'enfants)
+    //extends => La class Topic hérite de la class Entity
+    final class Topic extends Entity
+    {
 
+        //Liste des propriétés de la class Topic selon le
+        //Principe d'encapsulation (Visibilité des élements)
+
+        //private => Utilisable uniquement dans la class
         private $id;
-        private $title;
+        private $topicName;
+        private $creationDate;
+        private $isLocked;
         private $user;
-        private $creationdate;
-        private $closed;
+        // private $category;
 
+        //public => Utilisable hors de la class
         public function __construct($data){         
-            $this->hydrate($data);        
+            $this->hydrate($data);
         }
  
         /**
@@ -40,7 +51,7 @@
          */ 
         public function getTitle()
         {
-                return $this->title;
+                return $this->topicName;
         }
 
         /**
@@ -48,9 +59,9 @@
          *
          * @return  self
          */ 
-        public function setTitle($title)
+        public function setTitle($name)
         {
-                $this->title = $title;
+                $this->topicName = $name;
 
                 return $this;
         }
@@ -76,21 +87,41 @@
         }
 
         public function getCreationdate(){
-            $formattedDate = $this->creationdate->format("d/m/Y, H:i:s");
+            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
             return $formattedDate;
         }
 
         public function setCreationdate($date){
-            $this->creationdate = new \DateTime($date);
+            $this->creationDate = new \DateTime($date);
             return $this;
         }
+
+        /**
+         * Get the value of category
+         */ 
+        // public function getCategory()
+        // {
+        //         return $this->category;
+        // }
+
+        /**
+         * Set the value of category
+         *
+         * @return  self
+         */ 
+        // public function setCategory($category)
+        // {
+        //         $this->category = $category;
+
+        //         return $this;
+        // }
 
         /**
          * Get the value of closed
          */ 
         public function getClosed()
         {
-                return $this->closed;
+                return $this->isLocked;
         }
 
         /**
@@ -98,10 +129,16 @@
          *
          * @return  self
          */ 
-        public function setClosed($closed)
+        public function setClosed($locked)
         {
-                $this->closed = $closed;
+                $this->isLocked = $locked;
 
                 return $this;
         }
+
+        public function __toString()
+        {
+                return $this->getTitle() . $this->getUser() . $this->getCreationdate() . $this->getClosed();
+        }
+
     }
