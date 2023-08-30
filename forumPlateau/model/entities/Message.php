@@ -116,4 +116,9 @@
 
                 return $this;
         }
+
+        public function __toString()
+        {
+                return $this->getMessageText() . $this->getCreationDate() . $this->getUser() . $this->getTopic();
+        }
     }

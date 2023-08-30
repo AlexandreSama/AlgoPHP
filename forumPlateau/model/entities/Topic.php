@@ -19,7 +19,7 @@
         private $creationDate;
         private $isLocked;
         private $user;
-        // private $category;
+        private $category;
 
         //public => Utilisable hors de la class
         public function __construct($data){         
@@ -99,22 +99,22 @@
         /**
          * Get the value of category
          */ 
-        // public function getCategory()
-        // {
-        //         return $this->category;
-        // }
+        public function getCategory()
+        {
+                return $this->category;
+        }
 
         /**
          * Set the value of category
          *
          * @return  self
          */ 
-        // public function setCategory($category)
-        // {
-        //         $this->category = $category;
+        public function setCategory($category)
+        {
+                $this->category = $category;
 
-        //         return $this;
-        // }
+                return $this;
+        }
 
         /**
          * Get the value of closed

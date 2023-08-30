@@ -139,5 +139,10 @@
 
                 return $this;
         }
+
+        public function __toString()
+        {
+                return $this->getUsername() . $this->getEmail() . $this->getPassword() . $this->getInscriptionDate() . $this->getIsBanned();
+        }
     }
     

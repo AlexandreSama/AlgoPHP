@@ -5,10 +5,10 @@
     use App\DAO;
 
 
-    class MessageManager extends Manager{
+    class CategoryManager extends Manager{
 
-        protected $className = "Model\Entities\Message";
-        protected $tableName = "message";
+        protected $className = "Model\Entities\Category";
+        protected $tableName = "category";
 
 
         public function __construct(){
