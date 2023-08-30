@@ -13,8 +13,9 @@
         public function index(){
           
 
-           $topicManager = new TopicManager();
+            $topicManager = new TopicManager();
 
+            var_dump($topicManager->findAll(["creationDate", "DESC"]));
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
@@ -23,7 +24,5 @@
             ];
         
         }
-
-        
 
     }

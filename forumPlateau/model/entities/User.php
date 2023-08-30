@@ -140,6 +140,10 @@
                 return $this;
         }
 
+        public function hasRole($role){
+                
+        }
+
         public function __toString()
         {
                 return $this->getUsername() . $this->getEmail() . $this->getPassword() . $this->getInscriptionDate() . $this->getIsBanned();
