@@ -34,5 +34,14 @@
             return DAO::select($sql, ['id' => $id], true);
         }
 
+        public function getLastMessageFromTopicId($id){
+            $sql = 'SELECT *
+            FROM user u, message m, topic t
+            WHERE m.topic_id = :idtopic AND u.id_user = m.user_id
+            ORDER BY m.creationDate DESC
+            LIMIT 1';
+            return DAO::select($sql, ['idtopic' => $id], true);
+        }
+
 
     }

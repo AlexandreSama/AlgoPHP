@@ -17,11 +17,11 @@
                 <img src="./public/img/td2logo.png" alt="Logo Phenix Division">
             </div>
             <div class="navbar-title">
-                Phenix Division
+                <a href="index.php">Phenix Division</a>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">
-                    <i class="fas fa-bars"></i>
+                    <i class="fa-solid fa-user"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="#">Se connecter</a>

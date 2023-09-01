@@ -1,18 +1,30 @@
 <?php
-
 $topics = $result["data"]['topics'];
-//    var_dump($topics);
+$categoryName = $result["data"]['categoryName'];
+$userManager = $result["data"]['user'];
+$messageManager = $result["data"]['message'];
 ?>
-
-<h1>liste topics</h1>
-
-<?php
-foreach($topics as $topic ){
-    // var_dump($topic);
-    ?>
-    <p><?=$topic->getTitle()?></p>
+<link rel="stylesheet" href="./public/css/listTopics.css">
+<div class="inner-div">
+    <div class="categoryTitle">
+        <h3><?php echo $categoryName->getCategoryName() ?></h3>
+    </div>
     <?php
-}
-
-
-  
+        foreach ($topics as $topic) {
+            $user = $userManager->findOneById($topic['user_id']);
+            $lastMessageUser = $messageManager->getLastMessageFromTopicId($topic["id_topic"]);
+            echo '<div class="topicHolder">
+            <div class="linkHolder">
+                <a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] .  '</a>
+                <p>De: ' . $user->getUsername() . '</p>
+            </div>
+            <div class="infoHolder">';
+            foreach ($lastMessageUser as $lastMessage) {
+                echo '<p>Dernier message de : ' . $lastMessage['username'] . '</p>
+                <p>Le : ' . $lastMessage['creationDate'] .'</p>';
+            }
+        echo '</div>
+        </div>';
+        }
+    ?>
+</div>

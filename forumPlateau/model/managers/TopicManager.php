@@ -41,12 +41,12 @@
          * 
          * @return user The result of the SQL query, which is an array of user and topic data.
          */
-        public function getUserById($idUser, $idTopic){
-            $sql = 'SELECT *
-            FROM user u, topic t
-            WHERE u.id_user = :iduser AND t.id_topic = :idtopic';
-            return DAO::select($sql, ['iduser' => $idUser, 'idtopic' => $idTopic], true);
-        }
+        // public function getLastMessage($idUser, $idTopic){
+        //     $sql = 'SELECT *
+        //     FROM user u, topic t
+        //     WHERE u.id_user = :iduser AND t.id_topic = :idtopic';
+        //     return DAO::select($sql, ['iduser' => $idUser, 'idtopic' => $idTopic], true);
+        // }
 
 
     }

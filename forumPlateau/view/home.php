@@ -9,10 +9,11 @@ $messagesManager = $result["data"]['messages'];
 foreach ($categories as $valueCategory) {
     $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
     echo "<div class='main-inner'>
-        <div class='build-info'>" .
+        <div class='build-info'>
+        <a href='index.php?ctrl=forum&action=listTopics&id=" . $valueCategory->getId() .  "'>" .
         $valueCategory->getCategoryName()
         .
-        "</div>
+        "</a></div>
         <div class='info-section'>";
 
     if($topics !== null){
@@ -20,7 +21,7 @@ foreach ($categories as $valueCategory) {
             echo "<div class='build-details'><div class='build-name'>" . $valueTopic['title'] . "</div>";
             $messages = $messagesManager->getTopicById($valueTopic["id_topic"]);
             if ($messages !== null) {
-                $user = $topicManager->getUserById($valueTopic['user_id'], $valueTopic["id_topic"]);
+                $user = $messagesManager->getLastMessageFromTopicId($valueTopic["id_topic"]);
                  foreach ($messages as $valueMessage) {
                     foreach ($user as $valueUser) {
                         echo "<div class='build-lastMessage'>Dernier Message de : " . $valueUser['username'] . "</div><div class='build-date'>Le : " . $valueMessage['creationDate'] . "</div></div>";

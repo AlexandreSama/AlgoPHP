@@ -76,6 +76,10 @@ body, html {
   justify-content: center;
   width: 100%;
   align-items: center;
+  padding: 0 15px; /* Rembourrage de 15px à gauche et à droite */
+  height: calc(100% - 102px); /* Hauteur totale moins la somme des marges */
+  max-width: 80%; /* Limiter la largeur à 80% de la largeur totale */
+  margin: 0 auto;
 }
 .footer {
   background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond du footer */
@@ -101,4 +105,10 @@ body, html {
 .footer a {
   color: white;
   text-decoration: none;
+}
+
+
+a, a:visited{
+  text-decoration: none;
+  color: white;
 }
