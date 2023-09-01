@@ -14,12 +14,12 @@
           
 
             $topicManager = new TopicManager();
-            $topics = $topicManager->findAll(["creationDate", "DESC"]);
-            var_dump($topics);
+            // $topics = $topicManager->findAll();
+            // var_dump($topics);
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
-                    "topics" => $topics
+                    "topics" => $topicManager->findAll()
                 ]
             ];
         

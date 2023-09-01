@@ -1,9 +1,35 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<?php
+$categories = $result["data"]['categories'];
+$topicManager = $result["data"]['topics'];
+$messagesManager = $result["data"]['messages'];
+?>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
+<link rel="stylesheet" href="./public/css/home.css">
+<?php
+foreach ($categories as $valueCategory) {
+    $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
+    echo "<div class='main-inner'>
+        <div class='build-info'>" .
+        $valueCategory->getCategoryName()
+        .
+        "</div>
+        <div class='info-section'>";
 
-<p>
-    <a href="/security/login.html">Se connecter</a>
-    <span>&nbsp;-&nbsp;</span>
-    <a href="/security/register.html">S'inscrire</a>
-</p>
+    if($topics !== null){
+        foreach ($topics as $valueTopic) {
+            echo "<div class='build-details'><div class='build-name'>" . $valueTopic['title'] . "</div>";
+            $messages = $messagesManager->getTopicById($valueTopic["id_topic"]);
+            if ($messages !== null) {
+                $user = $topicManager->getUserById($valueTopic['user_id'], $valueTopic["id_topic"]);
+                 foreach ($messages as $valueMessage) {
+                    foreach ($user as $valueUser) {
+                        echo "<div class='build-lastMessage'>Dernier Message de : " . $valueUser['username'] . "</div><div class='build-date'>Le : " . $valueMessage['creationDate'] . "</div></div>";
+                    }
+                }
+            }
+        }
+    }
+    echo "</div>
+    </div>";
+}
+?>

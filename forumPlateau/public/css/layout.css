@@ -1,0 +1,104 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.content-wrapper {
+  position: relative;
+  height: 100%;
+  background-image: url('../img/td2bg.jpg'); /* Chemin vers votre image de fond */
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: brightness(0.7); /* Effet de filtre pour obscurcir l'image de fond */
+}
+
+
+/* Styles pour la barre de navigation */
+.navbar {
+  background-color: rgba(51, 51, 51, 0.7); /* Couleur grise avec transparence */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative; /* Position relative pour les éléments enfants */
+  z-index: 1; /* Place la navbar au-dessus de l'image de fond */
+}
+
+
+.navbar-logo img {
+  width: 40px; /* Ajustez la taille du logo */
+}
+
+.navbar-title {
+  font-size: 24px;
+}
+
+.navbar-dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Couleur grise */
+  min-width: 160px;
+  right: 0;
+  top: 100%;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #555; /* Couleur de survol */
+}
+
+.navbar-dropdown:hover .dropdown-content {
+  display: block;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.footer {
+  background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond du footer */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.footer-left, .footer-right, .footer-center{
+  text-align: center;
+}
+.footer-left,
+.footer-right {
+  flex: 1; /* Étirer les éléments pour occuper l'espace disponible */
+}
+
+.footer-center {
+  flex: 2; /* Étirer davantage le centre pour le texte principal */
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}

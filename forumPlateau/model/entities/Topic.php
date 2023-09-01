@@ -15,9 +15,9 @@
 
         //private => Utilisable uniquement dans la class
         private $id;
-        private $topicName;
+        private $title;
         private $creationDate;
-        private $isLocked;
+        private $closed;
         private $user;
         private $category;
 
@@ -51,7 +51,7 @@
          */ 
         public function getTitle()
         {
-                return $this->topicName;
+                return $this->title;
         }
 
         /**
@@ -61,7 +61,7 @@
          */ 
         public function setTitle($name)
         {
-                $this->topicName = $name;
+                $this->title = $name;
 
                 return $this;
         }
@@ -121,7 +121,7 @@
          */ 
         public function getClosed()
         {
-                return $this->isLocked;
+                return $this->closed;
         }
 
         /**
@@ -131,7 +131,7 @@
          */ 
         public function setClosed($locked)
         {
-                $this->isLocked = $locked;
+                $this->closed = $locked;
 
                 return $this;
         }

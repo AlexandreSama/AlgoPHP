@@ -5,6 +5,8 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
+use Model\Entities\Message;
+use Model\Managers\CategoryManager;
     use Model\Managers\UserManager;
     use Model\Managers\TopicManager;
     use Model\Managers\MessageManager;
@@ -12,9 +14,18 @@
     class HomeController extends AbstractController implements ControllerInterface{
 
         public function index(){
-            
+
+            $categoryManager = new CategoryManager();
+            $topicManager = new TopicManager();
+            $messageManager = new MessageManager();
+
             return [
-                "view" => VIEW_DIR."home.php"
+                "view" => VIEW_DIR."home.php",
+                "data" => [
+                    "categories" => $categoryManager->findAll(),
+                    "topics" => $topicManager,
+                    "messages" => $messageManager
+                ]
             ];
         }
 
