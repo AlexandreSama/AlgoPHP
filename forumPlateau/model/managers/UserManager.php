@@ -15,5 +15,12 @@
             parent::connect();
         }
 
+        public function getUsersByMessages($id){
+            $sql = 'SELECT *
+            FROM user u
+            WHERE u.id_user = :id';
+            return DAO::select($sql, ['id' => $id], true);
+        }
+
 
     }

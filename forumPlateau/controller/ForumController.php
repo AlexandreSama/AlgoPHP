@@ -47,4 +47,21 @@ use Model\Managers\UserManager;
             ];
         }
 
+        public function showTopic($topicId){
+
+            $topicManager = new TopicManager();
+            $messageManager = new MessageManager();
+            $userManager = new UserManager();
+            $messages = $messageManager->getTopicByIdAscendant($topicId);
+            $topic = $topicManager->findOneById($topicId);
+            return [
+                "view" => VIEW_DIR."forum/topic.php",
+                "data" => [
+                    "topic" => $topic,
+                    "userManager" => $userManager,
+                    "messages" => $messages
+                ]
+            ];
+        }
+
     }

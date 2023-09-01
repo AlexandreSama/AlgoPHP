@@ -18,7 +18,7 @@ foreach ($categories as $valueCategory) {
 
     if($topics !== null){
         foreach ($topics as $valueTopic) {
-            echo "<div class='build-details'><div class='build-name'>" . $valueTopic['title'] . "</div>";
+            echo "<div class='build-details'><div class='build-name'><a href='index.php?ctrl=forum&action=showTopic&id=" . $valueTopic['id_topic'] . "'>" . $valueTopic['title'] . "</a></div>";
             $messages = $messagesManager->getTopicById($valueTopic["id_topic"]);
             if ($messages !== null) {
                 $user = $messagesManager->getLastMessageFromTopicId($valueTopic["id_topic"]);

@@ -34,6 +34,14 @@
             return DAO::select($sql, ['id' => $id], true);
         }
 
+        public function getTopicByIdAscendant($id){
+            $sql = 'SELECT *
+            FROM message m
+            WHERE m.topic_id = :id
+            ORDER BY m.creationDate ASC';
+            return DAO::select($sql, ['id' => $id], true);
+        }
+
         public function getLastMessageFromTopicId($id){
             $sql = 'SELECT *
             FROM user u, message m, topic t
