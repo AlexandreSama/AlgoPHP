@@ -1,3 +1,12 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url(../fonts/Borda.ttf);
+}
+
+*{
+  font-family: myFirstFont;
+}
+
 body, html {
   margin: 0;
   padding: 0;

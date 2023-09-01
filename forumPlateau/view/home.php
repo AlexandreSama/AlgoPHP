@@ -29,6 +29,8 @@ foreach ($categories as $valueCategory) {
                 }
             }
         }
+    }else{
+        echo 'Pas de topics pour le moment !';
     }
     echo "</div>
     </div>";

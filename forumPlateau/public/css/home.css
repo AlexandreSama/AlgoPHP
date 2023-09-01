@@ -1,7 +1,7 @@
 .main-inner {
     width: 100%;
     max-width: calc(100% - 30px); /* Largeur maximale moins la marge */
-    padding: 0 15px 15px; /* Espace de 15px à gauche et à droite */
+    padding: 0 15px 35px; /* Espace de 15px à gauche et à droite */
     margin: 15px 0px;
     box-sizing: border-box; /* Inclut les marges dans la largeur totale */
     background-color: black;
@@ -11,7 +11,10 @@
 .build-info {
     text-align: left;
     height: 40px;
+    justify-content: center;
     line-height: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Styles pour la div contenant les informations découpées en colonnes */
