@@ -121,6 +121,8 @@ class FilmController
         $sql = 'SELECT f.titre AS titre, f.id_film AS id FROM film f';
 
         $films = $dao->executeRequest($sql);
+        $test = $dao->getUser();
+
         require 'view/film/deleteFilm.php';
     }
 

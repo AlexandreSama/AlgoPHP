@@ -34,6 +34,16 @@
             return DAO::select($sql, ['id' => $id], true);
         }
 
+        /**
+         * The function retrieves messages related to a specific topic, ordered by their creation date
+         * in ascending order.
+         * 
+         * @param id The parameter "id" is the ID of the topic for which you want to retrieve the
+         * messages.
+         * 
+         * @return array The result of the SQL query, which is an array of message objects that belong to the
+         * specified topic ID, ordered by their creation date in ascending order.
+         */
         public function getTopicByIdAscendant($id){
             $sql = 'SELECT *
             FROM message m
@@ -42,6 +52,14 @@
             return DAO::select($sql, ['id' => $id], true);
         }
 
+        /**
+         * The function retrieves the last message from a specific topic ID in a database.
+         * 
+         * @param string $id The parameter "id" is the topic ID. It is used to filter the messages and retrieve
+         * the last message from the specified topic.
+         * 
+         * @return array The last message from a specific topic ID.
+         */
         public function getLastMessageFromTopicId($id){
             $sql = 'SELECT *
             FROM user u, message m, topic t

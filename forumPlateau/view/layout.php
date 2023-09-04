@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+    <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
     <div class="content-wrapper">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -24,8 +26,8 @@
                     <i class="fa-solid fa-user"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="#">Se connecter</a>
-                    <a href="#">S'inscrire</a>
+                    <a href="index.php?ctrl=security&action=index">Se connecter</a>
+                    <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
                 </div>
             </div>
         </nav>
@@ -47,5 +49,48 @@
         </footer>
     </div>
 </body>
+<script>
+    $(document).ready(function() {
+        $(".message").each(function() {
+            if ($(this).text().length > 0) {
+                $(this).slideDown(500, function() {
+                    $(this).delay(3000).slideUp(500)
+                })
+            }
+        })
+        $(".delete-btn").on("click", function() {
+            return confirm("Etes-vous sûr de vouloir supprimer?")
+        })
+        tinymce.init({
+            selector: '.post',
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+    })
+
+
+
+    /*
+    $("#ajaxbtn").on("click", function(){
+        $.get(
+            "index.php?action=ajax",
+            {
+                nb : $("#nbajax").text()
+            },
+            function(result){
+                $("#nbajax").html(result)
+            }
+        )
+    })*/
+</script>
 
 </html>
