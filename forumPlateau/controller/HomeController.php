@@ -50,6 +50,7 @@ use Model\Managers\CategoryManager;
         public function listUsers(){
 
             $userManager = new UserManager();
+            
             $users = $userManager->findAll(['inscriptionDate', 'DESC']);
 
             return [

@@ -59,6 +59,7 @@
             $categoryManager = new CategoryManager();
             $userManager = new UserManager();
             $messageManager = new MessageManager();
+            
             $category = $categoryManager->findOneById($categoryId);
             $topics = $topicManager->getTopicByCategoryId($categoryId);
             
@@ -90,8 +91,10 @@
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
             $userManager = new UserManager();
+
             $messages = $messageManager->getTopicByIdAscendant($topicId);
             $topic = $topicManager->findOneById($topicId);
+
             return [
                 "view" => VIEW_DIR."forum/topic.php",
                 "data" => [
@@ -122,20 +125,11 @@
             if($categoryName){
 
                 $categoryManager = new CategoryManager();
-                $data = ['categoryName' => $categoryName];
-                $result = $categoryManager->add(["categoryName" => $categoryName]);
+                $data = ["categoryName" => $categoryName];
+                $categoryManager->add($data);
                 
                 $this->redirectTo('forum', 'home');
-                // if(is_string($result)){
 
-                    // $homeController = new HomeController();
-                    // return $homeController->index();
-
-
-                // }else{
-
-                //     return $this->addCategoryForm();
-                // }
             }else{
 
                 return $this->addCategoryForm();
@@ -150,13 +144,16 @@
          * @return array An array is being returned with two elements: "view" and "data".
          */
         public function addTopicForm(){
+
             $categoryManager = new CategoryManager();
+
             return [
                 "view" => VIEW_DIR."forum/addTopic.php",
                 "data" => [
                     "categories" => $categoryManager->findAll()
                 ]
-            ];
+                ];
+
         }
 
         /**
@@ -169,11 +166,13 @@
          * return the addTopicForm.
          */
         public function addTopic(){
+
             $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $categoryId = filter_input(INPUT_POST, 'categoryInput', FILTER_VALIDATE_INT);
 
             if($topicName && $messageText && $categoryId){
+                
                 $topicManager = new TopicManager();
                 $messageManager = new MessageManager();
 
@@ -184,8 +183,11 @@
                 $messageManager->add($messageData);
 
                 $this->redirectTo('forum', 'home');
+
             }else{
+
                 return $this->addTopicForm();
+
             }
         }
 
@@ -197,15 +199,19 @@
          * `add()` method of the `$messageMananger` object and pass in the `$messageData` array.
          */
         public function addMessage(){
+
             $topicId = filter_input(INPUT_POST, 'topicId', FILTER_VALIDATE_INT);
             $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if($topicId && $messageContent){
-                $messageManager = new MessageManager();
-                $messageData = ['messageText' => $messageContent, 'user_id' => 2, 'topic_id' => $topicId];
 
-                $test = $messageManager->add($messageData);
+            if($topicId && $messageContent){
+
+                $messageManager = new MessageManager();
+
+                $messageData = ['messageText' => $messageContent, 'user_id' => 2, 'topic_id' => $topicId];
+                $messageManager->add($messageData);
 
             }else{
+
                 return $this->showTopic($topicId);
 
             }
