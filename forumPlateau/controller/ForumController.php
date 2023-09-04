@@ -5,6 +5,8 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
+    use Model\Entities\Message;
+    use Model\Entities\Topic;
     use Model\Managers\CategoryManager;
     use Model\Managers\TopicManager;
     use Model\Managers\MessageManager;
@@ -137,6 +139,74 @@
             }else{
 
                 return $this->addCategoryForm();
+
+            }
+        }
+
+        /**
+         * The function returns a view and data for adding a topic in a forum, including a list of
+         * categories.
+         * 
+         * @return array An array is being returned with two elements: "view" and "data".
+         */
+        public function addTopicForm(){
+            $categoryManager = new CategoryManager();
+            return [
+                "view" => VIEW_DIR."forum/addTopic.php",
+                "data" => [
+                    "categories" => $categoryManager->findAll()
+                ]
+            ];
+        }
+
+        /**
+         * The function adds a new topic to a forum with the provided topic name, message text, and
+         * category ID.
+         * 
+         * @return If the variables $topicName, $messageText and $categoryId are all set and valid,
+         * the function will add a new topic and message to the database and then redirect the user to
+         * the forum home page. If any of the variables are not set or not valid, the function will
+         * return the addTopicForm.
+         */
+        public function addTopic(){
+            $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $categoryId = filter_input(INPUT_POST, 'categoryInput', FILTER_VALIDATE_INT);
+
+            if($topicName && $messageText && $categoryId){
+                $topicManager = new TopicManager();
+                $messageManager = new MessageManager();
+
+                $topicData = ['title' => $topicName, 'user_id' => 9, 'category_id' => $categoryId];
+                $topicId = $topicManager->add($topicData);
+
+                $messageData = ['messageText' => $messageText, 'user_id' => 9, 'topic_id' => $topicId];
+                $messageManager->add($messageData);
+
+                $this->redirectTo('forum', 'home');
+            }else{
+                return $this->addTopicForm();
+            }
+        }
+
+        /**
+         * The function `addMessage()` adds a message to a topic in a forum if the topic ID and message
+         * content are valid, otherwise it shows the topic page.
+         * 
+         * @return void the `$topicId` and `$messageContent` are both valid, the function will call the
+         * `add()` method of the `$messageMananger` object and pass in the `$messageData` array.
+         */
+        public function addMessage(){
+            $topicId = filter_input(INPUT_POST, 'topicId', FILTER_VALIDATE_INT);
+            $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if($topicId && $messageContent){
+                $messageManager = new MessageManager();
+                $messageData = ['messageText' => $messageContent, 'user_id' => 2, 'topic_id' => $topicId];
+
+                $test = $messageManager->add($messageData);
+
+            }else{
+                return $this->showTopic($topicId);
 
             }
         }

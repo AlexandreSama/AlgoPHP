@@ -13,7 +13,7 @@
 
 <body>
     <?php
-        var_dump(App\Session::getFlash("success"));
+        // var_dump(App\Session::getFlash("success"));
         if(strlen(App\Session::getFlash("error")) >= 1 || strlen(App\Session::getFlash("success")) >= 1 ){
             echo '<h3 class="message" style="color: red">' . App\Session::getFlash("error") . '</h3>
             <h3 class="message" style="color: green">' . App\Session::getFlash("success") . '</h3>';
@@ -34,6 +34,7 @@
                 <div class="dropdown-content">
                     <a href="index.php?ctrl=security&action=index">Se connecter</a>
                     <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
+                    <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
                     <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
                 </div>
             </div>
