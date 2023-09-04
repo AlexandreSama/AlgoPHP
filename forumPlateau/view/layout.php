@@ -7,12 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./public/css/layout.css">
     <script src="https://kit.fontawesome.com/eec634434d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Phenix Division</title>
 </head>
 
 <body>
-    <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
-    <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+    <?php
+        var_dump(App\Session::getFlash("success"));
+        if(strlen(App\Session::getFlash("error")) >= 1 || strlen(App\Session::getFlash("success")) >= 1 ){
+            echo '<h3 class="message" style="color: red">' . App\Session::getFlash("error") . '</h3>
+            <h3 class="message" style="color: green">' . App\Session::getFlash("success") . '</h3>';
+        }
+    ?>
     <div class="content-wrapper">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -27,6 +33,7 @@
                 </button>
                 <div class="dropdown-content">
                     <a href="index.php?ctrl=security&action=index">Se connecter</a>
+                    <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
                     <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
                 </div>
             </div>
@@ -49,6 +56,7 @@
         </footer>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
         $(".message").each(function() {

@@ -8,7 +8,7 @@
     use Model\Managers\CategoryManager;
     use Model\Managers\TopicManager;
     use Model\Managers\MessageManager;
-use Model\Managers\UserManager;
+    use Model\Managers\UserManager;
 
     class ForumController extends AbstractController implements ControllerInterface{
 
@@ -23,6 +23,22 @@ use Model\Managers\UserManager;
                 ]
             ];
         
+        }
+
+        public function home(){
+
+            $categoryManager = new CategoryManager();
+            $topicManager = new TopicManager();
+            $messageManager = new MessageManager();
+
+            return [
+                "view" => VIEW_DIR."home.php",
+                "data" => [
+                    "categories" => $categoryManager->findAll(),
+                    "topics" => $topicManager,
+                    "messages" => $messageManager
+                ]
+            ];
         }
 
         /**
@@ -82,6 +98,47 @@ use Model\Managers\UserManager;
                     "messages" => $messages
                 ]
             ];
+        }
+
+        public function addCategoryForm(){
+            return [
+                "view" => VIEW_DIR."forum/addCategory.php"
+            ];
+        }
+
+        /**
+         * The function adds a category to the database and redirects to the home page if successful,
+         * otherwise it displays the add category form again.
+         * 
+         * @return mixed The result of calling the `index()` method on a `HomeController` object if the
+         * `` is a string. Otherwise, it is returning the result of calling the
+         * `addCategoryForm()` method on the current object.
+         */
+        public function addCategory(){
+            $categoryName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($categoryName){
+
+                $categoryManager = new CategoryManager();
+                $data = ['categoryName' => $categoryName];
+                $result = $categoryManager->add(["categoryName" => $categoryName]);
+                
+                $this->redirectTo('forum', 'home');
+                // if(is_string($result)){
+
+                    // $homeController = new HomeController();
+                    // return $homeController->index();
+
+
+                // }else{
+
+                //     return $this->addCategoryForm();
+                // }
+            }else{
+
+                return $this->addCategoryForm();
+
+            }
         }
 
     }

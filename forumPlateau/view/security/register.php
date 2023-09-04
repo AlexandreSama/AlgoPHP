@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="./public/css/login_register.css">
 <div class="login-box">
-  <h2>Register</h2>
+  <h2>Inscription</h2>
   <form method="post" action="index.php?ctrl=security&action=register">
     <div class="user-box">
       <input type="text" name="usernameInput" required=true>
-      <label>Username</label>
+      <label>Pseudonyme</label>
     </div>
     <div class="user-box">
       <input type="email" name="emailInput" required=true>
@@ -12,14 +12,14 @@
     </div>
     <div class="user-box">
       <input type="password" name="passwordInput" required=true>
-      <label>Password</label>
+      <label>Mot de passe</label>
     </div>
     <button  href="#">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
-      Submit
+      S'inscrire
     </button>
   </form>
 </div>

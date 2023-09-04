@@ -38,6 +38,8 @@ use Model\Managers\CategoryManager;
             ];
         }
 
+
+
         /**
          * The function "listUsers" retrieves a list of users from the database and returns the view
          * and data needed to display the list.
