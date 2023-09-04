@@ -13,6 +13,15 @@ use Model\Managers\CategoryManager;
     
     class HomeController extends AbstractController implements ControllerInterface{
 
+        /**
+         * The index function returns an array with a view path and data containing categories, topics,
+         * and messages.
+         * 
+         * @return array an array is being returned with two keys: "view" and "data". The value of the "view"
+         * key is the path to the "home.php" view file. The value of the "data" key is an array
+         * containing three keys: "categories", "topics", and "messages". The value of the "categories"
+         * key is the result of calling the "findAll" method on
+         */
         public function index(){
 
             $categoryManager = new CategoryManager();
@@ -29,6 +38,13 @@ use Model\Managers\CategoryManager;
             ];
         }
 
+        /**
+         * The function "listUsers" retrieves a list of users from the database and returns the view
+         * and data needed to display the list.
+         * 
+         * @return array an array with two elements. The first element is a string representing the path to a
+         * view file, and the second element is an array containing the users data.
+         */
         public function listUsers(){
 
             $userManager = new UserManager();
