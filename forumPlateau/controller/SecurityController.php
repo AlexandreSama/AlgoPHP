@@ -7,6 +7,8 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Controller\HomeController;
 use Model\Entities\User;
+use Model\Managers\MessageManager;
+use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
 
 
@@ -46,9 +48,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $userManager = new UserManager();
 
             $user = $userManager->getUserByUsername($username);
-            
-            if(isset($user)){
-                if(password_verify($password, $user['password'])){
+            if($user){
+                if(password_verify($password, $user->getPassword())){
                     Session::setUser($user);
                     Session::addFlash('success', 'Vous êtes bien connecté !');
                     $this->redirectTo('forum', 'home');
@@ -108,7 +109,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
                 password verification. */
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash];
+            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(["ROLE_USER"])];
             $userManager = new UserManager();
             // $user = new User();
 
@@ -130,6 +131,34 @@ class SecurityController extends AbstractController implements ControllerInterfa
             return $this->registerForm();
             Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
         }
+    }
+
+    public function profile(){
+        $user = Session::getUser();
+        $topicManager = new TopicManager();
+        $messageManager = new MessageManager();
+
+        // var_dump($user);
+
+        $userManager = new UserManager();
+
+        $users = $userManager->findAll();
+
+        $topicCount = $topicManager->countAllByUserId($user->getId());
+        $messageCount = $messageManager->countAllByUserId($user->getId());
+
+
+        return [
+            "view" => VIEW_DIR . "/profile/profile.php",
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user,
+                "topicCount" => $topicCount,
+                "messageCount" => $messageCount,
+                "users" => $users
+            ]
+        ];
     }
 
     /*public function ajax(){

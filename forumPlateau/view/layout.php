@@ -28,6 +28,7 @@
                 if(isset($result['data']["user"])){   
                 ?>
                 <div class="dropdown-content">
+                    <a href="index.php?ctrl=security&action=profile">Profile</a>
                     <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
                     <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
                     <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>

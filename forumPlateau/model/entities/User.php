@@ -10,7 +10,7 @@
         private $username;
         private $email;
         private $password;
-        // private $role;
+        private $role;
         private $inscriptionDate;
         // private $profilePicture;
         private $isBanned;
@@ -140,13 +140,35 @@
                 return $this;
         }
 
-        public function hasRole($role){
-                
-        }
-
         public function __toString()
         {
                 return $this->getUsername() . $this->getEmail() . $this->getPassword() . $this->getInscriptionDate() . $this->getIsBanned();
         }
+
+        /**
+	 * Get the value of role
+	 */
+	public function getRole()
+	{
+		return json_decode($this->role);
+	}
+
+	/**
+	 * Set the value of role
+	 *
+	 * @return  self
+	 */
+	public function setRole($role)
+	{
+		$this->role = json_encode($role);
+
+		return $this;
+	}
+
+	public function hasRole($role)
+	{
+		$result = $this->getRole() == json_encode($role);
+		return $result;
+	}
     }
     

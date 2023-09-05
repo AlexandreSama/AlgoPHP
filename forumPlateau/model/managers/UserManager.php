@@ -35,7 +35,10 @@
             $sql = 'SELECT *
             FROM user u
             WHERE u.username = :username';
-            return DAO::select($sql, ['username' => $username], false);
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['username' => $username], false),
+                $this->className
+            );
         }
 
 

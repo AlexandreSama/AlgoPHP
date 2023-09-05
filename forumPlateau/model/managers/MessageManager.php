@@ -69,5 +69,12 @@
             return DAO::select($sql, ['idtopic' => $id], true);
         }
 
+        public function countAllByUserId($id){
+            $sql = 'SELECT COUNT(*) AS count
+            FROM message m
+            WHERE m.user_id = :id';
+            return DAO::select($sql, ['id' => $id], false);
+        }
+
 
     }
