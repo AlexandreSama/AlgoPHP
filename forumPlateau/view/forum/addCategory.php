@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./public/css/add.css">
+<link rel="stylesheet" href="./public/css/form.css">
 <div class="login-box">
   <h2>Créer une catégorie</h2>
   <form method="post" action="index.php?ctrl=forum&action=addCategory">

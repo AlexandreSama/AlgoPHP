@@ -55,6 +55,8 @@ h3 {
 
 .infoHolder {
     padding-right: 15px;
+    width: 16%;
+    display: flex;
 }
 
 .main-content {

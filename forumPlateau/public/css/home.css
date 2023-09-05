@@ -11,10 +11,11 @@
 .build-info {
     text-align: left;
     height: 40px;
-    justify-content: center;
+    justify-content: flex-start;
     line-height: 25px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
 }
 
 /* Styles pour la div contenant les informations découpées en colonnes */
@@ -40,4 +41,8 @@
 }
 .build-name{
     text-align: left;
+}
+
+.modifyLink{
+    margin-left: 15px;
 }

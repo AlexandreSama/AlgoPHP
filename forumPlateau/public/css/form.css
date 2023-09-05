@@ -162,6 +162,6 @@
   .messageLabelBox{
     top: -30px!important;
   }
-  .selectLabel{
+  .selectLabel, .selectCategory{
     top: 15px!important;
   }

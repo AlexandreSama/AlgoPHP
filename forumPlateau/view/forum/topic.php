@@ -8,18 +8,22 @@ $messages = $result["data"]['messages'];
 <div class="inner-div">
     <div class="categoryTitle">
         <h3><?php echo $topic->getTitle() ?></h3>
+        <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $topic->getId() ?>&type=topic"><i class="fa-solid fa-pen"></i></a>
     </div>
     <?php
     foreach ($messages as $message) {
         echo '<div class="topicHolder">
             <div class="textHolder">
             <p>' . $message['messageText'] . '</p>
+            <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=' . $message['id_message'] . '"><i class="fa-solid fa-x"></i></a>
             </div>';
         $users = $userManager->getUsersByMessages($message['user_id']);
         foreach ($users as $user) {
             echo '<div class="infoHolder">
                 <p>De : ' . $user['username'] . '</p>
                 <p>Le : ' . $message['creationDate'] . '</p>
+                <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=' . $message['id_message'] . '&type=message"><i class="fa-solid fa-pen"></i></a>
+
                 </div>';
         }
         echo '</div>';

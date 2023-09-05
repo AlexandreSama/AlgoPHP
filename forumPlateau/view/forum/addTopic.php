@@ -2,7 +2,7 @@
 $categories = $result["data"]['categories'];
 ?>
 
-<link rel="stylesheet" href="./public/css/add.css">
+<link rel="stylesheet" href="./public/css/form.css">
 <div class="login-box">
     <h2>Créer un topic</h2>
     <form method="post" action="index.php?ctrl=forum&action=addTopic">
