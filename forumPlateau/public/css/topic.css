@@ -60,18 +60,18 @@ h3 {
 }
 
 .main-content {
-    height: calc(100% - 350px);
+    height: calc(100% - 110px);
     padding: 25px 35px;
 }
 
 .addMessage {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    /* Étend la largeur des éléments à la largeur de la div */
+    align-items: center;
     height: 15vh;
-    position: relative;
-    top: 263px;
+    position: absolute;
+    bottom: 26px;
+    width: 78%;
 }
 
 .full-width-height {

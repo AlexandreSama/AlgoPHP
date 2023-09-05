@@ -3,7 +3,6 @@ $categories = $result["data"]['categories'];
 $topicManager = $result["data"]['topics'];
 $messagesManager = $result["data"]['messages'];
 ?>
-
 <link rel="stylesheet" href="./public/css/home.css">
 <?php
 foreach ($categories as $valueCategory) {

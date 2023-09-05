@@ -34,13 +34,16 @@ class ForumController extends AbstractController implements ControllerInterface
         $categoryManager = new CategoryManager();
         $topicManager = new TopicManager();
         $messageManager = new MessageManager();
-
+        $user = Session::getUser();
         return [
             "view" => VIEW_DIR . "home.php",
             "data" => [
                 "categories" => $categoryManager->findAll(),
                 "topics" => $topicManager,
-                "messages" => $messageManager
+                "messages" => $messageManager,
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user
             ]
         ];
     }
@@ -73,7 +76,9 @@ class ForumController extends AbstractController implements ControllerInterface
                 "topics" => $topics,
                 "categoryName" => $category,
                 "user" => $userManager,
-                "message" => $messageManager
+                "message" => $messageManager,
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
             ]
         ];
     }
@@ -98,13 +103,18 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $messages = $messageManager->getTopicByIdAscendant($topicId);
         $topic = $topicManager->findOneById($topicId);
+        $user = Session::getUser();
+
 
         return [
             "view" => VIEW_DIR . "forum/topic.php",
             "data" => [
                 "topic" => $topic,
                 "userManager" => $userManager,
-                "messages" => $messages
+                "messages" => $messages,
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user
             ]
         ];
     }
@@ -112,7 +122,11 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addCategoryForm()
     {
         return [
-            "view" => VIEW_DIR . "forum/addCategory.php"
+            "view" => VIEW_DIR . "forum/addCategory.php",
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
+            ]
         ];
     }
 
@@ -134,6 +148,7 @@ class ForumController extends AbstractController implements ControllerInterface
             $data = ["categoryName" => $categoryName];
             $categoryManager->add($data);
 
+            Session::addFlash('success', 'La catégorie a bien été ajouté !');
             $this->redirectTo('forum', 'home');
         } else {
 
@@ -155,7 +170,9 @@ class ForumController extends AbstractController implements ControllerInterface
         return [
             "view" => VIEW_DIR . "forum/addTopic.php",
             "data" => [
-                "categories" => $categoryManager->findAll()
+                "categories" => $categoryManager->findAll(),
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
             ]
         ];
     }
@@ -186,6 +203,8 @@ class ForumController extends AbstractController implements ControllerInterface
 
             $messageData = ['messageText' => $messageText, 'user_id' => 2, 'topic_id' => $topicId];
             $messageManager->add($messageData);
+
+            Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
             $this->redirectTo('forum', 'home');
         } else {
 
@@ -239,7 +258,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "category" => $categoryManager->findOneById($id),
-                        "formtype" => "category"
+                        "formtype" => "category",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -249,7 +270,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "topics" => $topicManager->findOneById($id),
-                        "formtype" => "topic"
+                        "formtype" => "topic",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -259,7 +282,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message"
+                        "formtype" => "message",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -289,6 +314,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     $categoryManager = new CategoryManager();
                     $data = ["id_category" => $id, "categoryName" => $categoryName];
                     $test = $categoryManager->updateCategory($data);
+
+                    Session::addFlash('success', 'La catégorie a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
                 } else {
 
@@ -304,6 +331,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     $topicManager = new TopicManager();
                     $data = ["id_topic" => $id, "title" => $topicName];
                     $test = $topicManager->updateTopic($data);
+
+                    Session::addFlash('success', 'Le topic a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
                 } else {
 
@@ -319,6 +348,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     $messageManager = new MessageManager();
                     $data = ["id_message" => $id, "messageText" => $messageContent];
                     $test = $messageManager->updateMessage($data);
+
+                    Session::addFlash('success', 'Le message a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
                 } else {
 
@@ -348,7 +379,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "category" => $categoryManager->findAll(),
-                        "formtype" => "category"
+                        "formtype" => "category",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -358,7 +391,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "topics" => $topicManager->findAll(),
-                        "formtype" => "topic"
+                        "formtype" => "topic",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -368,7 +403,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message"
+                        "formtype" => "message",
+                        "successMessage" => Session::getFlash('success'),
+                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
                 break;
@@ -394,8 +431,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     $categoryManager = new CategoryManager();
                     $categoryManager->delete($categoryId);
 
+                    Session::addFlash('success', 'La catégorie a bien été supprimé ! Félicitation !');
                     $this->redirectTo('forum', 'home');
-
                 } else {
 
                     return $this->deleteForm();
@@ -418,21 +455,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     $messageManager->delete($message->getId());
                     $test = $topicManager->delete($topicId);
 
-                    $this->redirectTo('forum', 'home');
-                } else {
-
-                    return $this->deleteForm();
-                }
-                break;
-
-            case 'message':
-                $messageId = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-                if ($messageId) {
-
-                    $messageManager = new MessageManager();
-                    $messageManager->delete($messageId);
-
+                    Session::addFlash('success', 'Le topic a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
                 } else {
 
@@ -454,6 +477,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $messageManager = new MessageManager();
         $messageManager->delete($id);
 
+        Session::addFlash('success', 'Le message a bien été modifié ! Félicitation !');
         $this->redirectTo('forum', 'home');
     }
 }

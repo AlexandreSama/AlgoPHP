@@ -18,17 +18,56 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         return [
             "view" => VIEW_DIR . "/security/login.php",
-            "data" => []
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
+            ]
+        ];
+    }
+
+    public function loginForm()
+    {
+
+        return [
+            "view" => VIEW_DIR . "/security/login.php",
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
+            ]
         ];
     }
 
     public function login()
     {
+        $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        return [
-            "view" => VIEW_DIR . "/security/login.php",
-            "data" => []
-        ];
+        if($username && $password){
+            $userManager = new UserManager();
+
+            $user = $userManager->getUserByUsername($username);
+            
+            if(isset($user)){
+                if(password_verify($password, $user['password'])){
+                    Session::setUser($user);
+                    Session::addFlash('success', 'Vous êtes bien connecté !');
+                    $this->redirectTo('forum', 'home');
+                }else{
+                    Session::addFlash('error', 'Mauvais mot de passe !');
+                    $this->redirectTo('forum', 'loginForm');
+                }
+            }else{
+                Session::addFlash('error', 'Mauvais mot de passe ou pseudonyme !');
+                $this->redirectTo('forum', 'loginForm');
+            }
+        }
+        
+    }
+
+    public function disconnect(){
+        unset($_SESSION['user']);
+        Session::addFlash('success', 'Vous êtes bien déconnecté !');
+        $this->redirectTo('forum', 'home');
     }
 
     public function registerForm()
@@ -36,7 +75,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         return [
             "view" => VIEW_DIR . "/security/register.php",
-            "data" => []
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error')
+            ]
         ];
     }
 
@@ -65,13 +107,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
                 The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
                 password verification. */
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash];
             $userManager = new UserManager();
-            // $user = new User($data);
+            // $user = new User();
 
             $userManager->add($data);
-
 
             /* The code is creating a new session object using the `Session` class. Then, it
             sets the user object to the session using the `setUser()` method. After that, it
@@ -79,14 +120,15 @@ class SecurityController extends AbstractController implements ControllerInterfa
             êtes désormais inscrit et connecté ! Félicitation !'. Finally, it creates a new
             instance of the `HomeController` class and calls its `index()` method, which
             returns the result. */
-            $session = new Session();
+            
             // $session->setUser($user);
-            $session->addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
+            Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
+
             $this->redirectTo('forum', 'home');
 
         } else {
-
             return $this->registerForm();
+            Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
         }
     }
 

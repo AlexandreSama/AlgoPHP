@@ -29,10 +29,16 @@ $messages = $result["data"]['messages'];
         echo '</div>';
     }
     ?>
+        <?php
+        if($result['data']["user"]){   
+        ?>
         <form method='post' action="index.php?ctrl=forum&action=addMessage" class="addMessage">
             <textarea class="full-width-height" name='messageContent'></textarea>
             <input type="text" name='topicId' style="display: none;" value="<?php echo $topic->getId() ?>">
             <button>Envoyer</button>
         </form>
+        <?php
+        }
+        ?>
     </div>
 </div>

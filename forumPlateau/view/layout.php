@@ -12,13 +12,6 @@
 </head>
 
 <body>
-    <?php
-        // var_dump(App\Session::getFlash("success"));
-        if(strlen(App\Session::getFlash("error")) >= 1 || strlen(App\Session::getFlash("success")) >= 1 ){
-            echo '<h3 class="message" style="color: red">' . App\Session::getFlash("error") . '</h3>
-            <h3 class="message" style="color: green">' . App\Session::getFlash("success") . '</h3>';
-        }
-    ?>
     <div class="content-wrapper">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -31,18 +24,36 @@
                 <button class="dropdown-button">
                     <i class="fa-solid fa-user"></i>
                 </button>
+                <?php
+                if(isset($result['data']["user"])){   
+                ?>
                 <div class="dropdown-content">
-                    <a href="index.php?ctrl=security&action=index">Se connecter</a>
                     <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
                     <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
                     <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
                     <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
+                    <a href="index.php?ctrl=security&action=disconnect">Se déconnecter</a>
+                </div>
+                <?php
+                }else{
+                ?>
+                <div class="dropdown-content">
+                    <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
                     <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
                 </div>
+                <?php
+                }
+                ?>
             </div>
         </nav>
 
         <main class="main-content">
+            <?php
+                if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
+                    echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] . '</h3>
+                            <h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
+                }
+            ?>
             <?= $page ?>
         </main>
 

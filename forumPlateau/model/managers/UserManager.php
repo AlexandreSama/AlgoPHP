@@ -31,5 +31,12 @@
             return DAO::select($sql, ['id' => $id], true);
         }
 
+        public function getUserByUsername($username){
+            $sql = 'SELECT *
+            FROM user u
+            WHERE u.username = :username';
+            return DAO::select($sql, ['username' => $username], false);
+        }
+
 
     }
