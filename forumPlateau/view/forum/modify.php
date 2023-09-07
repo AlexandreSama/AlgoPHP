@@ -14,9 +14,6 @@ switch ($formType) {
             $data = $result['data']["message"];
             $title = 'Modifier un message';
             break;
-        // default:
-        //     # code...
-        //     break;
 }
 
 ?>

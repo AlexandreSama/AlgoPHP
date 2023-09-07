@@ -4,7 +4,7 @@
     padding: 0 15px 20px; /* Espace de 15px à gauche et à droite */
     margin: 15px 0px;
     box-sizing: border-box; /* Inclut les marges dans la largeur totale */
-    background-color: black;
+    backdrop-filter: brightness(0.1);
     color: white;
 }
 

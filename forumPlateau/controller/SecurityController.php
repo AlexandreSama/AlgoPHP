@@ -142,8 +142,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
                 password verification. */
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(["ROLE_USER"]), 'profilePicture' => $nameFile];
+            // $role = array("ROLE_USER");
+            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode("ROLE_USER"), 'profilePicture' => $nameFile];
             $userManager = new UserManager();
 
             $userManager->add($data);

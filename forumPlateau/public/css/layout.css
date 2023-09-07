@@ -79,6 +79,38 @@ body, html {
   background-color: #555; /* Couleur de survol */
 }
 
+.subdropdown-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.subdropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Couleur grise */
+  min-width: 160px;
+  right: 160px;
+  top: 25%;
+}
+
+.subdropdown-content a {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.subdropdown-content a:hover {
+  background-color: #555; /* Couleur de survol */
+}
+
+.subdropdown-button:hover .subdropdown-content{
+  display: block;
+}
+
 .navbar-dropdown:hover .dropdown-content {
   display: block;
 }

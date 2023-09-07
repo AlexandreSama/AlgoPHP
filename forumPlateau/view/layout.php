@@ -32,10 +32,13 @@
                 <?php
                     if(App\Session::isAdmin()){
                 ?>
-                    <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
-                    <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
-                    <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
-                    <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
+                    <button class="subdropdown-button">Ajouter...
+                        <div class="subdropdown-content">
+                            <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
+                            <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
+                            <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
+                            <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
+                        </div>
                 <?php
                     }
                 ?>
