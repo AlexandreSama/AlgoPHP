@@ -69,6 +69,14 @@
             return DAO::select($sql, ['idtopic' => $id], true);
         }
 
+        /**
+         * The function counts the number of messages associated with a specific user ID.
+         * 
+         * @param String $id The parameter "id" is the user ID that is used to filter the messages. The
+         * function counts the number of messages that belong to a specific user.
+         * 
+         * @return Array the count of all messages associated with a specific user ID.
+         */
         public function countAllByUserId($id){
             $sql = 'SELECT COUNT(*) AS count
             FROM message m

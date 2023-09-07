@@ -53,7 +53,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function "listTopics" retrieves a list of topics belonging to a specific category in a
      * forum and returns the data needed to display them in a view.
      * 
-     * @param categoryId The categoryId parameter is the ID of the category for which you want to
+     * @param String $categoryId The categoryId parameter is the ID of the category for which you want to
      * list the topics.
      * 
      * @return array an array is being returned with two keys: "view" and "data". The value of "view" is
@@ -91,7 +91,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function "showTopic" retrieves a topic and its associated messages from the database and
      * returns them along with the necessary view and data for rendering the topic page.
      * 
-     * @param topicId The topicId parameter is the unique identifier of the topic that you want to
+     * @param String $topicId The topicId parameter is the unique identifier of the topic that you want to
      * display. It is used to retrieve the topic and its associated messages from the database.
      * 
      * @return array an array is being returned. The array has two elements: "view" and "data". The value
@@ -192,7 +192,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function adds a new topic to a forum with the provided topic name, message text, and
      * category ID.
      * 
-     * @return If the variables $topicName, $messageText and $categoryId are all set and valid,
+     * @return void If the variables $topicName, $messageText and $categoryId are all set and valid,
      * the function will add a new topic and message to the database and then redirect the user to
      * the forum home page. If any of the variables are not set or not valid, the function will
      * return the addTopicForm.
@@ -255,7 +255,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function modifies a form based on the type of data being modified (category, topic, or
      * message) and returns the corresponding view and data.
      * 
-     * @param id The `id` parameter is the identifier of the item that needs to be modified. It is used
+     * @param String $id The `id` parameter is the identifier of the item that needs to be modified. It is used
      * to retrieve the specific item from the database.
      * 
      * @return array An array with two keys: "view" and "data". The value of "view" is the path to a view
@@ -315,7 +315,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function modifies a category, topic, or message based on the type parameter passed in the
      * URL.
      * 
-     * @param id The parameter "id" is used to identify the specific item that needs to be modified. It
+     * @param String $id The parameter "id" is used to identify the specific item that needs to be modified. It
      * is passed to the function as an argument and is used to update the corresponding record in the
      * database.
      * 
@@ -382,7 +382,7 @@ class ForumController extends AbstractController implements ControllerInterface
     /**
      * The function `deleteForm` returns a view and data based on the type of form being deleted.
      * 
-     * @param id The "id" parameter is used to specify the ID of the item that needs to be deleted. It
+     * @param String $id The "id" parameter is used to specify the ID of the item that needs to be deleted. It
      * is an optional parameter, meaning it can be null if not provided.
      * 
      * @return array An array with two keys: "view" and "data". The value of "view" is the path to a view
@@ -493,7 +493,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The deleteMessage function deletes a message with the given ID and redirects the user to the
      * forum home page.
      * 
-     * @param id The id parameter represents the unique identifier of the message that needs to be
+     * @param String $id The id parameter represents the unique identifier of the message that needs to be
      * deleted.
      */
     public function deleteMessage($id)

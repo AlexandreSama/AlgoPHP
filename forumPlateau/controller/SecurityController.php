@@ -204,7 +204,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * The function "showProfile" retrieves user information, topic count, and message count for a given
      * user ID and returns it along with success and error messages.
      * 
-     * @param id The parameter "id" is the identifier of the user whose profile is being requested to be
+     * @param String $id The parameter "id" is the identifier of the user whose profile is being requested to be
      * shown.
      * 
      * @return array An array is being returned. The array has two keys: "view" and "data". The value of the
