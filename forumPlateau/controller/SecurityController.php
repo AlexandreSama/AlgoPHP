@@ -25,6 +25,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    /**
+     * The loginForm function returns the view and data needed to render a login form, including
+     * success and error messages and the current user.
+     * 
+     * @return array An array is being returned with two elements: "view" and "data".
+     */
     public function loginForm()
     {
         $user = Session::getUser();
@@ -39,6 +45,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    /**
+     * The login function filters and sanitizes the username and password inputs, checks if the user
+     * exists and if the password is correct, sets the user session and redirects to the home page of
+     * the forum if successful, otherwise displays error messages and redirects to the login form.
+     */
     public function login()
     {
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -65,12 +76,26 @@ class SecurityController extends AbstractController implements ControllerInterfa
         
     }
 
+    /**
+     * The disconnect function in PHP unsets the user session, adds a success flash message, and
+     * redirects the user to the home page of the forum.
+     */
     public function disconnect(){
         unset($_SESSION['user']);
         Session::addFlash('success', 'Vous êtes bien déconnecté !');
         $this->redirectTo('forum', 'home');
     }
 
+    /**
+     * The function returns the view and data needed for a registration form, including success and
+     * error messages and the current user.
+     * 
+     * @return array An array is being returned. The array has two elements: "view" and "data". The "view"
+     * element contains the path to the register.php view file. The "data" element is an associative
+     * array that contains the following keys: "successMessage", "errorMessage", and "user". The values
+     * for these keys are retrieved from the Session class using the getFlash method and the getUser
+     * method
+     */
     public function registerForm()
     {
         $user = Session::getUser();
@@ -139,12 +164,19 @@ class SecurityController extends AbstractController implements ControllerInterfa
         }
     }
 
+    /**
+     * The profile function retrieves user information, topic and message counts, and a list of all
+     * users for the profile page.
+     * 
+     * @return array An array is being returned with two keys: "view" and "data". The value of the "view" key
+     * is the path to a PHP file that will be used to render the profile view. The value of the "data"
+     * key is an array containing various data that will be passed to the view, including a success
+     * message, an error message, the current user, the count of topics
+     */
     public function profile(){
         $user = Session::getUser();
         $topicManager = new TopicManager();
         $messageManager = new MessageManager();
-
-        // var_dump($user);
 
         $userManager = new UserManager();
 
@@ -167,6 +199,18 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    /**
+     * The function "showProfile" retrieves user information, topic count, and message count for a given
+     * user ID and returns it along with success and error messages.
+     * 
+     * @param id The parameter "id" is the identifier of the user whose profile is being requested to be
+     * shown.
+     * 
+     * @return array An array is being returned. The array has two keys: "view" and "data". The value of the
+     * "view" key is the directory path to the file "showProfile.php". The value of the "data" key is an
+     * array containing various data such as success and error messages, user information, topic count,
+     * message count, and profile viewer information.
+     */
     public function showProfile($id){
 
         $user = Session::getUser();

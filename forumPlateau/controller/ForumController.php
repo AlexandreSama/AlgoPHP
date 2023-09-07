@@ -332,7 +332,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
                     $categoryManager = new CategoryManager();
                     $data = ["id_category" => $id, "categoryName" => $categoryName];
-                    $test = $categoryManager->updateCategory($data);
+                    $categoryManager->updateCategory($data);
 
                     Session::addFlash('success', 'La catégorie a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
@@ -349,7 +349,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
                     $topicManager = new TopicManager();
                     $data = ["id_topic" => $id, "title" => $topicName];
-                    $test = $topicManager->updateTopic($data);
+                    $topicManager->updateTopic($data);
 
                     Session::addFlash('success', 'Le topic a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
@@ -366,7 +366,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
                     $messageManager = new MessageManager();
                     $data = ["id_message" => $id, "messageText" => $messageContent];
-                    $test = $messageManager->updateMessage($data);
+                    $messageManager->updateMessage($data);
 
                     Session::addFlash('success', 'Le message a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
@@ -476,7 +476,7 @@ class ForumController extends AbstractController implements ControllerInterface
                         }
                     }
                     $messageManager->delete($message->getId());
-                    $test = $topicManager->delete($topicId);
+                    $topicManager->delete($topicId);
 
                     Session::addFlash('success', 'Le topic a bien été modifié ! Félicitation !');
                     $this->redirectTo('forum', 'home');
