@@ -25,58 +25,58 @@
                     <i class="fa-solid fa-user"></i>
                 </button>
                 <div class="dropdown-content">
-                <?php
-                if($result['data']["user"] !== false){
-                ?>
-                    <a href="index.php?ctrl=security&action=profile">Profile</a>
-                <?php
-                    if(App\Session::isAdmin()){
-                ?>
-                    <button class="subdropdown-button">Ajouter...
-                        <div class="subdropdown-content">
-                            <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
-                            <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
-                            <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
-                            <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
-                        </div>
-                <?php
-                    }
-                ?>
-                    <a href="index.php?ctrl=security&action=disconnect">Se déconnecter</a>
+                    <?php
+                    if ($result['data']["user"] !== false) {
+                    ?>
+                        <a href="index.php?ctrl=security&action=profile">Profile</a>
+                        <?php
+                        if (App\Session::isAdmin()) {
+                        ?>
+                            <button class="subdropdown-button">Ajouter...
+                                <div class="subdropdown-content">
+                                    <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
+                                    <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
+                                    <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
+                                    <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
+                                </div>
+                            <?php
+                        }
+                            ?>
+                            <a href="index.php?ctrl=security&action=disconnect">Se déconnecter</a>
                 </div>
-                <?php
-                }else{
-                ?>
-                    <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
-                    <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
-                </div>
-                <?php
-                }
-                ?>
-            </div>
-        </nav>
-
-        <main class="main-content">
             <?php
-                if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
-                    echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] . '</h3>
-                            <h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
-                }
+                    } else {
             ?>
-            <?= $page ?>
-        </main>
+                <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
+                <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
+            </div>
+        <?php
+                    }
+        ?>
+    </div>
+    </nav>
 
-        <footer class="footer">
-            <div class="footer-left">
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-center">
-                Made With Love By Alex
-            </div>
-            <div class="footer-right">
-                <a href="#">Mentions Légales</a>
-            </div>
-        </footer>
+    <main class="main-content">
+        <?php
+        if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
+            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] . '</h3>
+                            <h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
+        }
+        ?>
+        <?= $page ?>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="#">Contact</a>
+        </div>
+        <div class="footer-center">
+            Made With Love By Alex
+        </div>
+        <div class="footer-right">
+            <a href="#">Mentions Légales</a>
+        </div>
+    </footer>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

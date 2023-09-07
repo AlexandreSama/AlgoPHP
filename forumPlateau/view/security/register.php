@@ -18,7 +18,7 @@
       <input type="password" name="passwordInput" required=true>
       <label>Mot de passe</label>
     </div>
-    <button  href="#">
+    <button href="#">
       <span></span>
       <span></span>
       <span></span>

@@ -29,19 +29,19 @@ switch ($formType) {
         if ($formType == 'category') {
             echo '<div class="user-box">
                 <select name="categoryInput">';
-                foreach ($data as $value) {
-                    echo '<option value="' . $value->getId() . '">' . $value->getCategoryName() . '</option>';
-                }
-                echo '</select>
+            foreach ($data as $value) {
+                echo '<option value="' . $value->getId() . '">' . $value->getCategoryName() . '</option>';
+            }
+            echo '</select>
                     <label>Quel catégorie veut-tu supprimer ?</label>
                 </div>';
         } else if ($formType == 'topic') {
             echo '<div class="user-box">
                 <select name="topicInput">';
-                foreach ($data as $value) {
-                    echo '<option value="' . $value->getId() . '">' . $value->getTitle() . '</option>';
-                }
-                echo '</select>
+            foreach ($data as $value) {
+                echo '<option value="' . $value->getId() . '">' . $value->getTitle() . '</option>';
+            }
+            echo '</select>
                     <label>Quel topic veut-tu supprimer ?</label>
                 </div>';
         } else if ($formType == 'message') {

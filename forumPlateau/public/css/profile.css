@@ -1,34 +1,34 @@
-.inner-div{
-    width: calc(100% - 40px);
-    height: calc(100% - 150px);
-    color: white;
-    backdrop-filter: brightness(0.1);
-    display: flex;
-    flex-direction: column;
+.inner-div {
+  width: calc(100% - 40px);
+  height: calc(100% - 150px);
+  color: white;
+  backdrop-filter: brightness(0.1);
+  display: flex;
+  flex-direction: column;
 }
-.titleHolder{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10%;
+.titleHolder {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10%;
 }
-.profileInfo{
-    display: flex;
-    flex-direction: column;
-    height: 81%;
-    border: 2px solid white;
-    align-items: center;
-    gap: 5%;
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  height: 81%;
+  border: 2px solid white;
+  align-items: center;
+  gap: 5%;
 }
-img{
-    width: 150px;
+img {
+  width: 150px;
 }
-.info{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.infoAdminValue{
-    padding-bottom: 15px;
-    border: 2px solid white;
-    text-align: center;
+.infoAdminValue {
+  padding-bottom: 15px;
+  border: 2px solid white;
+  text-align: center;
 }

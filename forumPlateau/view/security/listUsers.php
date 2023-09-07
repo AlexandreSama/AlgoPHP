@@ -1,7 +1,7 @@
 <?php
 
 $users = $result["data"]['users'];
-    
+
 ?>
 <h3>Liste des utilisateurs</h3>
 

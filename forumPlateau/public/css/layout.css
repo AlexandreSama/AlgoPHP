@@ -3,11 +3,12 @@
   src: url(../fonts/Borda.ttf);
 }
 
-*{
+* {
   font-family: myFirstFont;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -16,15 +17,16 @@ body, html {
 .content-wrapper {
   position: relative;
   height: 100%;
-  background-image: url('../img/td2bg.jpg'); /* Chemin vers votre image de fond */
+  background-image: url("../img/td2bg.jpg"); /* Chemin vers votre image de fond */
   background-size: cover;
   background-position: center;
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  backdrop-filter: brightness(0.7); /* Effet de filtre pour obscurcir l'image de fond */
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: brightness(
+    0.7
+  ); /* Effet de filtre pour obscurcir l'image de fond */
 }
-
 
 /* Styles pour la barre de navigation */
 .navbar {
@@ -107,7 +109,7 @@ body, html {
   background-color: #555; /* Couleur de survol */
 }
 
-.subdropdown-button:hover .subdropdown-content{
+.subdropdown-button:hover .subdropdown-content {
   display: block;
 }
 
@@ -129,8 +131,8 @@ body, html {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .main-content {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .footer {
   background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond du footer */
@@ -141,7 +143,9 @@ body, html {
   padding: 10px 20px;
 }
 
-.footer-left, .footer-right, .footer-center{
+.footer-left,
+.footer-right,
+.footer-center {
   text-align: center;
 }
 .footer-left,
@@ -158,8 +162,8 @@ body, html {
   text-decoration: none;
 }
 
-
-a, a:visited{
+a,
+a:visited {
   text-decoration: none;
   color: white;
 }

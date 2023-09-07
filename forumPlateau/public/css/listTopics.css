@@ -1,60 +1,58 @@
-
 /* Styles pour la div interne */
 .inner-div {
-    width: 100%;
-    height: 100%;
-    color: white;
-    display: flex;
-    flex-direction: column;
-
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-.categoryTitle{
-    --x: 50%;
-    --y: 50%;
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    height: 40px;
-    background-color: rgba(51, 51, 51, 1);
+.categoryTitle {
+  --x: 50%;
+  --y: 50%;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  height: 40px;
+  background-color: rgba(51, 51, 51, 1);
 }
 
-h3{
-    margin: 0;
+h3 {
+  margin: 0;
 }
 
-.topicHolder{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 15px;
-    margin-right: 15px;
-    background-color: #373F51;
+.topicHolder {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #373f51;
 }
 
-.linkHolder{
-    align-items: flex-start;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    padding-left: 15px;
+.linkHolder {
+  align-items: flex-start;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
 }
-.infoHolder{
-    padding-right: 15px;
+.infoHolder {
+  padding-right: 15px;
 }
 
-.holder{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    gap: 3%;
-    overflow: scroll;
-    background-color: rgba(51, 51, 51, 0.9);
-    padding-top: 30px;
+.holder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 3%;
+  overflow: scroll;
+  background-color: rgba(51, 51, 51, 0.9);
+  padding-top: 30px;
 }
 .holder::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .holder {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

@@ -1,96 +1,91 @@
 .inner-div {
-    width: 100%;
-    height: 100%;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(51, 51, 51, 0.7);
-    justify-content: space-between;
-
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(51, 51, 51, 0.7);
+  justify-content: space-between;
 }
 
 .categoryTitle {
-    --x: 50%;
-    --y: 50%;
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    height: 40px;
-    border-bottom: 2px solid white;
-    margin-bottom: 20px
+  --x: 50%;
+  --y: 50%;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  height: 40px;
+  border-bottom: 2px solid white;
+  margin-bottom: 20px;
 }
 
 h3 {
-    margin: 0;
+  margin: 0;
 }
 
 .topicHolder {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    /* border-bottom: 2px solid white; */
-    background-color: #373F51;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: #373f51;
 }
 
 .linkHolder {
-    align-items: flex-start;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    padding-left: 15px;
+  align-items: flex-start;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
 }
 
 .textHolder {
-    padding-left: 15px;
+  padding-left: 15px;
 }
 
 .infoHolder {
-    padding-right: 15px;
-    width: 16%;
-    display: flex;
-    flex-direction: column;
+  padding-right: 15px;
+  width: 16%;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
-    height: calc(100% - 110px);
-    padding: 25px 35px;
+  height: calc(100% - 110px);
+  padding: 25px 35px;
 }
 
 .addMessage {
-    display: flex;
-    flex-direction: column;
-    height: 15vh;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  width: 100%;
 }
 
 .full-width-height {
-    flex-grow: 1;
-    /* Le textarea prend toute la hauteur disponible */
-    /* Le textarea prend toute la largeur disponible */
-    resize: none;
-    /* Empêche le redimensionnement manuel du textarea */
+  flex-grow: 1;
+  resize: none;
 }
 
 button {
-    width: 10%;
+  width: 10%;
   height: 30%;
   align-self: center;
   display: flex;
 }
 
-.messagesHolder{
-    height: 73%;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    gap: 3%;
+.messagesHolder {
+  height: 73%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  gap: 3%;
 }
 .messagesHolder::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .messagesHolder {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

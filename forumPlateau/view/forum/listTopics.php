@@ -10,26 +10,26 @@ $messageManager = $result["data"]['message'];
         <h3><?php echo $categoryName->getCategoryName() ?></h3>
     </div>
     <?php
-    if($topics){
+    if ($topics) {
         echo '<div class="holder">';
         foreach ($topics as $topic) {
-                $user = $userManager->findOneById($topic['user_id']);
-                $lastMessageUser = $messageManager->getLastMessageFromTopicId($topic["id_topic"]);
-                echo '<div class="topicHolder">
+            $user = $userManager->findOneById($topic['user_id']);
+            $lastMessageUser = $messageManager->getLastMessageFromTopicId($topic["id_topic"]);
+            echo '<div class="topicHolder">
                 <div class="linkHolder">
                     <a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] .  '</a>
                     <p>De : <a href="index.php?ctrl=security&action=showProfile&id=' . $user->getId() . '">' . $user->getUsername() . '</a></p>
                 </div>
                 <div class="infoHolder">';
-                foreach ($lastMessageUser as $lastMessage) {
-                    echo '<p>Dernier message de : ' . $lastMessage['username'] . '</p>
-                    <p>Le : ' . $lastMessage['creationDate'] .'</p>';
-                }
+            foreach ($lastMessageUser as $lastMessage) {
+                echo '<p>Dernier message de : ' . $lastMessage['username'] . '</p>
+                    <p>Le : ' . $lastMessage['creationDate'] . '</p>';
+            }
             echo '</div>
             </div>';
         }
         echo '</div>';
-    }else{
+    } else {
         echo '<p>Pas de topics pour le moment !</p>';
     }
     ?>

@@ -6,14 +6,14 @@ switch ($formType) {
         $data = $result['data']["category"];
         $title = 'Modifier une catégorie';
         break;
-        case 'topic':
-            $data = $result['data']["topics"];
-            $title = 'Modifier un topic';
-            break;
-        case 'message':
-            $data = $result['data']["message"];
-            $title = 'Modifier un message';
-            break;
+    case 'topic':
+        $data = $result['data']["topics"];
+        $title = 'Modifier un topic';
+        break;
+    case 'message':
+        $data = $result['data']["message"];
+        $title = 'Modifier un message';
+        break;
 }
 
 ?>
@@ -23,17 +23,17 @@ switch ($formType) {
     <?php echo $title ?>
     <form method="post" action="index.php?ctrl=forum&action=modify&id=<?php echo $data->getId() ?>&type=<?php echo $formType ?>">
         <?php
-        if($formType == 'category'){
+        if ($formType == 'category') {
             echo '<div class="user-box">
                 <input type="text" name="categoryNameInput" required=true>
                 <label>Inscrit le nouveau titre de cet catégorie</label>
             </div>';
-        }else if($formType == 'topic'){
+        } else if ($formType == 'topic') {
             echo '<div class="user-box">
                 <input type="text" name="topicNameInput" required=true>
                 <label>Inscrit le nouveau titre de ce topic</label>
             </div>';
-        }else if($formType == 'message'){
+        } else if ($formType == 'message') {
             echo '<div class="user-box">
                 <input type="text" name="messageTextInput" required=true>
                 <label>Inscrit le nouveau message que tu souhaite</label>

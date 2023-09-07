@@ -21,8 +21,8 @@
             <p>Topics ouverts : <?php echo $result['data']["topicCount"]['count'] ?></p>
         </div>
         <!-- <?php
-        // if (App\Session::isAdmin()) {
-        ?>
+                // if (App\Session::isAdmin()) {
+                ?>
             <div class="infoAdmin">
                 <table>
                     <tr>
