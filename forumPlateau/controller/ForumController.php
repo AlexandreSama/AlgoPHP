@@ -15,9 +15,17 @@ use Model\Managers\UserManager;
 class ForumController extends AbstractController implements ControllerInterface
 {
 
+    /**
+     * The index function returns a view and data for a 404 error page in a forum, including the user
+     * information from the session.
+     * 
+     * @return Array An array is being returned. The array has two elements: "view" and "data". The value of
+     * "view" is the directory path to the file "404.php" in the "forum" directory of the view
+     * directory. The value of "data" is an array with one element: "user", which is assigned the value
+     * of the  variable.
+     */
     public function index()
     {
-
 
         $user = Session::getUser();
 
@@ -29,6 +37,14 @@ class ForumController extends AbstractController implements ControllerInterface
             ];
     }
 
+    /**
+     * The function "home" returns an array with the view path and data needed for rendering the home page,
+     * including categories, topics, messages, success and error messages, and the current user.
+     * 
+     * @return Array An array is being returned. The array has two keys: "view" and "data". The value of the
+     * "view" key is the path to a PHP file. The value of the "data" key is an array containing various
+     * data, including the categories, topics, messages, success message, error message, and user.
+     */
     public function home()
     {
 
