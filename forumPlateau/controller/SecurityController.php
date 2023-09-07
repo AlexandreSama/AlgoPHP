@@ -5,8 +5,6 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
-use Controller\HomeController;
-use Model\Entities\User;
 use Model\Managers\MessageManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
@@ -29,12 +27,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
     public function loginForm()
     {
+        $user = Session::getUser();
 
         return [
             "view" => VIEW_DIR . "/security/login.php",
             "data" => [
                 "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user
             ]
         ];
     }
@@ -58,7 +58,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                     $this->redirectTo('forum', 'loginForm');
                 }
             }else{
-                Session::addFlash('error', 'Mauvais mot de passe ou pseudonyme !');
+                Session::addFlash('error', 'Mauvais pseudonyme !');
                 $this->redirectTo('forum', 'loginForm');
             }
         }
@@ -73,12 +73,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
     public function registerForm()
     {
+        $user = Session::getUser();
 
         return [
             "view" => VIEW_DIR . "/security/register.php",
             "data" => [
                 "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user
             ]
         ];
     }

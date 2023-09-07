@@ -68,6 +68,8 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $category = $categoryManager->findOneById($categoryId);
         $topics = $topicManager->getTopicByCategoryId($categoryId);
+        $user = Session::getUser();
+
 
 
         return [
@@ -75,8 +77,9 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "topics" => $topics,
                 "categoryName" => $category,
-                "user" => $userManager,
+                "userManager" => $userManager,
                 "message" => $messageManager,
+                "user" => $user,
                 "successMessage" => Session::getFlash('success'),
                 "errorMessage" => Session::getFlash('error')
             ]
@@ -121,11 +124,14 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function addCategoryForm()
     {
+        $user = Session::getUser();
+
         return [
             "view" => VIEW_DIR . "forum/addCategory.php",
             "data" => [
                 "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user,
             ]
         ];
     }
@@ -165,6 +171,8 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addTopicForm()
     {
 
+        $user = Session::getUser();
+
         $categoryManager = new CategoryManager();
 
         return [
@@ -172,7 +180,9 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "categories" => $categoryManager->findAll(),
                 "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user,
+
             ]
         ];
     }
@@ -250,6 +260,8 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function modifyForm($id)
     {
+        $user = Session::getUser();
+
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
@@ -260,7 +272,9 @@ class ForumController extends AbstractController implements ControllerInterface
                         "category" => $categoryManager->findOneById($id),
                         "formtype" => "category",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user,
+
                     ]
                 ];
                 break;
@@ -272,7 +286,8 @@ class ForumController extends AbstractController implements ControllerInterface
                         "topics" => $topicManager->findOneById($id),
                         "formtype" => "topic",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user
                     ]
                 ];
                 break;
@@ -284,7 +299,8 @@ class ForumController extends AbstractController implements ControllerInterface
                         "message" => $messageManager->findOneById($id),
                         "formtype" => "message",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user,
                     ]
                 ];
                 break;
@@ -371,6 +387,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function deleteForm($id = null)
     {
+        $user = Session::getUser();
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
@@ -381,7 +398,8 @@ class ForumController extends AbstractController implements ControllerInterface
                         "category" => $categoryManager->findAll(),
                         "formtype" => "category",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user
                     ]
                 ];
                 break;
@@ -393,7 +411,8 @@ class ForumController extends AbstractController implements ControllerInterface
                         "topics" => $topicManager->findAll(),
                         "formtype" => "topic",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user
                     ]
                 ];
                 break;
@@ -405,7 +424,8 @@ class ForumController extends AbstractController implements ControllerInterface
                         "message" => $messageManager->findOneById($id),
                         "formtype" => "message",
                         "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
+                        "errorMessage" => Session::getFlash('error'),
+                        "user" => $user
                     ]
                 ];
                 break;

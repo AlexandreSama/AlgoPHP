@@ -12,9 +12,11 @@ foreach ($categories as $valueCategory) {
         <a href='index.php?ctrl=forum&action=listTopics&id=" . $valueCategory->getId() .  "'>" .
         $valueCategory->getCategoryName()
         .
-        "</a>
-        <a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>
-        </div>
+        "</a>";
+        if(App\Session::isAdmin()){
+            echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";
+        }
+        echo "</div>
         <div class='info-section'>";
 
     if($topics !== null){

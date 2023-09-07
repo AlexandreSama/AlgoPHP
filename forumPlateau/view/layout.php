@@ -24,21 +24,26 @@
                 <button class="dropdown-button">
                     <i class="fa-solid fa-user"></i>
                 </button>
-                <?php
-                if(isset($result['data']["user"])){   
-                ?>
                 <div class="dropdown-content">
+                <?php
+                if($result['data']["user"] !== false){
+                ?>
                     <a href="index.php?ctrl=security&action=profile">Profile</a>
+                <?php
+                    if(App\Session::isAdmin()){
+                ?>
                     <a href="index.php?ctrl=forum&action=addCategoryForm">Ajouter une catégorie</a>
                     <a href="index.php?ctrl=forum&action=addTopicForm">Ajouter un topic</a>
                     <a href="index.php?ctrl=forum&action=deleteForm&type=category">Supprimer une catégorie</a>
                     <a href="index.php?ctrl=forum&action=deleteForm&type=topic">Supprimer un topic</a>
+                <?php
+                    }
+                ?>
                     <a href="index.php?ctrl=security&action=disconnect">Se déconnecter</a>
                 </div>
                 <?php
                 }else{
                 ?>
-                <div class="dropdown-content">
                     <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
                     <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
                 </div>

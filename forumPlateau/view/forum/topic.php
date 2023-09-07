@@ -14,17 +14,20 @@ $messages = $result["data"]['messages'];
     foreach ($messages as $message) {
         echo '<div class="topicHolder">
             <div class="textHolder">
-            <p>' . $message['messageText'] . '</p>
-            <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=' . $message['id_message'] . '"><i class="fa-solid fa-x"></i></a>
-            </div>';
+            <p>' . $message['messageText'] . '</p>';
+            if(App\Session::isAdmin()){
+                echo '<a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=' . $message['id_message'] . '"><i class="fa-solid fa-x"></i></a>';
+            }
+            echo '</div>';
         $users = $userManager->getUsersByMessages($message['user_id']);
         foreach ($users as $user) {
             echo '<div class="infoHolder">
                 <p>De : ' . $user['username'] . '</p>
-                <p>Le : ' . $message['creationDate'] . '</p>
-                <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=' . $message['id_message'] . '&type=message"><i class="fa-solid fa-pen"></i></a>
-
-                </div>';
+                <p>Le : ' . $message['creationDate'] . '</p>';
+                if(App\Session::isAdmin()){
+                    echo '<a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=' . $message['id_message'] . '&type=message"><i class="fa-solid fa-pen"></i></a>';
+                }
+                echo '</div>';
         }
         echo '</div>';
     }

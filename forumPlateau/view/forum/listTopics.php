@@ -1,7 +1,7 @@
 <?php
 $topics = $result["data"]['topics'];
 $categoryName = $result["data"]['categoryName'];
-$userManager = $result["data"]['user'];
+$userManager = $result["data"]['userManager'];
 $messageManager = $result["data"]['message'];
 ?>
 <link rel="stylesheet" href="./public/css/listTopics.css">

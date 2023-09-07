@@ -24,6 +24,8 @@ use Model\Managers\CategoryManager;
          */
         public function index(){
 
+            $user = Session::getUser();
+
             $categoryManager = new CategoryManager();
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
@@ -33,6 +35,7 @@ use Model\Managers\CategoryManager;
                 "data" => [
                     "categories" => $categoryManager->findAll(),
                     "topics" => $topicManager,
+                    "user" => $user,
                     "messages" => $messageManager
                 ]
             ];
