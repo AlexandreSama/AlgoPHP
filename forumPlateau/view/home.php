@@ -33,7 +33,7 @@ foreach ($categories as $valueCategory) {
             }
         }
     }else{
-        echo 'Pas de topics pour le moment !';
+        echo '<p class="noTopic">Pas de topics pour le moment !</p>';
     }
     echo "</div>
     </div>";

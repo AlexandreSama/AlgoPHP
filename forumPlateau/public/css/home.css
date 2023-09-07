@@ -1,28 +1,33 @@
 .main-inner {
     width: 100%;
-    max-width: calc(100% - 30px); /* Largeur maximale moins la marge */
-    padding: 0 15px 20px; /* Espace de 15px à gauche et à droite */
+    padding: 20px 15px 20px;
     margin: 15px 0px;
-    box-sizing: border-box; /* Inclut les marges dans la largeur totale */
-    backdrop-filter: brightness(0.1);
-    color: white;
+    box-sizing: border-box;
+    background-color: rgba(51, 51, 51, 0.7);
 }
 
 .build-info {
     text-align: left;
     height: 40px;
+    padding-left: 15px;
     justify-content: flex-start;
     line-height: 25px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: rgba(44, 45, 51, 1.7);
 }
 
 /* Styles pour la div contenant les informations découpées en colonnes */
 .info-section {
     display: flex;
     flex-direction: column; /* Mettre en colonne */
-    background-color: gray;
+    background-color: #373F51;
+    
+}
+.noTopic{
+    padding-left: 15px;
+    color: white;
 }
 
 /* Styles pour chaque petite div */
@@ -44,6 +49,7 @@
     text-align: left;
     display: flex;
     align-items: center;
+    padding-left: 15px;
 }
 
 .modifyLink{
