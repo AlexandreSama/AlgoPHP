@@ -30,7 +30,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $user = Session::getUser();
 
             return [
-                "view" => VIEW_DIR."forum/404.php",
+                "view" => VIEW_DIR."404.php",
                 "data" => [
                     "user" => $user,
                 ]
