@@ -1,68 +1,72 @@
 <?php
 
-    namespace Controller;
+namespace Controller;
 
-    use App\Session;
-    use App\AbstractController;
-    use App\ControllerInterface;
-    use Model\Managers\UserManager;
-    
-    class HomeController extends AbstractController implements ControllerInterface{
+use App\Session;
+use App\AbstractController;
+use App\ControllerInterface;
+use Model\Managers\UserManager;
 
-        /**
-         * The index function returns an array with a view path and data containing categories, topics,
-         * and messages.
-         * 
-         * @return array an array is being returned with two keys: "view" and "data". The value of the "view"
-         * key is the path to the "home.php" view file. The value of the "data" key is an array
-         * containing three keys: "categories", "topics", and "messages". The value of the "categories"
-         * key is the result of calling the "findAll" method on
-         */
-        public function index(){
+class HomeController extends AbstractController implements ControllerInterface
+{
 
-            $user = Session::getUser();
+    /**
+     * The index function returns an array with a view path and data containing categories, topics,
+     * and messages.
+     * 
+     * @return array an array is being returned with two keys: "view" and "data". The value of the "view"
+     * key is the path to the "home.php" view file. The value of the "data" key is an array
+     * containing three keys: "categories", "topics", and "messages". The value of the "categories"
+     * key is the result of calling the "findAll" method on
+     */
+    public function index()
+    {
 
-            return [
-                "view" => VIEW_DIR."404.php",
-                "data" => [
-                    "user" => $user,
-                ]
-            ];
-        }
+        $user = Session::getUser();
+
+        return [
+            "view" => VIEW_DIR . "404.php",
+            "data" => [
+                "user" => $user,
+            ]
+        ];
+    }
 
 
-        /**
-         * The function "listUsers" retrieves a list of users from the database and returns the view
-         * and data needed to display the list.
-         * 
-         * @return array an array with two elements. The first element is a string representing the path to a
-         * view file, and the second element is an array containing the users data.
-         */
-        public function listUsers(){
+    /**
+     * The function "listUsers" retrieves a list of users from the database and returns the view
+     * and data needed to display the list.
+     * 
+     * @return array an array with two elements. The first element is a string representing the path to a
+     * view file, and the second element is an array containing the users data.
+     */
+    public function listUsers()
+    {
 
-            $userManager = new UserManager();
-            
-            $users = $userManager->findAll(['inscriptionDate', 'DESC']);
+        $userManager = new UserManager();
 
-            return [
-                "view" => VIEW_DIR."security/listUsers.php",
-                "data" => [
-                    "users" => $users
-                ]
-            ];
-        }
-            
+        $users = $userManager->findAll(['inscriptionDate', 'DESC']);
 
-        public function forumRules(){
-            
-            return [
-                "view" => VIEW_DIR."rules.php"
-            ];
-        }
+        return [
+            "view" => VIEW_DIR . "security/listUsers.php",
+            "data" => [
+                "users" => $users
+            ]
+        ];
+    }
 
-        /*public function ajax(){
+
+    public function forumRules()
+    {
+
+        return [
+            "view" => VIEW_DIR . "rules.php"
+        ];
+    }
+
+    /*public function ajax(){
             $nb = $_GET['nb'];
             $nb++;
             include(VIEW_DIR."ajax.php");
         }*/
-    }
+}

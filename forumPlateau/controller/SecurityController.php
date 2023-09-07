@@ -18,12 +18,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         $user = Session::getUser();
 
-            return [
-                "view" => VIEW_DIR."404.php",
-                "data" => [
-                    "user" => $user,
-                ]
-            ];
+        return [
+            "view" => VIEW_DIR . "404.php",
+            "data" => [
+                "user" => $user,
+            ]
+        ];
     }
 
     /**
@@ -56,32 +56,32 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        if($username && $password){
+        if ($username && $password) {
             $userManager = new UserManager();
 
             $user = $userManager->getUserByUsername($username);
-            if($user){
-                if(password_verify($password, $user->getPassword())){
+            if ($user) {
+                if (password_verify($password, $user->getPassword())) {
                     Session::setUser($user);
                     Session::addFlash('success', 'Vous êtes bien connecté !');
                     $this->redirectTo('forum', 'home');
-                }else{
+                } else {
                     Session::addFlash('error', 'Mauvais mot de passe !');
                     $this->redirectTo('forum', 'loginForm');
                 }
-            }else{
+            } else {
                 Session::addFlash('error', 'Mauvais pseudonyme !');
                 $this->redirectTo('forum', 'loginForm');
             }
         }
-        
     }
 
     /**
      * The disconnect function in PHP unsets the user session, adds a success flash message, and
      * redirects the user to the home page of the forum.
      */
-    public function disconnect(){
+    public function disconnect()
+    {
         unset($_SESSION['user']);
         Session::addFlash('success', 'Vous êtes bien déconnecté !');
         $this->redirectTo('forum', 'home');
@@ -154,11 +154,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
             êtes désormais inscrit et connecté ! Félicitation !'. Finally, it creates a new
             instance of the `HomeController` class and calls its `index()` method, which
             returns the result. */
-            
+
             Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
 
             $this->redirectTo('forum', 'home');
-
         } else {
             return $this->registerForm();
             Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
@@ -174,7 +173,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * key is an array containing various data that will be passed to the view, including a success
      * message, an error message, the current user, the count of topics
      */
-    public function profile(){
+    public function profile()
+    {
         $user = Session::getUser();
         $topicManager = new TopicManager();
         $messageManager = new MessageManager();
@@ -212,7 +212,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * array containing various data such as success and error messages, user information, topic count,
      * message count, and profile viewer information.
      */
-    public function showProfile($id){
+    public function showProfile($id)
+    {
 
         $user = Session::getUser();
         $topicManager = new TopicManager();
