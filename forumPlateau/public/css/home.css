@@ -29,8 +29,9 @@
 .build-details {
     height: 55px;
     display: flex;
-    flex-direction: column; /* Mettre en colonne */
+    flex-direction: row;
     border-top: 5px solid black;
+    justify-content: space-between;
 }
 
 /* Styles pour les textes à l'intérieur des petites divs */
@@ -41,8 +42,17 @@
 }
 .build-name{
     text-align: left;
+    display: flex;
+    align-items: center;
 }
 
 .modifyLink{
     margin-left: 15px;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
 }

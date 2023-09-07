@@ -4,17 +4,18 @@
         <h3 class="title">Profile</h3>
     </div>
     <div class="profileInfo">
+        <img src="./public/uploads/<?php echo $result['data']["user"]->getProfilePicture() ?>" alt="">
+
         <div class="info">
-            <img src="#" alt="">
             <p>Pseudonyme : <?php echo $result['data']["user"]->getUsername() ?></p>
             <p>Date de création du compte : <?php echo $result['data']["user"]->getInscriptionDate() ?></p>
-            <p>Rôle : 
-                <?php 
-                    if($result['data']["user"]->getRole() == '"ROLE_ADMIN"'){
-                        echo "Administrateur";
-                    }else{
-                        echo "Visiteur";
-                    }
+            <p>Rôle :
+                <?php
+                if ($result['data']["user"]->getRole() == '"ROLE_ADMIN"') {
+                    echo "Administrateur";
+                } else {
+                    echo "Visiteur";
+                }
                 ?></p>
             <p>Nombre de messages : <?php echo $result['data']["messageCount"]['count'] ?></p>
             <p>Topics ouverts : <?php echo $result['data']["topicCount"]['count'] ?></p>

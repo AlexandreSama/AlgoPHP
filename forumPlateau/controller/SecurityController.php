@@ -101,8 +101,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'emailInput', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $tmpName = $_FILES['avatarInput']['tmp_name'];
 
-        if ($username && $email && $password) {
+        if ($username && $email && $password && $tmpName) {
+
+            $uniqueName = uniqid('', true);
+            $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
+            move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
 
             /* Generating a hash of the user's password using the bcrypt algorithm. 
                 This is a one-way hashing function that is commonly used for password hashing in PHP. 
@@ -111,9 +116,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
                 password verification. */
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(["ROLE_USER"])];
+
+            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(["ROLE_USER"]), 'profilePicture' => $nameFile];
             $userManager = new UserManager();
-            // $user = new User();
 
             $userManager->add($data);
 
@@ -124,7 +129,6 @@ class SecurityController extends AbstractController implements ControllerInterfa
             instance of the `HomeController` class and calls its `index()` method, which
             returns the result. */
             
-            // $session->setUser($user);
             Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
 
             $this->redirectTo('forum', 'home');
@@ -159,6 +163,33 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 "topicCount" => $topicCount,
                 "messageCount" => $messageCount,
                 "users" => $users
+            ]
+        ];
+    }
+
+    public function showProfile($id){
+
+        $user = Session::getUser();
+        $topicManager = new TopicManager();
+        $messageManager = new MessageManager();
+
+
+        $userManager = new UserManager();
+
+        $profileViewer = $userManager->findOneById($id);
+
+        $topicCount = $topicManager->countAllByUserId($id);
+        $messageCount = $messageManager->countAllByUserId($id);
+
+        return [
+            "view" => VIEW_DIR . "/profile/showProfile.php",
+            "data" => [
+                "successMessage" => Session::getFlash('success'),
+                "errorMessage" => Session::getFlash('error'),
+                "user" => $user,
+                "topicCount" => $topicCount,
+                "messageCount" => $messageCount,
+                "profileViewer" => $profileViewer
             ]
         ];
     }

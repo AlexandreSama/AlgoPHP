@@ -1,12 +1,12 @@
 
 /* Styles pour la div interne */
 .inner-div {
-    flex: 1; /* Pour occuper toute la hauteur disponible */
-    background-color: #ccc; /* Couleur de fond (modifiable selon vos besoins) */
-    width: calc(100% - 40px); /* Largeur moins l'espace de marge */
-    height: calc(100% - 40px); /* Hauteur moins l'espace de marge */
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     color: white;
     background-color: black;
+    display: flex;
+    flex-direction: column;
 
 }
 
@@ -49,3 +49,17 @@ h3{
     height: calc(100% - 152px);
     padding: 25px 35px;
 }
+.holder{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 3%;
+    overflow: scroll;
+}
+.holder::-webkit-scrollbar {
+    display: none;
+}
+.holder {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

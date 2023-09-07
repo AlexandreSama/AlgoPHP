@@ -12,7 +12,7 @@
         private $password;
         private $role;
         private $inscriptionDate;
-        // private $profilePicture;
+        private $profilePicture;
         private $isBanned;
         
         public function __construct($data)
@@ -170,5 +170,25 @@
 		$result = $this->getRole() == json_encode($role);
 		return $result;
 	}
+
+        /**
+         * Get the value of profilePicture
+         */ 
+        public function getProfilePicture()
+        {
+                return $this->profilePicture;
+        }
+
+        /**
+         * Set the value of profilePicture
+         *
+         * @return  self
+         */ 
+        public function setProfilePicture($profilePicture)
+        {
+                $this->profilePicture = $profilePicture;
+
+                return $this;
+        }
     }
     

@@ -27,7 +27,7 @@ foreach ($categories as $valueCategory) {
                 $user = $messagesManager->getLastMessageFromTopicId($valueTopic["id_topic"]);
                  foreach ($messages as $valueMessage) {
                     foreach ($user as $valueUser) {
-                        echo "<div class='build-lastMessage'>Dernier Message de : " . $valueUser['username'] . "</div><div class='build-date'>Le : " . $valueMessage['creationDate'] . "</div></div>";
+                        echo "<div class='userInfo'><div class='build-lastMessage'>Dernier Message de : <a href='index.php?ctrl=security&action=showProfile&id=" . $valueUser['id_user'] . "'>" . $valueUser['username'] . "</a></div><div class='build-date'>Le : " . $valueMessage['creationDate'] . "</div></div></div>";
                     }
                 }
             }

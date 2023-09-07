@@ -232,6 +232,8 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addMessage()
     {
 
+        $id = Session::getUser()->getId();
+
         $topicId = filter_input(INPUT_POST, 'topicId', FILTER_VALIDATE_INT);
         $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -239,8 +241,9 @@ class ForumController extends AbstractController implements ControllerInterface
 
             $messageManager = new MessageManager();
 
-            $messageData = ['messageText' => $messageContent, 'user_id' => 2, 'topic_id' => $topicId];
+            $messageData = ['messageText' => $messageContent, 'user_id' => $id, 'topic_id' => $topicId];
             $messageManager->add($messageData);
+            $this->redirectTo('forum', 'home');
         } else {
 
             return $this->showTopic($topicId);

@@ -11,13 +11,14 @@ $messageManager = $result["data"]['message'];
     </div>
     <?php
     if($topics){
+        echo '<div class="holder">';
         foreach ($topics as $topic) {
                 $user = $userManager->findOneById($topic['user_id']);
                 $lastMessageUser = $messageManager->getLastMessageFromTopicId($topic["id_topic"]);
                 echo '<div class="topicHolder">
                 <div class="linkHolder">
                     <a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] .  '</a>
-                    <p>De: ' . $user->getUsername() . '</p>
+                    <p>De : <a href="index.php?ctrl=security&action=showProfile&id=' . $user->getId() . '">' . $user->getUsername() . '</a></p>
                 </div>
                 <div class="infoHolder">';
                 foreach ($lastMessageUser as $lastMessage) {
@@ -27,6 +28,7 @@ $messageManager = $result["data"]['message'];
             echo '</div>
             </div>';
         }
+        echo '</div>';
     }else{
         echo '<p>Pas de topics pour le moment !</p>';
     }
