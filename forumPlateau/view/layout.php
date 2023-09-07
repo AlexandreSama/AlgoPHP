@@ -18,7 +18,7 @@
                 <img src="./public/img/td2logo.png" alt="Logo Phenix Division">
             </div>
             <div class="navbar-title">
-                <a href="index.php">Phenix Division</a>
+                <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">

@@ -26,21 +26,13 @@ use Model\Managers\CategoryManager;
 
             $user = Session::getUser();
 
-            $categoryManager = new CategoryManager();
-            $topicManager = new TopicManager();
-            $messageManager = new MessageManager();
-
             return [
-                "view" => VIEW_DIR."home.php",
+                "view" => VIEW_DIR."forum/404.php",
                 "data" => [
-                    "categories" => $categoryManager->findAll(),
-                    "topics" => $topicManager,
                     "user" => $user,
-                    "messages" => $messageManager
                 ]
             ];
         }
-
 
 
         /**

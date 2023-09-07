@@ -19,13 +19,14 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
 
-        $topicManager = new TopicManager();
-        return [
-            // "view" => VIEW_DIR."forum/listTopics.php",
-            "data" => [
-                "topics" => $topicManager->findAll()
-            ]
-        ];
+        $user = Session::getUser();
+
+            return [
+                "view" => VIEW_DIR."forum/404.php",
+                "data" => [
+                    "user" => $user,
+                ]
+            ];
     }
 
     public function home()

@@ -16,13 +16,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function index()
     {
 
-        return [
-            "view" => VIEW_DIR . "/security/login.php",
-            "data" => [
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
-            ]
-        ];
+        $user = Session::getUser();
+
+            return [
+                "view" => VIEW_DIR."forum/404.php",
+                "data" => [
+                    "user" => $user,
+                ]
+            ];
     }
 
     /**
