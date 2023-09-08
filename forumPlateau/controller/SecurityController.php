@@ -200,6 +200,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    public function changeProfilePicture($id){
+        $userManager = new UserManager();
+        $user = $userManager->findOneById($id);
+
+        $oldProfilePicture = $user->getProfilePicture();
+
+    }
+
     /**
      * The function "showProfile" retrieves user information, topic count, and message count for a given
      * user ID and returns it along with success and error messages.
@@ -238,6 +246,25 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 "profileViewer" => $profileViewer
             ]
         ];
+    }
+
+    public function changeRole($id){
+
+        $userManager = new UserManager();
+
+        $profileViewer = $userManager->findOneById($id);
+
+        $oldRole = $profileViewer->getRole();
+        var_dump($oldRole);
+        if($oldRole == '"ROLE_ADMIN"'){
+            $newRole = "ROLE_USER";
+        }else{
+            $newRole = "ROLE_ADMIN";
+        }
+
+        $userManager->changeRole($newRole, $id);
+        Session::addFlash('success', 'Le role a bien été modifié !');
+        $this->redirectTo('security', 'showProfile', $id);
     }
 
     /*public function ajax(){

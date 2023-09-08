@@ -12,9 +12,9 @@
             <p>Rôle :
                 <?php
                 if ($result['data']["profileViewer"]->getRole() == '"ROLE_ADMIN"') {
-                    echo "Administrateur";
+                    echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Administrateur</a>";
                 } else {
-                    echo "Visiteur";
+                    echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Visiteur</a>";
                 }
                 ?></p>
             <p>Nombre de messages : <?php echo $result['data']["messageCount"]['count'] ?></p>

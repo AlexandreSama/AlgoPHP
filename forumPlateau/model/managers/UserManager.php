@@ -53,4 +53,11 @@ class UserManager extends Manager
             $this->className
         );
     }
+
+    public function changeRole($role, $id){
+        $sql = 'UPDATE user u
+        SET role = :role
+        WHERE u.id_user = :id';
+        return DAO::update($sql, ['id' => $id, 'role' => json_encode($role)], false);
+    }
 }
