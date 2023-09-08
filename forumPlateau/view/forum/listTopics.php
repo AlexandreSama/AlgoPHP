@@ -31,20 +31,25 @@ $aimerManager = $result["data"]['aimerManager']
 
                 echo '<p>Dernier message de : ' . $lastMessage['username'] . '</p>
                     <p>Le : ' . $lastMessage['creationDate'] . '</p>';
-                $likes = $aimerManager->getLikesByTopicId($topic['id_topic'])["likes"];
-                if ($aimerManager->getLikesByTopicId($topic['id_topic'])["likes"] !== null) {
-                    $userLikeId = $aimerManager->checkUserLike($topic['id_topic']);
-                    if (isset($userLikeId["user_id"])) {
-                        if ($userLikeId["user_id"] == App\Session::getUser()->getId()) {
-                            echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=unlikeTopic&id=' . $topic['id_topic'] . '">Unlike ce topic</a></button></p>';
+                if (App\Session::getUser()) {
+                    if ($aimerManager->getLikesByTopicId($topic['id_topic'])["likes"] !== null) {
+                        $likes = $aimerManager->getLikesByTopicId($topic['id_topic'])["likes"];
+                        $userLikeId = $aimerManager->checkUserLike($topic['id_topic']);
+                        if (isset($userLikeId["user_id"])) {
+                            if ($userLikeId["user_id"] == App\Session::getUser()->getId()) {
+                                echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=unlikeTopic&id=' . $topic['id_topic'] . '">Unlike ce topic</a></button></p>';
+                            } else {
+                                echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                            }
                         } else {
                             echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
                         }
                     } else {
-                        echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                        echo '<p>Nombre de like : 0 <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
                     }
-                } else {
-                    echo '<p>Nombre de like : 0 <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                }else{
+                    $likes = $aimerManager->getLikesByTopicId($topic['id_topic'])["likes"];
+                    echo '<p>Nombre de like : ' . $likes . ' </p>';
                 }
             }
 

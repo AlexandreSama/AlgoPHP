@@ -142,21 +142,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
                 password verification. */
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            // $role = array("ROLE_USER");
             $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode("ROLE_USER"), 'profilePicture' => $nameFile];
-            $userManager = new UserManager();
 
+            $userManager = new UserManager();
             $userManager->add($data);
 
-            /* The code is creating a new session object using the `Session` class. Then, it
-            sets the user object to the session using the `setUser()` method. After that, it
-            adds a flash message to the session with the key 'success' and the message 'Vous
-            êtes désormais inscrit et connecté ! Félicitation !'. Finally, it creates a new
-            instance of the `HomeController` class and calls its `index()` method, which
-            returns the result. */
-
             Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
-
             $this->redirectTo('forum', 'home');
         } else {
             return $this->registerForm();
@@ -248,6 +239,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+    /**
+     * The function changes the role of a user from "ROLE_ADMIN" to "ROLE_USER" or vice versa and
+     * redirects to the user's profile page.
+     * 
+     * @param String $id The parameter "id" is the unique identifier of the user whose role needs to be
+     * changed.
+     */
     public function changeRole($id){
 
         $userManager = new UserManager();
