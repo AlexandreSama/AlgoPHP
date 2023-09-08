@@ -19,6 +19,10 @@
             </div>
             <div class="navbar-title">
                 <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
+                <div class="search">
+                    <input type="text" placeholder="Vous chercher un titre ?" id="searchInput">
+                    <button>Chercher</button>
+                </div>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">
@@ -107,8 +111,6 @@
             content_css: '//www.tiny.cloud/css/codepen.min.css'
         });
     })
-
-
 
     /*
     $("#ajaxbtn").on("click", function(){

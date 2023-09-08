@@ -9,7 +9,7 @@ foreach ($categories as $valueCategory) {
     $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
     echo "<div class='main-inner'>
         <div class='build-info'>
-        <a href='index.php?ctrl=forum&action=listTopics&id=" . $valueCategory->getId() .  "'>" .
+        <a href='index.php?ctrl=forum&action=listTopics&id=" . $valueCategory->getId() .  "' class='titleCategory'>" .
         $valueCategory->getCategoryName()
         .
         "</a>";
@@ -39,3 +39,27 @@ foreach ($categories as $valueCategory) {
     </div>";
 }
 ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const mainInner = document.querySelector('.main-inner');
+        const links = document.querySelectorAll('.main-inner a');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            links.forEach(function(link) {
+                const linkText = link.textContent.toLowerCase();
+                if (linkText.includes(searchTerm)) {
+                    link.style.display = 'block'; // Afficher le lien
+                    mainInner.style.display = 'block'
+                } else {
+                    link.style.display = 'none'; // Masquer le lien
+                    mainInner.style.display = 'none';
+                }
+            });
+
+        });
+    });
+</script>

@@ -47,6 +47,9 @@ html {
 
 .navbar-title {
   font-size: 24px;
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
 }
 
 .navbar-dropdown {
@@ -167,3 +170,4 @@ a:visited {
   text-decoration: none;
   color: white;
 }
+
