@@ -12,9 +12,17 @@
             <p>Rôle :
                 <?php
                 if ($result['data']["profileViewer"]->getRole() == '"ROLE_ADMIN"') {
-                    echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Administrateur</a>";
+                    if(App\Session::isAdmin()){
+                        echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Administrateur</a>";
+                    }else{
+                        echo "Administrateur";
+                    }
                 } else {
-                    echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Visiteur</a>";
+                    if(App\Session::isAdmin()){
+                        echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Visiteur</a>";
+                    }else{
+                        echo "Visiteur";
+                    }
                 }
                 ?></p>
             <p>Nombre de messages : <?php echo $result['data']["messageCount"]['count'] ?></p>
