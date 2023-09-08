@@ -5,6 +5,7 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
+use Model\Managers\AimerManager;
 use Model\Managers\CategoryManager;
 use Model\Managers\TopicManager;
 use Model\Managers\MessageManager;
@@ -76,6 +77,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function listTopics($categoryId)
     {
+        $aimerManager = new AimerManager();
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
         $userManager = new UserManager();
@@ -85,11 +87,10 @@ class ForumController extends AbstractController implements ControllerInterface
         $topics = $topicManager->getTopicByCategoryId($categoryId);
         $user = Session::getUser();
 
-
-
         return [
             "view" => VIEW_DIR . "forum/listTopics.php",
             "data" => [
+                "aimerManager" => $aimerManager,
                 "topics" => $topics,
                 "categoryName" => $category,
                 "userManager" => $userManager,
@@ -99,6 +100,40 @@ class ForumController extends AbstractController implements ControllerInterface
                 "errorMessage" => Session::getFlash('error')
             ]
         ];
+    }
+
+    /**
+     * The function `likeTopic` adds a like to a topic and redirects the user to the forum home page.
+     * 
+     * @param String $id The id parameter represents the unique identifier of the topic that the user wants to
+     * like.
+     */
+    public function likeTopic($id){
+        $topicManager = new TopicManager();
+
+        $user = Session::getUser();
+        $topic = $topicManager->findOneById($id);
+
+        $topicManager->addLike($topic, $user);
+
+        $this->redirectTo('forum', 'home');
+    }
+
+    /**
+     * The function unlikeTopic removes a like from a topic and redirects the user to the forum home page.
+     * 
+     * @param String $id The id parameter represents the unique identifier of the topic that the user wants to
+     * unlike.
+     */
+    public function unlikeTopic($id){
+        $topicManager = new TopicManager();
+
+        $user = Session::getUser();
+        $topic = $topicManager->findOneById($id);
+
+        $topicManager->removeLike($topic, $user);
+
+        $this->redirectTo('forum', 'home');
     }
 
     /**
@@ -137,6 +172,12 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
+    /**
+     * The lockTopic function locks a topic, adds a success flash message, and redirects to the forum's
+     * showTopic page.
+     * 
+     * @param String $id The parameter "id" is the identifier of the topic that needs to be locked.
+     */
     public function lockTopic($id){
         $topicManager = new TopicManager();
         $topicManager->lockTopic($id);
@@ -145,6 +186,12 @@ class ForumController extends AbstractController implements ControllerInterface
         $this->redirectTo('forum', 'showTopic', $id);
     }
 
+    /**
+     * The function unlocks a topic, adds a success flash message, and redirects to the forum page
+     * showing the unlocked topic.
+     * 
+     * @param String $id The parameter "id" is the identifier of the topic that needs to be unlocked.
+     */
     public function unlockTopic($id){
         $topicManager = new TopicManager();
         $topicManager->unlockTopic($id);
@@ -153,6 +200,16 @@ class ForumController extends AbstractController implements ControllerInterface
         $this->redirectTo('forum', 'showTopic', $id);
     }
 
+    /**
+     * The function returns a view and data for adding a category in a forum, including success and
+     * error messages and the current user.
+     * 
+     * @return Array An array is being returned. The array contains two elements: "view" and "data". The
+     * "view" element contains the path to the view file "forum/addCategory.php". The "data" element
+     * contains an associative array with three key-value pairs: "successMessage" and "errorMessage"
+     * which are retrieved from the session flash messages, and "user" which is the current user object
+     * retrieved
+     */
     public function addCategoryForm()
     {
         $user = Session::getUser();

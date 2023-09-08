@@ -14,6 +14,7 @@ final class User extends Entity
         private $role;
         private $inscriptionDate;
         private $profilePicture;
+        private $favoris;
         private $isBanned;
 
         public function __construct($data)
@@ -188,6 +189,48 @@ final class User extends Entity
         public function setProfilePicture($profilePicture)
         {
                 $this->profilePicture = $profilePicture;
+
+                return $this;
+        }
+
+        
+
+        // /**
+        //  * Get the value of likedTopic
+        //  */ 
+        // public function getLikedTopic()
+        // {
+        //         return $this->likedTopic;
+        // }
+
+        /**
+         * Get the value of likedTopic
+         */ 
+        public function getFavoris()
+        {
+                return $this->favoris;
+        }
+
+//         /**
+//          * Set the value of likedTopic
+//          *
+//          * @return  self
+//          */ 
+//         public function addLikedTopic(Topic $topic)
+//         {
+//                 $this->likedTopic[] = $topic;
+
+//                 return $this;
+//         }
+// }
+        /**
+         * Set the value of likedTopic
+         *
+         * @return  self
+         */ 
+        public function addFavoris(Topic $topic)
+        {
+                $this->favoris[] = $topic;
 
                 return $this;
         }

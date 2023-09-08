@@ -12,11 +12,12 @@
   --x: 50%;
   --y: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 30px;
   height: 40px;
   border-bottom: 2px solid white;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 h3 {

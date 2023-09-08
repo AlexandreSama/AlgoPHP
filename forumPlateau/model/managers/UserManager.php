@@ -54,6 +54,16 @@ class UserManager extends Manager
         );
     }
 
+    /**
+     * The function updates the role of a user in the database.
+     * 
+     * @param String $role The role parameter is the new role that you want to assign to the user. It can be a
+     * string or an array, depending on how you want to store the role information in your database.
+     * @param String $id The `id` parameter is the unique identifier of the user whose role needs to be
+     * changed. It is used to identify the specific user in the database.
+     * 
+     * @return bool the result of the DAO::update() method.
+     */
     public function changeRole($role, $id){
         $sql = 'UPDATE user u
         SET role = :role

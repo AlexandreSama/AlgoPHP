@@ -18,6 +18,8 @@ final class Topic extends Entity
         private $title;
         private $creationDate;
         private $closed;
+        // private $userLikes;
+        private $favoris;
         private $user;
         private $category;
 
@@ -142,5 +144,50 @@ final class Topic extends Entity
         public function __toString()
         {
                 return $this->getTitle() . $this->getUser() . $this->getCreationdate() . $this->getClosed();
+        }
+
+       
+
+        // /**
+        //  * Get the value of like
+        //  */ 
+        // public function getLike()
+        // {
+        //         return $this->userLikes;
+        // }
+
+        // /**
+        //  * Set the value of like
+        //  *
+        //  * @return  self
+        //  */ 
+        // public function addLike(User $userLike)
+        // {
+        //         $this->userLikes[] = $userLike;
+
+        //         return $this;
+        // }
+        
+
+          /**
+         * Get the value of likedTopic
+         */ 
+        public function getFavoris()
+        {
+                return $this->favoris;
+        }
+
+//      
+// }
+        /**
+         * Set the value of likedTopic
+         *
+         * @return  self
+         */ 
+        public function addFavoris(User $user)
+        {
+                $this->favoris[] = $user;
+
+                return $this;
         }
 }
