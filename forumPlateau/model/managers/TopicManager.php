@@ -51,4 +51,18 @@ class TopicManager extends Manager
             WHERE t.user_id = :id';
         return DAO::select($sql, ['id' => $id], false);
     }
+
+    public function lockTopic($id){
+        $sql = 'UPDATE topic t
+        SET closed = 1
+        WHERE t.id_topic = :id';
+        return DAO::update($sql, ['id' => $id], false);
+    }
+
+    public function unlockTopic($id){
+        $sql = 'UPDATE topic t
+        SET closed = 0
+        WHERE t.id_topic = :id';
+        return DAO::update($sql, ['id' => $id], false);
+    }
 }

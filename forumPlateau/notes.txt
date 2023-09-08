@@ -9,10 +9,10 @@ Implements => Oblige une class a avoir le/les noms de fonctions de la class impl
 
 
 
-Visiteur peut lire mais pas écrire
+Visiteur peut lire mais pas écrire | V
 (Sujets plus likés)
-Lock un sujet
-Administration => Posts, Utilisateurs
-Page d'accueil only CSS (Pas Bootstrap) => Ergonomies avant tout !
+Lock un sujet | V
+Administration => Posts, Utilisateurs | V
+Page d'accueil only CSS (Pas Bootstrap) => Ergonomies avant tout ! | V
 
-Quand utilisateur créer un Topic => Premier post est celui de l'utilisateur
+Quand utilisateur créer un Topic => Premier post est celui de l'utilisateur | V

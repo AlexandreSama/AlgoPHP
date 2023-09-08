@@ -137,6 +137,22 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
+    public function lockTopic($id){
+        $topicManager = new TopicManager();
+        $topicManager->lockTopic($id);
+        Session::addFlash('success', 'Ce topic a bien été lock');
+        var_dump($id);
+        $this->redirectTo('forum', 'showTopic', $id);
+    }
+
+    public function unlockTopic($id){
+        $topicManager = new TopicManager();
+        $topicManager->unlockTopic($id);
+        Session::addFlash('success', 'Ce topic a bien été unlock');
+        var_dump($id);
+        $this->redirectTo('forum', 'showTopic', $id);
+    }
+
     public function addCategoryForm()
     {
         $user = Session::getUser();
