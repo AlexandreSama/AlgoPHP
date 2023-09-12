@@ -127,28 +127,49 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'emailInput', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $passwordValidator = filter_input(INPUT_POST, 'passwordVerificatorInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $tmpName = $_FILES['avatarInput']['tmp_name'];
 
-        if ($username && $email && $password && $tmpName) {
-
-            $uniqueName = uniqid('', true);
-            $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
-            move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
-
-            /* Generating a hash of the user's password using the bcrypt algorithm. 
-                This is a one-way hashing function that is commonly used for password hashing in PHP. 
-                The `password_hash()` function takes the user's password as the first parameter and 
-                the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
-                The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
-                password verification. */
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode("ROLE_USER"), 'profilePicture' => $nameFile];
+        if ($username && $email && $password && $passwordValidator && $tmpName) {
 
             $userManager = new UserManager();
-            $userManager->add($data);
 
-            Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
-            $this->redirectTo('forum', 'home');
+            if(!$userManager->getUserByUsername($username)){
+
+                if($password == $passwordValidator && strlen($password) >= 12){
+
+                    $uniqueName = uniqid('', true);
+                    $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
+                    move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
+        
+                    /* Generating a hash of the user's password using the bcrypt algorithm. 
+                        This is a one-way hashing function that is commonly used for password hashing in PHP. 
+                        The `password_hash()` function takes the user's password as the first parameter and 
+                        the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
+                        The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
+                        password verification. */
+                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                    $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(['ROLE_USER']), 'profilePicture' => $nameFile];
+
+                    $userManager->add($data);
+
+                    Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
+                    $this->redirectTo('forum', 'home');
+
+                }else{
+
+                    // print_r('WrongPassword');
+                    Session::addFlash('error', 'Vos mots de passe ne se ressemblent pas ou n\'est pas assez long !');
+                    $this->redirectTo('security', 'registerForm');
+
+                }
+            }else{
+                // print_r('PseudoAlreadyUsed');
+                Session::addFlash('error', 'Ce pseudonyme est déjà enregistré !');
+                $this->redirectTo('security', 'registerForm');
+
+            }
+
         } else {
             return $this->registerForm();
             Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');

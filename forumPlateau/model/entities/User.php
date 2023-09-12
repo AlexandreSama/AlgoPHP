@@ -194,15 +194,6 @@ final class User extends Entity
         }
 
         
-
-        // /**
-        //  * Get the value of likedTopic
-        //  */ 
-        // public function getLikedTopic()
-        // {
-        //         return $this->likedTopic;
-        // }
-
         /**
          * Get the value of likedTopic
          */ 
@@ -211,18 +202,6 @@ final class User extends Entity
                 return $this->favoris;
         }
 
-//         /**
-//          * Set the value of likedTopic
-//          *
-//          * @return  self
-//          */ 
-//         public function addLikedTopic(Topic $topic)
-//         {
-//                 $this->likedTopic[] = $topic;
-
-//                 return $this;
-//         }
-// }
         /**
          * Set the value of likedTopic
          *

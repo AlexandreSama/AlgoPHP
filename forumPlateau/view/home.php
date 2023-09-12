@@ -41,25 +41,25 @@ foreach ($categories as $valueCategory) {
 ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
-        const mainInner = document.querySelector('.main-inner');
-        const links = document.querySelectorAll('.main-inner a');
+//     document.addEventListener('DOMContentLoaded', function() {
+//         const searchInput = document.getElementById('searchInput');
+//         const mainInner = document.querySelector('.main-inner');
+//         const links = document.querySelectorAll('.main-inner a');
 
-        searchInput.addEventListener('input', function() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
+//         searchInput.addEventListener('input', function() {
+//             const searchTerm = searchInput.value.toLowerCase().trim();
 
-            links.forEach(function(link) {
-                const linkText = link.textContent.toLowerCase();
-                if (linkText.includes(searchTerm)) {
-                    link.style.display = 'block'; // Afficher le lien
-                    mainInner.style.display = 'block'
-                } else {
-                    link.style.display = 'none'; // Masquer le lien
-                    mainInner.style.display = 'none';
-                }
-            });
+//             links.forEach(function(link) {
+//                 const linkText = link.textContent.toLowerCase();
+//                 if (linkText.includes(searchTerm)) {
+//                     link.style.display = 'block'; // Afficher le lien
+//                     mainInner.style.display = 'block'
+//                 } else {
+//                     link.style.display = 'none'; // Masquer le lien
+//                     mainInner.style.display = 'none';
+//                 }
+//             });
 
-        });
-    });
-</script>
+//         });
+//     });
+// </script>

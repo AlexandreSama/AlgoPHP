@@ -19,10 +19,10 @@
             </div>
             <div class="navbar-title">
                 <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
-                <div class="search">
-                    <input type="text" placeholder="Vous chercher un titre ?" id="searchInput">
+                <form class="search" action="index.php?ctrl=search&action=index" method="post">
+                    <input type="text" placeholder="Vous chercher un titre ?" name='searchInput' id="searchInput">
                     <button>Chercher</button>
-                </div>
+                </form>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">

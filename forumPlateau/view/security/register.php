@@ -18,6 +18,10 @@
       <input type="password" name="passwordInput" required=true>
       <label>Mot de passe</label>
     </div>
+    <div class="user-box">
+      <input type="password" name="passwordVerificatorInput" required=true>
+      <label>Confirmer votre mot de passe</label>
+    </div>
     <button href="#">
       <span></span>
       <span></span>
