@@ -71,16 +71,23 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 //If we get the user, pass, else they go back to the form
                 if ($user) {
 
-                    //We check if the password given in the form is
-                    //Equal to the password stored in the DB
-                    if (password_verify($password, $user->getPassword())) {
+                    if ($user->getIsBanned() == 0) {
 
-                        Session::setUser($user);
-                        Session::addFlash('success', 'Vous êtes bien connecté !');
-                        $this->redirectTo('forum', 'home');
+                        //We check if the password given in the form is
+                        //Equal to the password stored in the DB
+                        if (password_verify($password, $user->getPassword())) {
+
+                            Session::setUser($user);
+                            Session::addFlash('success', 'Vous êtes bien connecté !');
+                            $this->redirectTo('forum', 'home');
+                        } else {
+
+                            Session::addFlash('error', 'Mauvais mot de passe !');
+                            $this->redirectTo('forum', 'loginForm');
+                        }
                     } else {
-
-                        Session::addFlash('error', 'Mauvais mot de passe !');
+                        
+                        Session::addFlash('error', 'Vous êtes actuellement banni !');
                         $this->redirectTo('forum', 'loginForm');
                     }
                 } else {
@@ -88,13 +95,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
                     Session::addFlash('error', 'Mauvais pseudonyme !');
                     $this->redirectTo('forum', 'loginForm');
                 }
-
-            }else{
+            } else {
 
                 Session::addFlash('error', 'Veuillez recommencer !');
                 $this->redirectTo('forum', 'loginForm');
             }
-
         } else {
 
             Session::addFlash('error', 'Un bot ? Sérieusement ?');
@@ -108,7 +113,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      */
     public function disconnect()
     {
-        
+
         unset($_SESSION['user']);
         Session::addFlash('success', 'Vous êtes bien déconnecté !');
         $this->redirectTo('forum', 'home');
