@@ -20,6 +20,7 @@ $categories = $result["data"]['categories'];
             <select name="categoryInput">
                 <?php
                 foreach ($categories as $value) {
+                    
                     echo '<option value="' . $value->getId() . '">' . $value->getCategoryName() . '</option>';
                 }
                 ?>

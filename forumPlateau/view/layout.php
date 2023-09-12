@@ -63,8 +63,8 @@
     <main class="main-content">
         <?php
         if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
-            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] . '</h3>
-                            <h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
+            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'].
+            '</h3><h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
         }
         ?>
         <?= $page ?>

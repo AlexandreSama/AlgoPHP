@@ -12,15 +12,21 @@
             <p>Rôle :
                 <?php
                 if ($result['data']["profileViewer"]->getRole() == '"ROLE_ADMIN"') {
+
                     if(App\Session::isAdmin()){
+
                         echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Administrateur</a>";
                     }else{
+
                         echo "Administrateur";
                     }
                 } else {
+
                     if(App\Session::isAdmin()){
+
                         echo "<a href='index.php?ctrl=security&action=changeRole&id=" . $result['data']["profileViewer"]->getId() . "'>Visiteur</a>";
                     }else{
+                        
                         echo "Visiteur";
                     }
                 }

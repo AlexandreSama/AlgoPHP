@@ -33,6 +33,7 @@
                         </tr>
                         <?php
                         foreach ($result["data"]['users'] as $value) {
+                            
                             echo "<tr>
                                     <td class='infoAdminValue'>" . $value->getUsername() . "</td>
                                     <td class='infoAdminValue'>" . $value->getInscriptionDate() . "</td>
