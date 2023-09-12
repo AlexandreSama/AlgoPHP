@@ -3,6 +3,10 @@
   <h2>Connexion</h2>
   <form method="post" action="index.php?ctrl=security&action=login">
     <div class="user-box">
+      <input type="text" name="honeyPotInput" style="display: none;">
+      <label>HoneyPot</label>
+    </div>
+    <div class="user-box">
       <input type="text" name="usernameInput" require>
       <label>Pseudonyme</label>
     </div>

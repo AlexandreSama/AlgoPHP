@@ -53,26 +53,33 @@ class SecurityController extends AbstractController implements ControllerInterfa
      */
     public function login()
     {
+        $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        if ($username && $password) {
-            $userManager = new UserManager();
+        if (empty($honeyPot)) {
 
-            $user = $userManager->getUserByUsername($username);
-            if ($user) {
-                if (password_verify($password, $user->getPassword())) {
-                    Session::setUser($user);
-                    Session::addFlash('success', 'Vous êtes bien connecté !');
-                    $this->redirectTo('forum', 'home');
+            if ($username && $password) {
+                $userManager = new UserManager();
+
+                $user = $userManager->getUserByUsername($username);
+                if ($user) {
+                    if (password_verify($password, $user->getPassword())) {
+                        Session::setUser($user);
+                        Session::addFlash('success', 'Vous êtes bien connecté !');
+                        $this->redirectTo('forum', 'home');
+                    } else {
+                        Session::addFlash('error', 'Mauvais mot de passe !');
+                        $this->redirectTo('forum', 'loginForm');
+                    }
                 } else {
-                    Session::addFlash('error', 'Mauvais mot de passe !');
+                    Session::addFlash('error', 'Mauvais pseudonyme !');
                     $this->redirectTo('forum', 'loginForm');
                 }
-            } else {
-                Session::addFlash('error', 'Mauvais pseudonyme !');
-                $this->redirectTo('forum', 'loginForm');
             }
+        } else {
+            Session::addFlash('error', 'Un bot ? Sérieusement ?');
+            $this->redirectTo('forum', 'loginForm');
         }
     }
 
@@ -122,57 +129,69 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function register()
     {
 
+        //Honey Pot ! Bruteforce
+
         /* The code is using the `filter_input` function to retrieve and sanitize user input from
             the `POST` request. */
+        $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'emailInput', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $passwordValidator = filter_input(INPUT_POST, 'passwordVerificatorInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $tmpName = $_FILES['avatarInput']['tmp_name'];
+        $mimetype = mime_content_type($tmpName);
 
-        if ($username && $email && $password && $passwordValidator && $tmpName) {
+        if (empty($honeyPot)) {
 
-            $userManager = new UserManager();
+            if ($username && $email && $password && $passwordValidator && $tmpName) {
 
-            if(!$userManager->getUserByUsername($username)){
+                if (in_array($mimetype, array('image/jpeg', 'image/png'))) {
 
-                if($password == $passwordValidator && strlen($password) >= 12){
+                    $userManager = new UserManager();
 
-                    $uniqueName = uniqid('', true);
-                    $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
-                    move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
-        
-                    /* Generating a hash of the user's password using the bcrypt algorithm. 
-                        This is a one-way hashing function that is commonly used for password hashing in PHP. 
-                        The `password_hash()` function takes the user's password as the first parameter and 
-                        the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
-                        The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
-                        password verification. */
-                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                    $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(['ROLE_USER']), 'profilePicture' => $nameFile];
+                    if (!$userManager->getUserByUsername($username)) {
 
-                    $userManager->add($data);
+                        if ($password == $passwordValidator && strlen($password) >= 12) {
 
-                    Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
-                    $this->redirectTo('forum', 'home');
+                            $uniqueName = uniqid('', true);
+                            $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
+                            move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
 
-                }else{
+                            /* Generating a hash of the user's password using the bcrypt algorithm. 
+                            This is a one-way hashing function that is commonly used for password hashing in PHP. 
+                            The `password_hash()` function takes the user's password as the first parameter and 
+                            the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
+                            The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
+                            password verification. */
+                            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                            $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(['ROLE_USER']), 'profilePicture' => $nameFile];
 
-                    // print_r('WrongPassword');
-                    Session::addFlash('error', 'Vos mots de passe ne se ressemblent pas ou n\'est pas assez long !');
+                            $userManager->add($data);
+
+                            Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
+                            $this->redirectTo('forum', 'home');
+                        } else {
+
+                            // print_r('WrongPassword');
+                            Session::addFlash('error', 'Vos mots de passe ne se ressemblent pas ou n\'est pas assez long !');
+                            $this->redirectTo('security', 'registerForm');
+                        }
+                    } else {
+                        // print_r('PseudoAlreadyUsed');
+                        Session::addFlash('error', 'Ce pseudonyme est déjà enregistré !');
+                        $this->redirectTo('security', 'registerForm');
+                    }
+                } else {
+                    Session::addFlash('error', 'Veuillez insérer une image de type : PNG ou JPG !');
                     $this->redirectTo('security', 'registerForm');
-
                 }
-            }else{
-                // print_r('PseudoAlreadyUsed');
-                Session::addFlash('error', 'Ce pseudonyme est déjà enregistré !');
-                $this->redirectTo('security', 'registerForm');
-
+            } else {
+                return $this->registerForm();
+                Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
             }
-
         } else {
-            return $this->registerForm();
-            Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
+            Session::addFlash('error', 'Un bot ? Sérieusement ?');
+            $this->redirectTo('security', 'registerForm');
         }
     }
 
@@ -212,13 +231,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
-    public function changeProfilePicture($id){
-        $userManager = new UserManager();
-        $user = $userManager->findOneById($id);
+    // public function changeProfilePicture($id){
+    //     $userManager = new UserManager();
+    //     $user = $userManager->findOneById($id);
 
-        $oldProfilePicture = $user->getProfilePicture();
+    //     $oldProfilePicture = $user->getProfilePicture();
 
-    }
+    // }
 
     /**
      * The function "showProfile" retrieves user information, topic count, and message count for a given
@@ -267,7 +286,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * @param String $id The parameter "id" is the unique identifier of the user whose role needs to be
      * changed.
      */
-    public function changeRole($id){
+    public function changeRole($id)
+    {
 
         $userManager = new UserManager();
 
@@ -275,9 +295,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         $oldRole = $profileViewer->getRole();
         var_dump($oldRole);
-        if($oldRole == '"ROLE_ADMIN"'){
+        if ($oldRole == '"ROLE_ADMIN"') {
             $newRole = "ROLE_USER";
-        }else{
+        } else {
             $newRole = "ROLE_ADMIN";
         }
 
