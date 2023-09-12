@@ -46,10 +46,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
         ];
     }
 
+
     /**
-     * The login function filters and sanitizes the username and password inputs, checks if the user
-     * exists and if the password is correct, sets the user session and redirects to the home page of
-     * the forum if successful, otherwise displays error messages and redirects to the login form.
+     * The login function checks if the honeyPot input is empty, sanitizes the username and password
+     * inputs, retrieves the user from the database based on the username, checks if the user is
+     * banned, verifies the password, and sets the user in the session if successful.
      */
     public function login()
     {
@@ -86,7 +87,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                             $this->redirectTo('forum', 'loginForm');
                         }
                     } else {
-                        
+
                         Session::addFlash('error', 'Vous êtes actuellement banni !');
                         $this->redirectTo('forum', 'loginForm');
                     }
@@ -268,7 +269,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * The function "showProfile" retrieves user information, topic count, and message count for a given
      * user ID and returns it along with success and error messages.
      * 
-     * @param String $id The parameter "id" is the identifier of the user whose profile is being requested to be
+     * @param string $id The parameter "id" is the identifier of the user whose profile is being requested to be
      * shown.
      * 
      * @return array An array is being returned. The array has two keys: "view" and "data". The value of the
@@ -308,7 +309,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      * The function changes the role of a user from "ROLE_ADMIN" to "ROLE_USER" or vice versa and
      * redirects to the user's profile page.
      * 
-     * @param String $id The parameter "id" is the unique identifier of the user whose role needs to be
+     * @param string $id The parameter "id" is the unique identifier of the user whose role needs to be
      * changed.
      */
     public function changeRole($id)

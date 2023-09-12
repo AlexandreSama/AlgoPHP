@@ -21,10 +21,10 @@ class CategoryManager extends Manager
     /**
      * The function findOneByName retrieves a category from the database based on its name.
      * 
-     * @param String $categoryName The parameter "categoryName" is a string that represents the name of the
+     * @param string $categoryName The parameter "categoryName" is a string that represents the name of the
      * category you want to find.
      * 
-     * @return Array the result of the SQL query, which is a single row from the "category" table that
+     * @return array the result of the SQL query, which is a single row from the "category" table that
      * matches the given category name.
      */
     public function findOneByName($categoryName){

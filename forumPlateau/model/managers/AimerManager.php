@@ -23,12 +23,12 @@ class AimerManager extends Manager
      * The function adds a like to a topic by inserting the topic ID and user ID into the "aimer"
      * table.
      * 
-     * @param String $topicId The topicId parameter is the ID of the topic that the user wants to add a like
+     * @param string $topicId The topicId parameter is the ID of the topic that the user wants to add a like
      * to.
-     * @param String $userId The userId parameter represents the ID of the user who is adding a like to a
+     * @param string $userId The userId parameter represents the ID of the user who is adding a like to a
      * topic.
      * 
-     * @return Boolean The result of the `DAO::insert()` method, which is a boolean value indicating whether
+     * @return boolean The result of the `DAO::insert()` method, which is a boolean value indicating whether
      * the insertion was successful or not.
      */
     public function addLike($topicId, $userId){
@@ -47,9 +47,9 @@ class AimerManager extends Manager
     /**
      * The function retrieves the number of likes for a given topic ID from the "aimer" table.
      * 
-     * @param String $id The parameter "id" is the topic id for which you want to retrieve the number of likes.
+     * @param string $id The parameter "id" is the topic id for which you want to retrieve the number of likes.
      * 
-     * @return Array The number of likes for a specific topic ID.
+     * @return array The number of likes for a specific topic ID.
      */
     public function getLikesByTopicId($id){
         $sql = 'SELECT COUNT(*) AS likes
@@ -62,10 +62,10 @@ class AimerManager extends Manager
     /**
      * The function checks if a user has liked a specific topic.
      * 
-     * @param String $idTopic The parameter `idTopic` is the ID of the topic that you want to check if a user
+     * @param string $idTopic The parameter `idTopic` is the ID of the topic that you want to check if a user
      * has liked.
      * 
-     * @return Array The user_id of the users who have liked the topic with the given idTopic.
+     * @return array The user_id of the users who have liked the topic with the given idTopic.
      */
     public function checkUserLike($idTopic){
         $sql = 'SELECT user_id

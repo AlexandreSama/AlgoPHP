@@ -23,9 +23,9 @@ class TopicManager extends Manager
     /**
      * The function retrieves a topic by its category ID from the database.
      * 
-     * @param String $id The parameter "id" is a string representing the category ID.
+     * @param string $id The parameter "id" is a string representing the category ID.
      * 
-     * @return Array The result of the SQL query, which is an array of topic records that have a
+     * @return array The result of the SQL query, which is an array of topic records that have a
      * category_id matching the provided .
      */
     public function getTopicByCategoryId($id)
@@ -39,10 +39,10 @@ class TopicManager extends Manager
     /**
      * The function counts the number of topics associated with a specific user ID.
      * 
-     * @param String $id The parameter "id" is the user ID that is used to filter the topics. The function
+     * @param string $id The parameter "id" is the user ID that is used to filter the topics. The function
      * counts the number of topics that are associated with a specific user ID.
      * 
-     * @return Array The count of all topics associated with a specific user ID.
+     * @return array The count of all topics associated with a specific user ID.
      */
     public function countAllByUserId($id)
     {
@@ -56,9 +56,9 @@ class TopicManager extends Manager
      * The lockTopic function updates the closed field of a topic in the database to 1, indicating that
      * the topic is locked.
      * 
-     * @param String $id The parameter "id" is the identifier of the topic that needs to be locked.
+     * @param string $id The parameter "id" is the identifier of the topic that needs to be locked.
      * 
-     * @return the result of the DAO::update() method.
+     * @return boolean the result of the DAO::update() method.
      */
     public function lockTopic($id){
         $sql = 'UPDATE topic t
@@ -70,9 +70,9 @@ class TopicManager extends Manager
     /**
      * The function unlocks a topic by updating the 'closed' field to 0 in the database.
      * 
-     * @param String $id The parameter "id" is the ID of the topic that needs to be unlocked.
+     * @param string $id The parameter "id" is the ID of the topic that needs to be unlocked.
      * 
-     * @return the result of the DAO::update() method.
+     * @return boolean the result of the DAO::update() method.
      */
     public function unlockTopic($id){
         $sql = 'UPDATE topic t
@@ -89,7 +89,7 @@ class TopicManager extends Manager
      * @param User $user The user parameter represents the user who is adding a like to a topic. It could be an
      * instance of a User class or simply the user's ID.
      * 
-     * @return Boolean The result of the DAO::insert() method, which is typically a boolean value indicating
+     * @return boolean The result of the DAO::insert() method, which is typically a boolean value indicating
      * whether the insertion was successful or not.
      */
     public function addLike($topic, $user){
@@ -112,7 +112,7 @@ class TopicManager extends Manager
      * @param User $user The  parameter is an object representing a user. It likely has properties such
      * as id, name, email, etc., and methods to retrieve and manipulate user data.
      * 
-     * @return Boolean The result of the `DAO::delete()` method, which is likely a boolean value indicating
+     * @return boolean The result of the `DAO::delete()` method, which is likely a boolean value indicating
      * whether the deletion was successful or not.
      */
     public function removeLike($topic, $user){

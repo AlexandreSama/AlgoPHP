@@ -21,7 +21,7 @@ class MessageManager extends Manager
     /**
      * The function retrieves a topic by its ID from the database.
      * 
-     * @param id The parameter "id" is the topic ID that is used to filter the messages in the
+     * @param string $id The parameter "id" is the topic ID that is used to filter the messages in the
      * database. It is passed as a parameter to the SQL query to retrieve all the messages that
      * belong to a specific topic.
      * 
@@ -42,7 +42,7 @@ class MessageManager extends Manager
      * The function retrieves messages related to a specific topic, ordered by their creation date
      * in ascending order.
      * 
-     * @param id The parameter "id" is the ID of the topic for which you want to retrieve the
+     * @param string $id The parameter "id" is the ID of the topic for which you want to retrieve the
      * messages.
      * 
      * @return array The result of the SQL query, which is an array of message objects that belong to the
@@ -78,10 +78,10 @@ class MessageManager extends Manager
     /**
      * The function counts the number of messages associated with a specific user ID.
      * 
-     * @param String $id The parameter "id" is the user ID that is used to filter the messages. The
+     * @param string $id The parameter "id" is the user ID that is used to filter the messages. The
      * function counts the number of messages that belong to a specific user.
      * 
-     * @return Array the count of all messages associated with a specific user ID.
+     * @return array the count of all messages associated with a specific user ID.
      */
     public function countAllByUserId($id)
     {

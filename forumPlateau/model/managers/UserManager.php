@@ -21,7 +21,7 @@ class UserManager extends Manager
     /**
      * The function retrieves a user's information based on their ID.
      * 
-     * @param String $id The parameter "id" is the identifier of the user for which you want to retrieve
+     * @param string $id The parameter "id" is the identifier of the user for which you want to retrieve
      * the information.
      * 
      * @return array The result of the SQL query, which is an array of user records that match the given
@@ -38,7 +38,7 @@ class UserManager extends Manager
     /**
      * The function retrieves a user from the database based on their username.
      * 
-     * @param String $username The parameter "username" is the username of the user you want to retrieve
+     * @param string $username The parameter "username" is the username of the user you want to retrieve
      * from the database.
      * 
      * @return mixed the result of the query, which is either a single user object or null.
@@ -57,9 +57,9 @@ class UserManager extends Manager
     /**
      * The function updates the role of a user in the database.
      * 
-     * @param String $role The role parameter is the new role that you want to assign to the user. It can be a
+     * @param string $role The role parameter is the new role that you want to assign to the user. It can be a
      * string or an array, depending on how you want to store the role information in your database.
-     * @param String $id The `id` parameter is the unique identifier of the user whose role needs to be
+     * @param string $id The `id` parameter is the unique identifier of the user whose role needs to be
      * changed. It is used to identify the specific user in the database.
      * 
      * @return bool the result of the DAO::update() method.

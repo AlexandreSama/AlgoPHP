@@ -18,7 +18,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The index function returns a view and data for a 404 error page in a forum, including the user
      * information from the session.
      * 
-     * @return Array An array is being returned. The array has two elements: "view" and "data". The value of
+     * @return array An array is being returned. The array has two elements: "view" and "data". The value of
      * "view" is the directory path to the file "404.php" in the "forum" directory of the view
      * directory. The value of "data" is an array with one element: "user", which is assigned the value
      * of the  variable.
@@ -40,7 +40,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function "home" returns an array with the view path and data needed for rendering the home page,
      * including categories, topics, messages, success and error messages, and the current user.
      * 
-     * @return Array An array is being returned. The array has two keys: "view" and "data". The value of the
+     * @return array An array is being returned. The array has two keys: "view" and "data". The value of the
      * "view" key is the path to a PHP file. The value of the "data" key is an array containing various
      * data, including the categories, topics, messages, success message, error message, and user.
      */
@@ -68,7 +68,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function "listTopics" retrieves a list of topics belonging to a specific category in a
      * forum and returns the data needed to display them in a view.
      * 
-     * @param String $categoryId The categoryId parameter is the ID of the category for which you want to
+     * @param string $categoryId The categoryId parameter is the ID of the category for which you want to
      * list the topics.
      * 
      * @return array an array is being returned with two keys: "view" and "data". The value of "view" is
@@ -106,7 +106,7 @@ class ForumController extends AbstractController implements ControllerInterface
     /**
      * The function `likeTopic` adds a like to a topic and redirects the user to the forum home page.
      * 
-     * @param String $id The id parameter represents the unique identifier of the topic that the user wants to
+     * @param string $id The id parameter represents the unique identifier of the topic that the user wants to
      * like.
      */
     public function likeTopic($id){
@@ -125,7 +125,7 @@ class ForumController extends AbstractController implements ControllerInterface
     /**
      * The function unlikeTopic removes a like from a topic and redirects the user to the forum home page.
      * 
-     * @param String $id The id parameter represents the unique identifier of the topic that the user wants to
+     * @param string $id The id parameter represents the unique identifier of the topic that the user wants to
      * unlike.
      */
     public function unlikeTopic($id){
@@ -145,7 +145,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function "showTopic" retrieves a topic and its associated messages from the database and
      * returns them along with the necessary view and data for rendering the topic page.
      * 
-     * @param String $topicId The topicId parameter is the unique identifier of the topic that you want to
+     * @param string $topicId The topicId parameter is the unique identifier of the topic that you want to
      * display. It is used to retrieve the topic and its associated messages from the database.
      * 
      * @return array an array is being returned. The array has two elements: "view" and "data". The value
@@ -181,7 +181,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The lockTopic function locks a topic, adds a success flash message, and redirects to the forum's
      * showTopic page.
      * 
-     * @param String $id The parameter "id" is the identifier of the topic that needs to be locked.
+     * @param string $id The parameter "id" is the identifier of the topic that needs to be locked.
      */
     public function lockTopic($id){
 
@@ -197,7 +197,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function unlocks a topic, adds a success flash message, and redirects to the forum page
      * showing the unlocked topic.
      * 
-     * @param String $id The parameter "id" is the identifier of the topic that needs to be unlocked.
+     * @param string $id The parameter "id" is the identifier of the topic that needs to be unlocked.
      */
     public function unlockTopic($id){
 
@@ -213,7 +213,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function returns a view and data for adding a category in a forum, including success and
      * error messages and the current user.
      * 
-     * @return Array An array is being returned. The array contains two elements: "view" and "data". The
+     * @return array An array is being returned. The array contains two elements: "view" and "data". The
      * "view" element contains the path to the view file "forum/addCategory.php". The "data" element
      * contains an associative array with three key-value pairs: "successMessage" and "errorMessage"
      * which are retrieved from the session flash messages, and "user" which is the current user object
@@ -353,7 +353,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function modifies a form based on the type of data being modified (category, topic, or
      * message) and returns the corresponding view and data.
      * 
-     * @param String $id The `id` parameter is the identifier of the item that needs to be modified. It is used
+     * @param string $id The `id` parameter is the identifier of the item that needs to be modified. It is used
      * to retrieve the specific item from the database.
      * 
      * @return array An array with two keys: "view" and "data". The value of "view" is the path to a view
@@ -416,7 +416,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The function modifies a category, topic, or message based on the type parameter passed in the
      * URL.
      * 
-     * @param String $id The parameter "id" is used to identify the specific item that needs to be modified. It
+     * @param string $id The parameter "id" is used to identify the specific item that needs to be modified. It
      * is passed to the function as an argument and is used to update the corresponding record in the
      * database.
      * 
@@ -487,7 +487,7 @@ class ForumController extends AbstractController implements ControllerInterface
     /**
      * The function `deleteForm` returns a view and data based on the type of form being deleted.
      * 
-     * @param String $id The "id" parameter is used to specify the ID of the item that needs to be deleted. It
+     * @param string $id The "id" parameter is used to specify the ID of the item that needs to be deleted. It
      * is an optional parameter, meaning it can be null if not provided.
      * 
      * @return array An array with two keys: "view" and "data". The value of "view" is the path to a view
@@ -605,7 +605,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * The deleteMessage function deletes a message with the given ID and redirects the user to the
      * forum home page.
      * 
-     * @param String $id The id parameter represents the unique identifier of the message that needs to be
+     * @param string $id The id parameter represents the unique identifier of the message that needs to be
      * deleted.
      */
     public function deleteMessage($id)

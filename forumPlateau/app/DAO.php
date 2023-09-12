@@ -39,6 +39,18 @@ abstract class DAO
         );
     }
 
+    /**
+     * The function inserts data into a database table and returns the ID of the newly inserted record.
+     * 
+     * @param string $sql The  parameter is a string that represents the SQL query that you want to
+     * execute. It can be any valid SQL statement, such as an INSERT, UPDATE, or DELETE statement.
+     * @param array $param The parameter is an optional parameter that allows you to pass an array of
+     * values to be used as parameters in the prepared statement. These values will be bound to the
+     * corresponding placeholders in the SQL query. If no  is provided, the execute() method will
+     * be called without any parameters.
+     * 
+     * @return int the ID of the record that was just added to the database.
+     */
     public static function insert($sql, $param = null)
     {
         try {
@@ -52,6 +64,18 @@ abstract class DAO
         }
     }
 
+    /**
+     * The function "update" executes a SQL query with parameters and returns the execution status.
+     * 
+     * @param string $sql The  parameter is a string that represents the SQL query that you want to
+     * execute. It can be any valid SQL statement, such as SELECT, INSERT, UPDATE, or DELETE.
+     * @param array $params The  parameter is an array that contains the values to be bound to the
+     * prepared statement placeholders in the SQL query. These values will be used to replace the
+     * placeholders in the query before it is executed.
+     * 
+     * @return boolean the result of the execute() method, which is a boolean value indicating whether the SQL
+     * statement was successfully executed or not.
+     */
     public static function update($sql, $params)
     {
         try {
@@ -65,6 +89,19 @@ abstract class DAO
         }
     }
 
+    /**
+     * The function deletes data from a database using a prepared SQL statement and returns the
+     * execution status.
+     * 
+     * @param string $sql The  parameter is a string that represents the SQL query to be executed. It can
+     * be any valid SQL statement, such as SELECT, INSERT, UPDATE, or DELETE.
+     * @param array $params The  parameter is an array that contains the values to be bound to the
+     * placeholders in the SQL statement. These values will be used to replace the placeholders in the
+     * prepared statement before it is executed.
+     * 
+     * @return boolean the result of the execute() method, which is either true or false depending on the
+     * success of the statement execution.
+     */
     public static function delete($sql, $params)
     {
         try {
