@@ -24,8 +24,10 @@ class SearchController extends AbstractController implements ControllerInterface
         $category = $categoryManager->findOneByName($search);
 
         if($category != null){
+
             $this->redirectTo('forum', 'listTopics', $category['id_category']);
         }else{
+            
             Session::addFlash('error', 'Aucune catégorie trouvé a ce nom !');
             $this->redirectTo('forum', 'home');
         }

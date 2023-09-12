@@ -57,27 +57,46 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+        //Check if honeyPot is empty, just in case where a bot write something
         if (empty($honeyPot)) {
 
+            //If the sanitize passed
             if ($username && $password) {
+
                 $userManager = new UserManager();
 
+                //Get the user by the username given in the form
                 $user = $userManager->getUserByUsername($username);
+
+                //If we get the user, pass, else they go back to the form
                 if ($user) {
+
+                    //We check if the password given in the form is
+                    //Equal to the password stored in the DB
                     if (password_verify($password, $user->getPassword())) {
+
                         Session::setUser($user);
                         Session::addFlash('success', 'Vous êtes bien connecté !');
                         $this->redirectTo('forum', 'home');
                     } else {
+
                         Session::addFlash('error', 'Mauvais mot de passe !');
                         $this->redirectTo('forum', 'loginForm');
                     }
                 } else {
+
                     Session::addFlash('error', 'Mauvais pseudonyme !');
                     $this->redirectTo('forum', 'loginForm');
                 }
+
+            }else{
+
+                Session::addFlash('error', 'Veuillez recommencer !');
+                $this->redirectTo('forum', 'loginForm');
             }
+
         } else {
+
             Session::addFlash('error', 'Un bot ? Sérieusement ?');
             $this->redirectTo('forum', 'loginForm');
         }
@@ -89,6 +108,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      */
     public function disconnect()
     {
+        
         unset($_SESSION['user']);
         Session::addFlash('success', 'Vous êtes bien déconnecté !');
         $this->redirectTo('forum', 'home');

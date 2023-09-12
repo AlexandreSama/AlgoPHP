@@ -77,6 +77,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function listTopics($categoryId)
     {
+        
         $aimerManager = new AimerManager();
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
@@ -109,6 +110,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * like.
      */
     public function likeTopic($id){
+
         $topicManager = new TopicManager();
 
         $user = Session::getUser();
@@ -117,6 +119,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager->addLike($topic, $user);
 
         $this->redirectTo('forum', 'home');
+
     }
 
     /**
@@ -126,6 +129,7 @@ class ForumController extends AbstractController implements ControllerInterface
      * unlike.
      */
     public function unlikeTopic($id){
+
         $topicManager = new TopicManager();
 
         $user = Session::getUser();
@@ -134,6 +138,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager->removeLike($topic, $user);
 
         $this->redirectTo('forum', 'home');
+
     }
 
     /**
@@ -179,11 +184,13 @@ class ForumController extends AbstractController implements ControllerInterface
      * @param String $id The parameter "id" is the identifier of the topic that needs to be locked.
      */
     public function lockTopic($id){
+
         $topicManager = new TopicManager();
         $topicManager->lockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été lock');
         var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
+
     }
 
     /**
@@ -193,11 +200,13 @@ class ForumController extends AbstractController implements ControllerInterface
      * @param String $id The parameter "id" is the identifier of the topic that needs to be unlocked.
      */
     public function unlockTopic($id){
+
         $topicManager = new TopicManager();
         $topicManager->unlockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été unlock');
         var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
+
     }
 
     /**
@@ -212,6 +221,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function addCategoryForm()
     {
+
         $user = Session::getUser();
 
         return [
@@ -234,6 +244,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function addCategory()
     {
+
         $categoryName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ($categoryName) {
@@ -351,11 +362,12 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function modifyForm($id)
     {
-        $user = Session::getUser();
 
+        $user = Session::getUser();
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
+
                 $categoryManager = new CategoryManager();
                 return [
                     "view" => VIEW_DIR . "forum/modify.php",
@@ -370,6 +382,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
                 break;
             case 'topic':
+
                 $topicManager = new TopicManager();
                 return [
                     "view" => VIEW_DIR . "forum/modify.php",
@@ -383,6 +396,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
                 break;
             case 'message':
+
                 $messageManager = new MessageManager();
                 return [
                     "view" => VIEW_DIR . "forum/modify.php",
@@ -411,9 +425,11 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function modify($id)
     {
+
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
+
                 $categoryName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if ($categoryName) {
@@ -431,6 +447,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 break;
 
             case 'topic':
+
                 $topicName = filter_input(INPUT_POST, 'topicNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if ($topicName) {
@@ -448,6 +465,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 break;
 
             case 'message':
+
                 $messageContent = filter_input(INPUT_POST, 'messageTextInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if ($messageContent) {
@@ -478,10 +496,12 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function deleteForm($id = null)
     {
+
         $user = Session::getUser();
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
+
                 $categoryManager = new CategoryManager();
                 return [
                     "view" => VIEW_DIR . "forum/delete.php",
@@ -495,6 +515,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
                 break;
             case 'topic':
+
                 $topicManager = new TopicManager();
                 return [
                     "view" => VIEW_DIR . "forum/delete.php",
@@ -508,6 +529,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 ];
                 break;
             case 'message':
+
                 $messageManager = new MessageManager();
                 return [
                     "view" => VIEW_DIR . "forum/delete.php",
@@ -532,9 +554,11 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function delete()
     {
+
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
+
                 $categoryId = filter_input(INPUT_POST, 'categoryInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if ($categoryId) {
@@ -551,6 +575,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 break;
 
             case 'topic':
+
                 $topicId = filter_input(INPUT_POST, 'topicInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if ($topicId) {
@@ -585,6 +610,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function deleteMessage($id)
     {
+
         $messageManager = new MessageManager();
         $messageManager->delete($id);
 
