@@ -1,64 +1,31 @@
-.main-inner {
+.holder{
   width: 100%;
-  padding: 20px 15px 20px;
-  margin: 15px 0px;
-  box-sizing: border-box;
+  padding: 10px 10px 10px;
+  background-color: black;
+  margin-top: 20px;
+  color: white;
+}
+.topicInfoHolder{
+  background-color: rgba(44, 45, 51, 1.7);
+  height: 40px;
+}
+.infoHolder{
   background-color: rgba(51, 51, 51, 0.7);
 }
-
-.build-info {
+.holderTitle{
   text-align: left;
-  height: 40px;
-  padding-left: 15px;
-  justify-content: flex-start;
-  line-height: 25px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: rgba(44, 45, 51, 1.7);
+  padding-left: 20px;
 }
-
-/* Styles pour la div contenant les informations découpées en colonnes */
-.info-section {
-  display: flex;
-  flex-direction: column; /* Mettre en colonne */
-  background-color: #373f51;
+.titleTopic{
+  text-align: start;
+  vertical-align: baseline;
+  padding-top: 10px;
+  padding-left: 20px;
 }
-.noTopic {
-  padding-left: 15px;
-  color: white;
+.infoLastMessage{
+  text-align: end;
+  padding-right: 15px;
 }
-
-/* Styles pour chaque petite div */
-.build-details {
-  height: 55px;
-  display: flex;
-  flex-direction: row;
-  border-top: 5px solid black;
-  justify-content: space-between;
-}
-
-/* Styles pour les textes à l'intérieur des petites divs */
-.build-lastMessage,
-.build-date {
-  text-align: right;
-  padding-right: 10px;
-}
-.build-name {
-  text-align: left;
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-}
-
-.modifyLink {
-  margin-left: 15px;
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  color: white;
+.titleTopic, .infoLastMessage{
+  border-bottom: 2px solid white;
 }

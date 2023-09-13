@@ -137,9 +137,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
      */
     public function register()
     {
-
-        /* The code is using the `filter_input` function to retrieve and sanitize user input from
-            the `POST` request. */
+        
         $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'emailInput', FILTER_VALIDATE_EMAIL);
@@ -172,7 +170,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 password_hash function takes two parameters - the password to be hashed and the algorithm to be used
                                 for hashing. In this case, the PASSWORD_DEFAULT algorithm is used, which is currently bcrypt. The
                                 resulting password hash can be stored in a database or used for password verification. */
-                                
+
                                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
                                 $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(['ROLE_USER']), 'profilePicture' => $nameFile];
 

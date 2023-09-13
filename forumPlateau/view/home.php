@@ -6,47 +6,52 @@ $messagesManager = $result["data"]['messages'];
 <link rel="stylesheet" href="./public/css/home.css">
 <?php
 
-foreach ($categories as $valueCategory) {
+    foreach ($categories as $valueCategory) {
 
-    $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
-    echo "<div class='main-inner'>
-        <div class='build-info'>
-        <a href='index.php?ctrl=forum&action=listTopics&id=" . $valueCategory->getId() .  "' class='titleCategory'>" .
-        $valueCategory->getCategoryName()
-        .
-        "</a>";
-    if (App\Session::isAdmin()) {
+        $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
 
-        echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";
-    }
+        echo '<table class="holder" cellspacing="0">
+                <thead class="topicInfoHolder">
+                <tr>
+                    <th colspan="2" class="holderTitle">
+                    <a href="index.php?ctrl=forum&action=listTopics&id=' .
+                    $valueCategory->getId() . '">'
+                    . $valueCategory->getCategoryName()
+                    . '</a>';
+        if(App\Session::isAdmin()){
+            echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";
+        }
 
-    echo "</div>
-        <div class='info-section'>";
+        echo '</th></tr>
+                </thead>
+                <tbody>';
 
-    if ($topics !== null) {
+        if($topics){
+            foreach ($topics as $topic) {
+                echo '<tr class="infoHolder">
+                <td class="titleTopic"><a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] . '</a>
+                </td>';
+                $messages = $messagesManager->getTopicById($topic["id_topic"]);
+                if ($messages !== null) {
+                    $users = $messagesManager->getLastMessageFromTopicId($topic["id_topic"]);
+                    foreach ($messages as $message) {
 
-        foreach ($topics as $valueTopic) {
+                        foreach ($users as $user) {
 
-            echo "<div class='build-details'><div class='build-name'><a href='index.php?ctrl=forum&action=showTopic&id=" . $valueTopic['id_topic'] . "'>" . $valueTopic['title'] . "</a></div>";
-            $messages = $messagesManager->getTopicById($valueTopic["id_topic"]);
-            if ($messages !== null) {
-
-                $user = $messagesManager->getLastMessageFromTopicId($valueTopic["id_topic"]);
-                foreach ($messages as $valueMessage) {
-
-                    foreach ($user as $valueUser) {
-
-                        echo "<div class='userInfo'><div class='build-lastMessage'>Dernier Message de : <a href='index.php?ctrl=security&action=showProfile&id=" . $valueUser['id_user'] . "'>" . $valueUser['username'] . "</a></div><div class='build-date'>Le : " . $valueMessage['creationDate'] . "</div></div></div>";
+                            echo '<td class="infoLastMessage">
+                                <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=' . $user['id_user'] . '">' . $user['username'] . '</a></p>
+                                <p>Le : ' . $message['creationDate'] . '</p></td>';
+                        }
                     }
                 }
             }
+        }else{
+            echo '<td>Pas de topics pour le moment !</td>';
         }
-    } else {
 
-        echo '<p class="noTopic">Pas de topics pour le moment !</p>';
+        echo '</tr>
+        </tbody>
+        </table>';
+
     }
-
-    echo "</div>
-    </div>";
-}
 ?>
