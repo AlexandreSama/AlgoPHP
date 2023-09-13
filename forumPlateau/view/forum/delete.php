@@ -23,7 +23,7 @@ switch ($formType) {
 
 <link rel="stylesheet" href="./public/css/form.css">
 <div class="login-box">
-    <?php echo $title ?>
+    <p style="color: white;"><?php echo $title ?></p>
     <form method="post" action="index.php?ctrl=forum&action=delete&type=<?php echo $formType ?>">
         <?php
         if ($formType == 'category') {
@@ -36,7 +36,6 @@ switch ($formType) {
             }
 
             echo '</select>
-                    <label>Quel catégorie veut-tu supprimer ?</label>
                 </div>';
         } else if ($formType == 'topic') {
 
@@ -48,13 +47,11 @@ switch ($formType) {
             }
 
             echo '</select>
-                    <label>Quel topic veut-tu supprimer ?</label>
                 </div>';
         } else if ($formType == 'message') {
             
             echo '<div class="user-box">
                 <input type="text" name="messageTextInput" required=true>
-                <label>Quel message veut-tu supprimer ?</label>
             </div>';
         }
         ?>

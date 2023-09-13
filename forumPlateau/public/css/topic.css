@@ -21,7 +21,8 @@
 }
 .messageTopic {
   text-align: start;
-  padding-top: 10px;
+  padding-top: 25px;
+  vertical-align: sub;
   padding-left: 20px;
 }
 .infoLastMessage {
