@@ -60,7 +60,8 @@ class TopicManager extends Manager
      * 
      * @return boolean the result of the DAO::update() method.
      */
-    public function lockTopic($id){
+    public function lockTopic($id)
+    {
         $sql = 'UPDATE topic t
         SET closed = 1
         WHERE t.id_topic = :id';
@@ -74,7 +75,8 @@ class TopicManager extends Manager
      * 
      * @return boolean the result of the DAO::update() method.
      */
-    public function unlockTopic($id){
+    public function unlockTopic($id)
+    {
         $sql = 'UPDATE topic t
         SET closed = 0
         WHERE t.id_topic = :id';
@@ -92,7 +94,8 @@ class TopicManager extends Manager
      * @return boolean The result of the DAO::insert() method, which is typically a boolean value indicating
      * whether the insertion was successful or not.
      */
-    public function addLike($topic, $user){
+    public function addLike($topic, $user)
+    {
 
         $sql = 'INSERT INTO aimer
         (topic_id, user_id) VALUES
@@ -115,19 +118,20 @@ class TopicManager extends Manager
      * @return boolean The result of the `DAO::delete()` method, which is likely a boolean value indicating
      * whether the deletion was successful or not.
      */
-    public function removeLike($topic, $user){
+    public function removeLike($topic, $user)
+    {
 
         $sql = 'DELETE FROM aimer
         WHERE topic_id = :idtopic AND user_id = :iduser';
         $likes = $user->getFavoris();
         $likesTopic = $topic->getFavoris();
         foreach ($likes as $key => $value) {
-            if($value->getId() == $topic->getId()){
+            if ($value->getId() == $topic->getId()) {
                 unset($likes[$key]);
             }
         }
         foreach ($likesTopic as $key => $value) {
-            if($value->getId() == $user->getId()){
+            if ($value->getId() == $user->getId()) {
                 unset($likesTopic[$key]);
             }
         }

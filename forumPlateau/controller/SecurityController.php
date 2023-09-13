@@ -192,7 +192,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
                             $userManager->add($data);
 
-                            Session::addFlash('success', 'Vous êtes désormais inscrit et connecté ! Félicitation !');
+                            Session::addFlash('success', 'Vous êtes désormais inscrit ! Félicitation !');
                             $this->redirectTo('forum', 'home');
                         } else {
 
@@ -211,11 +211,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 }
             } else {
 
-                return $this->registerForm();
                 Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
+                $this->redirectTo('security', 'registerForm');
             }
         } else {
-            
+
             Session::addFlash('error', 'Un bot ? Sérieusement ?');
             $this->redirectTo('security', 'registerForm');
         }

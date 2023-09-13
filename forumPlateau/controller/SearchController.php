@@ -14,7 +14,7 @@ use Model\Managers\UserManager;
 class SearchController extends AbstractController implements ControllerInterface
 {
 
-    
+
     /**
      * The index function takes user input for search and type, and based on the type, retrieves and
      * returns data related to categories or topics.
@@ -79,7 +79,7 @@ class SearchController extends AbstractController implements ControllerInterface
             default:
                 Session::addFlash('error', 'Veuillez choisir un type !');
                 $this->redirectTo('forum', 'home');
-            break;
+                break;
         }
     }
 }

@@ -31,7 +31,8 @@ class AimerManager extends Manager
      * @return boolean The result of the `DAO::insert()` method, which is a boolean value indicating whether
      * the insertion was successful or not.
      */
-    public function addLike($topicId, $userId){
+    public function addLike($topicId, $userId)
+    {
         $topic = intval($topicId);
         $user = intval($userId);
         $sql = 'INSERT INTO aimer
@@ -51,7 +52,8 @@ class AimerManager extends Manager
      * 
      * @return array The number of likes for a specific topic ID.
      */
-    public function getLikesByTopicId($id){
+    public function getLikesByTopicId($id)
+    {
         $sql = 'SELECT COUNT(*) AS likes
         FROM aimer a
         WHERE a.topic_id = :id';
@@ -67,12 +69,12 @@ class AimerManager extends Manager
      * 
      * @return array The user_id of the users who have liked the topic with the given idTopic.
      */
-    public function checkUserLike($idTopic){
+    public function checkUserLike($idTopic)
+    {
         $sql = 'SELECT user_id
         FROM aimer a
         WHERE a.topic_id = :id';
 
         return DAO::select($sql, ['id' => $idTopic], false);
     }
-
 }

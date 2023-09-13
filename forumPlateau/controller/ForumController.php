@@ -77,7 +77,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function listTopics($categoryId)
     {
-        
+
         $aimerManager = new AimerManager();
         $topicManager = new TopicManager();
         $categoryManager = new CategoryManager();
@@ -109,7 +109,8 @@ class ForumController extends AbstractController implements ControllerInterface
      * @param string $id The id parameter represents the unique identifier of the topic that the user wants to
      * like.
      */
-    public function likeTopic($id){
+    public function likeTopic($id)
+    {
 
         $topicManager = new TopicManager();
 
@@ -119,7 +120,6 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager->addLike($topic, $user);
 
         $this->redirectTo('forum', 'home');
-
     }
 
     /**
@@ -128,7 +128,8 @@ class ForumController extends AbstractController implements ControllerInterface
      * @param string $id The id parameter represents the unique identifier of the topic that the user wants to
      * unlike.
      */
-    public function unlikeTopic($id){
+    public function unlikeTopic($id)
+    {
 
         $topicManager = new TopicManager();
 
@@ -138,7 +139,6 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager->removeLike($topic, $user);
 
         $this->redirectTo('forum', 'home');
-
     }
 
     /**
@@ -183,14 +183,14 @@ class ForumController extends AbstractController implements ControllerInterface
      * 
      * @param string $id The parameter "id" is the identifier of the topic that needs to be locked.
      */
-    public function lockTopic($id){
+    public function lockTopic($id)
+    {
 
         $topicManager = new TopicManager();
         $topicManager->lockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été lock');
         var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
-
     }
 
     /**
@@ -199,14 +199,14 @@ class ForumController extends AbstractController implements ControllerInterface
      * 
      * @param string $id The parameter "id" is the identifier of the topic that needs to be unlocked.
      */
-    public function unlockTopic($id){
+    public function unlockTopic($id)
+    {
 
         $topicManager = new TopicManager();
         $topicManager->unlockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été unlock');
         var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
-
     }
 
     /**

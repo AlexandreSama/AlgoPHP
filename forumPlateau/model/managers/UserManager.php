@@ -64,7 +64,8 @@ class UserManager extends Manager
      * 
      * @return bool the result of the DAO::update() method.
      */
-    public function changeRole($role, $id){
+    public function changeRole($role, $id)
+    {
         $sql = 'UPDATE user u
         SET role = :role
         WHERE u.id_user = :id';
