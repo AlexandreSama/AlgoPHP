@@ -59,7 +59,7 @@ $messages = $result["data"]['messages'];
             <form method='post' action="index.php?ctrl=forum&action=addMessage" class="addMessage">
                 <textarea class="full-width-height" name='messageContent'></textarea>
                 <input type="text" name='topicId' style="display: none;" value="<?php echo $topic->getId(); ?>">
-                <button>Envoyer</button>
+                <button class="formButton">Envoyer</button>
             </form>
         <?php endif; ?>
         </div>
