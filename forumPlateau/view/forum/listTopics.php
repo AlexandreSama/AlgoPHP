@@ -2,15 +2,15 @@
 $topics = $result["data"]['topics'];
 $userManager = $result["data"]['userManager'];
 $messageManager = $result["data"]['message'];
-$aimerManager = $result["data"]['aimerManager']
+$aimerManager = $result["data"]['aimerManager'];
 ?>
 <link rel="stylesheet" href="./public/css/listTopics.css">
 <table class="holder" cellspacing="0">
     <thead class="topicInfoHolder">
         <tr>
             <th colspan="2" class="holderTitle">
-                <?php if (isset($result["data"]['categoryName'])) {
-                    echo $result["data"]['categoryName']->getCategoryName();
+                <?php if (isset($result["data"]['category'])) {
+                    echo $result["data"]['category']->getCategoryName();
                 } else {
                     echo 'Liste de recherche : ';
                 }
@@ -44,18 +44,18 @@ $aimerManager = $result["data"]['aimerManager']
 
                                 if ($userLikeId["user_id"] == App\Session::getUser()->getId()) {
 
-                                    echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=unlikeTopic&id=' . $topic['id_topic'] . '">Unlike ce topic</a></button></p>';
+                                    echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=unlikeTopic&id=' . $topic['id_topic'] . '&catid=' . $result["data"]['category']->getId() . '">Unlike ce topic</a></button></p>';
                                 } else {
 
-                                    echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                                    echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '&catid=' . $result["data"]['category']->getId() . '">Liker ce topic</a></button></p>';
                                 }
                             } else {
 
-                                echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                                echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '&catid=' . $result["data"]['category']->getId() . '">Liker ce topic</a></button></p>';
                             }
                         } else {
 
-                            echo '<p>Nombre de like : 0 <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '">Liker ce topic</a></button></p>';
+                            echo '<p>Nombre de like : 0 <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=likeTopic&id=' . $topic['id_topic'] . '&catid=' . $result["data"]['category']->getId() . '">Liker ce topic</a></button></p>';
                         }
                     } else {
 

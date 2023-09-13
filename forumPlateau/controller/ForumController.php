@@ -84,7 +84,8 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "aimerManager" => $aimerManager,
                 "topics" => $topics,
-                "categoryName" => $category,
+                "category" => $category,
+                "catid", $category->getId(),
                 "userManager" => $userManager,
                 "message" => $messageManager
             ]
@@ -103,10 +104,11 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager = new TopicManager();
 
         $topic = $topicManager->findOneById($id);
+        $catid = $_GET['catid'];
 
         $topicManager->addLike($topic, Session::getUser());
 
-        $this->redirectTo('forum', 'home');
+        $this->redirectTo('forum', 'listTopics', $catid);
     }
 
     /**
@@ -121,10 +123,11 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager = new TopicManager();
 
         $topic = $topicManager->findOneById($id);
+        $catid = $_GET['catid'];
 
         $topicManager->removeLike($topic, Session::getUser());
 
-        $this->redirectTo('forum', 'home');
+        $this->redirectTo('forum', 'listTopics', $catid);
     }
 
     /**
