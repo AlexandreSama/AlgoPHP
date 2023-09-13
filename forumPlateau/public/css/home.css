@@ -29,3 +29,6 @@
 .titleTopic, .infoLastMessage{
   border-bottom: 2px solid white;
 }
+.modifyLink{
+  padding-left: 15px;
+}
