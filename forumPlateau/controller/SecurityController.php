@@ -138,8 +138,6 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function register()
     {
 
-        //Ovasp
-
         /* The code is using the `filter_input` function to retrieve and sanitize user input from
             the `POST` request. */
         $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

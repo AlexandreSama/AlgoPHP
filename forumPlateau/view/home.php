@@ -6,9 +6,6 @@ $messagesManager = $result["data"]['messages'];
 <link rel="stylesheet" href="./public/css/home.css">
 <?php
 
-if(!App\Session::getUser()) {
-    echo "hello inconnu";
-}
 foreach ($categories as $valueCategory) {
 
     $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
