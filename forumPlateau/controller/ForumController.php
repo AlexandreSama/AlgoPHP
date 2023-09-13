@@ -85,7 +85,6 @@ class ForumController extends AbstractController implements ControllerInterface
                 "aimerManager" => $aimerManager,
                 "topics" => $topics,
                 "category" => $category,
-                "catid", $category->getId(),
                 "userManager" => $userManager,
                 "message" => $messageManager
             ]
