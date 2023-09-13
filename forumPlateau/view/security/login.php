@@ -4,7 +4,7 @@
   <form method="post" action="index.php?ctrl=security&action=login">
     <div class="user-box">
       <input type="text" name="honeyPotInput" style="display: none;">
-      <label>HoneyPot</label>
+      <label style="display: none;">HoneyPot</label>
     </div>
     <div class="user-box">
       <input type="text" name="usernameInput" require>
