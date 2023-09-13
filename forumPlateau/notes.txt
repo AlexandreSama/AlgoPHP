@@ -16,3 +16,14 @@ Administration => Posts, Utilisateurs | V
 Page d'accueil only CSS (Pas Bootstrap) => Ergonomies avant tout ! | V
 
 Quand utilisateur créer un Topic => Premier post est celui de l'utilisateur | V
+
+Fonctionnalités : 
+
+- Inscription/Connexion
+- Vérification du mot de passe
+- honeyPot Login/register
+- Likes
+- Supprimer/Modifier
+- Changer le rôle d'un utilisateur
+- Permissions
+- Barre de recherche amenant directement a une catégorie spécifique (a voir pour un topic spécifique)

@@ -48,7 +48,7 @@ html {
 .navbar-title {
   font-size: 24px;
   display: flex;
-  width: 40%;
+  width: 50%;
   justify-content: space-around;
 }
 
@@ -171,3 +171,20 @@ a:visited {
   color: white;
 }
 
+
+#type-select{
+  position: relative;
+  right: 19%;
+  width: 45%;
+}
+#searchInput{
+  width: 100%;
+}
+.search{
+  display: flex;
+  width: 65%;
+}
+.searchButton{
+  position: relative;
+    right: 15%;
+}

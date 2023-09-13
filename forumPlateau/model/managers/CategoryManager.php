@@ -27,11 +27,18 @@ class CategoryManager extends Manager
      * @return array the result of the SQL query, which is a single row from the "category" table that
      * matches the given category name.
      */
-    public function findOneByName($categoryName){
+    public function findOneByName($categoryName)
+    {
+        $nameCategory = ucfirst($categoryName);
+        var_dump($nameCategory);
         $sql = 'SELECT *
         FROM category c
-        WHERE c.categoryName = :categoryName';
+        WHERE c.categoryName LIKE "%' . $nameCategory . '%"';
 
-        return DAO::select($sql, ['categoryName' => $categoryName], false);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['categoryName' => $nameCategory], true),
+            $this->className
+        );
+        // return DAO::select($sql, ['categoryName' => $nameCategory], false);
     }
 }

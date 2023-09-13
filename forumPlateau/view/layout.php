@@ -21,7 +21,12 @@
                 <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
                 <form class="search" action="index.php?ctrl=search&action=index" method="post">
                     <input type="text" placeholder="Vous chercher un titre ?" name='searchInput' id="searchInput">
-                    <button>Chercher</button>
+                    <select name="typeInput" id="type-select">
+                        <option value="">--Choisissez un type--</option>
+                        <option value="category">Catégorie</option>
+                        <option value="topic">Topic</option>
+                    </select>
+                    <button class="searchButton">Chercher</button>
                 </form>
             </div>
             <div class="navbar-dropdown">
@@ -63,8 +68,8 @@
     <main class="main-content">
         <?php
         if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
-            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'].
-            '</h3><h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
+            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] .
+                '</h3><h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
         }
         ?>
         <?= $page ?>

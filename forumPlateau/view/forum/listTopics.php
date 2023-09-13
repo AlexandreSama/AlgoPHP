@@ -1,6 +1,5 @@
 <?php
 $topics = $result["data"]['topics'];
-$categoryName = $result["data"]['categoryName'];
 $userManager = $result["data"]['userManager'];
 $messageManager = $result["data"]['message'];
 $aimerManager = $result["data"]['aimerManager']
@@ -8,7 +7,12 @@ $aimerManager = $result["data"]['aimerManager']
 <link rel="stylesheet" href="./public/css/listTopics.css">
 <div class="inner-div">
     <div class="categoryTitle">
-        <h3><?php echo $categoryName->getCategoryName() ?></h3>
+        <?php if(isset($result["data"]['categoryName'])){
+            echo '<h3>' . $result["data"]['categoryName']->getCategoryName() . '</h3>';
+        }else{
+           echo '<h3>Liste de recherche : </h3>';
+        }
+        ?>
     </div>
     <?php
     if ($topics) {

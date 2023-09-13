@@ -196,24 +196,26 @@ class SecurityController extends AbstractController implements ControllerInterfa
                             $this->redirectTo('forum', 'home');
                         } else {
 
-                            // print_r('WrongPassword');
                             Session::addFlash('error', 'Vos mots de passe ne se ressemblent pas ou n\'est pas assez long !');
                             $this->redirectTo('security', 'registerForm');
                         }
                     } else {
-                        // print_r('PseudoAlreadyUsed');
+
                         Session::addFlash('error', 'Ce pseudonyme est déjà enregistré !');
                         $this->redirectTo('security', 'registerForm');
                     }
                 } else {
+
                     Session::addFlash('error', 'Veuillez insérer une image de type : PNG ou JPG !');
                     $this->redirectTo('security', 'registerForm');
                 }
             } else {
+
                 return $this->registerForm();
                 Session::addFlash('error', 'Impossible de vous eenregistrer, veuillez réessayer !');
             }
         } else {
+            
             Session::addFlash('error', 'Un bot ? Sérieusement ?');
             $this->redirectTo('security', 'registerForm');
         }

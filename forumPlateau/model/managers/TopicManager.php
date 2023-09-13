@@ -133,4 +133,23 @@ class TopicManager extends Manager
         }
         return DAO::delete($sql, ['idtopic' => $topic->getId(), 'iduser' => $user->getId()]);
     }
+
+    /**
+     * The function findOneByName retrieves a category from the database based on its name.
+     * 
+     * @param string $topicName The parameter "topicName" is a string that represents the name of the
+     * category you want to find.
+     * 
+     * @return array the result of the SQL query, which is a single row from the "category" table that
+     * matches the given category name.
+     */
+    public function findOneByName($topicName)
+    {
+        $nameTopic = ucfirst($topicName);
+        $sql = 'SELECT *
+        FROM topic t
+        WHERE t.title LIKE "%' . $nameTopic . '%"';
+
+        return DAO::select($sql, ['nameTopic' => $nameTopic], true);
+    }
 }
