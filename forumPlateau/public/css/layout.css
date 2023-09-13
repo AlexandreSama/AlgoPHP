@@ -127,16 +127,15 @@ html {
   align-items: center;
   justify-content: flex-start;
   padding: 0 20px 0 20px;
+  backdrop-filter: blur(5px);
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .main-content::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.main-content {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
 .footer {
   background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond du footer */
   color: white;

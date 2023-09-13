@@ -19,6 +19,7 @@ $messagesManager = $result["data"]['messages'];
                     . $valueCategory->getCategoryName()
                     . '</a>';
         if(App\Session::isAdmin()){
+            
             echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";
         }
 
@@ -27,12 +28,15 @@ $messagesManager = $result["data"]['messages'];
                 <tbody>';
 
         if($topics){
+
             foreach ($topics as $topic) {
+
                 echo '<tr class="infoHolder">
                 <td class="titleTopic"><a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] . '</a>
                 </td>';
                 $messages = $messagesManager->getTopicById($topic["id_topic"]);
-                if ($messages !== null) {
+                if ($messages) {
+
                     $users = $messagesManager->getLastMessageFromTopicId($topic["id_topic"]);
                     foreach ($messages as $message) {
 
@@ -46,6 +50,7 @@ $messagesManager = $result["data"]['messages'];
                 }
             }
         }else{
+
             echo '<td>Pas de topics pour le moment !</td>';
         }
 

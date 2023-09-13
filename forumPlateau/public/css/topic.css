@@ -1,62 +1,37 @@
-.inner-div {
+.holder {
   width: 100%;
-  height: 100%;
+  padding: 10px 10px 10px;
+  background-color: black;
+  margin-top: 20px;
   color: white;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(51, 51, 51, 0.7);
-  justify-content: space-between;
+  height: 100%;
+  overflow: scroll;
 }
-
-.categoryTitle {
-  --x: 50%;
-  --y: 50%;
-  display: flex;
-  justify-content: space-between;
-  font-size: 30px;
+.topicInfoHolder {
+  background-color: rgba(44, 45, 51, 1.7);
   height: 40px;
-  border-bottom: 2px solid white;
-  margin-bottom: 20px;
-  align-items: center;
 }
-
-h3 {
-  margin: 0;
-}
-
-.topicHolder {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  background-color: #373f51;
-}
-
-.linkHolder {
-  align-items: flex-start;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  padding-left: 15px;
-}
-
-.textHolder {
-  padding-left: 15px;
-}
-
 .infoHolder {
+  background-color: rgba(51, 51, 51, 0.7);
+}
+.holderTitle {
+  text-align: center;
+  padding-left: 20px;
+  font-size: 20px;
+}
+.messageTopic {
+  text-align: start;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.infoLastMessage {
+  text-align: end;
   padding-right: 15px;
-  width: 16%;
-  display: flex;
-  flex-direction: column;
 }
-
-.main-content {
-  height: calc(100% - 110px);
-  padding: 25px 35px;
+.messageTopic,
+.infoLastMessage {
+  border-bottom: 2px solid white;
 }
-
 .addMessage {
   display: flex;
   flex-direction: column;
@@ -76,17 +51,10 @@ h3 {
   display: flex;
 }
 
-.messagesHolder {
-  height: 73%;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  gap: 3%;
-}
-.messagesHolder::-webkit-scrollbar {
+.holder::-webkit-scrollbar {
   display: none;
 }
-.messagesHolder {
+.holder {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
