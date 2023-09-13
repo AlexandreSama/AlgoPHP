@@ -21,14 +21,8 @@ class HomeController extends AbstractController implements ControllerInterface
      */
     public function index()
     {
-
-        $user = Session::getUser();
-
         return [
-            "view" => VIEW_DIR . "404.php",
-            "data" => [
-                "user" => $user,
-            ]
+            "view" => VIEW_DIR . "404.php"
         ];
     }
 

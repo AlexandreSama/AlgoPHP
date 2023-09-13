@@ -35,7 +35,7 @@
                 </button>
                 <div class="dropdown-content">
                     <?php
-                    if ($result['data']["user"] !== false) {
+                    if (App\Session::getUser()) {
                     ?>
                         <a href="index.php?ctrl=security&action=profile">Profile</a>
                         <?php
@@ -67,9 +67,9 @@
 
     <main class="main-content">
         <?php
-        if (isset($result["data"]['successMessage']) || isset($result["data"]['errorMessage'])) {
-            echo '<h3 class="message" style="color: red">' . $result["data"]['errorMessage'] .
-                '</h3><h3 class="message" style="color: green">' . $result["data"]['successMessage'] . '</h3>';
+        if (App\Session::getFlash('success') || App\Session::getFlash('error')) {
+            echo '<h3 class="message" style="color: red">' . App\Session::getFlash('error') .
+                '</h3><h3 class="message" style="color: green">' . App\Session::getFlash('success') . '</h3>';
         }
         ?>
         <?= $page ?>

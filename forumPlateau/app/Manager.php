@@ -61,7 +61,6 @@ abstract class Manager
                     VALUES
                     (:" . implode(" , :", $keys) . ")";
         //"'Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com'"
-        var_dump($sql);
         /*
                 INSERT INTO user (username,password,email) VALUES ('Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com') 
             */
@@ -88,8 +87,6 @@ abstract class Manager
         // Créez une requête SQL UPDATE avec des paramètres liés
         $sql = "UPDATE $this->tableName SET categoryName = :categoryName WHERE id_category = :id_category";
 
-        var_dump($sql);
-
         try {
             return DAO::update($sql, $data);
         } catch (\PDOException $e) {
@@ -104,8 +101,6 @@ abstract class Manager
         // Créez une requête SQL UPDATE avec des paramètres liés
         $sql = "UPDATE $this->tableName SET title = :title WHERE id_topic = :id_topic";
 
-        var_dump($sql);
-
         try {
             return DAO::update($sql, $data);
         } catch (\PDOException $e) {
@@ -119,8 +114,6 @@ abstract class Manager
 
         // Créez une requête SQL UPDATE avec des paramètres liés
         $sql = "UPDATE $this->tableName SET messageText = :messageText WHERE id_message = :id_message";
-
-        var_dump($sql);
 
         try {
             return DAO::update($sql, $data);

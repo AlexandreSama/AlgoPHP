@@ -26,13 +26,8 @@ class ForumController extends AbstractController implements ControllerInterface
     public function index()
     {
 
-        $user = Session::getUser();
-
         return [
-            "view" => VIEW_DIR . "404.php",
-            "data" => [
-                "user" => $user,
-            ]
+            "view" => VIEW_DIR . "404.php"
         ];
     }
 
@@ -50,16 +45,13 @@ class ForumController extends AbstractController implements ControllerInterface
         $categoryManager = new CategoryManager();
         $topicManager = new TopicManager();
         $messageManager = new MessageManager();
-        $user = Session::getUser();
+
         return [
             "view" => VIEW_DIR . "home.php",
             "data" => [
                 "categories" => $categoryManager->findAll(),
                 "topics" => $topicManager,
-                "messages" => $messageManager,
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error'),
-                "user" => $user
+                "messages" => $messageManager
             ]
         ];
     }
@@ -86,7 +78,6 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $category = $categoryManager->findOneById($categoryId);
         $topics = $topicManager->getTopicByCategoryId($categoryId);
-        $user = Session::getUser();
 
         return [
             "view" => VIEW_DIR . "forum/listTopics.php",
@@ -95,10 +86,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 "topics" => $topics,
                 "categoryName" => $category,
                 "userManager" => $userManager,
-                "message" => $messageManager,
-                "user" => $user,
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error')
+                "message" => $messageManager
             ]
         ];
     }
@@ -114,10 +102,9 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicManager = new TopicManager();
 
-        $user = Session::getUser();
         $topic = $topicManager->findOneById($id);
 
-        $topicManager->addLike($topic, $user);
+        $topicManager->addLike($topic, Session::getUser());
 
         $this->redirectTo('forum', 'home');
     }
@@ -133,10 +120,9 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicManager = new TopicManager();
 
-        $user = Session::getUser();
         $topic = $topicManager->findOneById($id);
 
-        $topicManager->removeLike($topic, $user);
+        $topicManager->removeLike($topic, Session::getUser());
 
         $this->redirectTo('forum', 'home');
     }
@@ -161,7 +147,6 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $messages = $messageManager->getTopicByIdAscendant($topicId);
         $topic = $topicManager->findOneById($topicId);
-        $user = Session::getUser();
 
 
         return [
@@ -169,10 +154,7 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "topic" => $topic,
                 "userManager" => $userManager,
-                "messages" => $messages,
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error'),
-                "user" => $user
+                "messages" => $messages
             ]
         ];
     }
@@ -189,7 +171,6 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager = new TopicManager();
         $topicManager->lockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été lock');
-        var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
     }
 
@@ -205,7 +186,6 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicManager = new TopicManager();
         $topicManager->unlockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été unlock');
-        var_dump($id);
         $this->redirectTo('forum', 'showTopic', $id);
     }
 
@@ -222,15 +202,8 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addCategoryForm()
     {
 
-        $user = Session::getUser();
-
         return [
-            "view" => VIEW_DIR . "forum/addCategory.php",
-            "data" => [
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error'),
-                "user" => $user,
-            ]
+            "view" => VIEW_DIR . "forum/addCategory.php"
         ];
     }
 
@@ -270,18 +243,12 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addTopicForm()
     {
 
-        $user = Session::getUser();
-
         $categoryManager = new CategoryManager();
 
         return [
             "view" => VIEW_DIR . "forum/addTopic.php",
             "data" => [
-                "categories" => $categoryManager->findAll(),
-                "successMessage" => Session::getFlash('success'),
-                "errorMessage" => Session::getFlash('error'),
-                "user" => $user,
-
+                "categories" => $categoryManager->findAll()
             ]
         ];
     }
@@ -363,7 +330,6 @@ class ForumController extends AbstractController implements ControllerInterface
     public function modifyForm($id)
     {
 
-        $user = Session::getUser();
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
@@ -373,11 +339,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "category" => $categoryManager->findOneById($id),
-                        "formtype" => "category",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user,
-
+                        "formtype" => "category"
                     ]
                 ];
                 break;
@@ -388,10 +350,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "topics" => $topicManager->findOneById($id),
-                        "formtype" => "topic",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user
+                        "formtype" => "topic"
                     ]
                 ];
                 break;
@@ -402,10 +361,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user,
+                        "formtype" => "message"
                     ]
                 ];
                 break;
@@ -496,8 +452,6 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function deleteForm($id = null)
     {
-
-        $user = Session::getUser();
         $type = $_GET['type'];
         switch ($type) {
             case 'category':
@@ -507,10 +461,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "category" => $categoryManager->findAll(),
-                        "formtype" => "category",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user
+                        "formtype" => "category"
                     ]
                 ];
                 break;
@@ -521,10 +472,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "topics" => $topicManager->findAll(),
-                        "formtype" => "topic",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user
+                        "formtype" => "topic"
                     ]
                 ];
                 break;
@@ -535,10 +483,7 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message",
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user
+                        "formtype" => "message"
                     ]
                 ];
                 break;

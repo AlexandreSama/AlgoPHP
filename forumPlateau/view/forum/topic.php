@@ -54,8 +54,8 @@ $messages = $result["data"]['messages'];
                 <?php endforeach; ?>
             <?php endforeach; ?>
         </div>
-        <?php if ($result['data']["user"] && !$topic->getClosed()) : ?>
-            
+        <?php if (App\Session::getUser() && !$topic->getClosed()) : ?>
+
             <form method='post' action="index.php?ctrl=forum&action=addMessage" class="addMessage">
                 <textarea class="full-width-height" name='messageContent'></textarea>
                 <input type="text" name='topicId' style="display: none;" value="<?php echo $topic->getId(); ?>">

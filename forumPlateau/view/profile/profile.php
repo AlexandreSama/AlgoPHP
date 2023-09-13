@@ -5,15 +5,15 @@
     </div>
     <div class="profileInfo">
         <div class="imageHolder">
-            <img src="./public/uploads/<?php echo $result['data']["user"]->getProfilePicture() ?>" alt="">
+            <img src="./public/uploads/<?php echo App\Session::getUser()->getProfilePicture() ?>" alt="">
         </div>
         <div class="infoHolder">
             <div class="info">
-                <p>Pseudonyme : <?php echo $result['data']["user"]->getUsername() ?></p>
-                <p>Date de création du compte : <?php echo $result['data']["user"]->getInscriptionDate() ?></p>
+                <p>Pseudonyme : <?php echo App\Session::getUser()->getUsername() ?></p>
+                <p>Date de création du compte : <?php echo App\Session::getUser()->getInscriptionDate() ?></p>
                 <p>Rôle :
                     <?php
-                    if ($result['data']["user"]->hasRole("ROLE_ADMIN")) {
+                    if (App\Session::getUser()->hasRole("ROLE_ADMIN")) {
                         echo "Administrateur";
                     } else {
                         echo "Visiteur";
