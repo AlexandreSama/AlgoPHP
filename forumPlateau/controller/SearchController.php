@@ -77,7 +77,7 @@ class SearchController extends AbstractController implements ControllerInterface
 
                 break;
             default:
-                Session::addFlash('error', 'Aucune catégorie trouvé a ce nom !');
+                Session::addFlash('error', 'Veuillez choisir un type !');
                 $this->redirectTo('forum', 'home');
             break;
         }

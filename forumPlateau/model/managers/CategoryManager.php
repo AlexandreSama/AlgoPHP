@@ -30,7 +30,6 @@ class CategoryManager extends Manager
     public function findOneByName($categoryName)
     {
         $nameCategory = ucfirst($categoryName);
-        var_dump($nameCategory);
         $sql = 'SELECT *
         FROM category c
         WHERE c.categoryName LIKE "%' . $nameCategory . '%"';
@@ -39,6 +38,5 @@ class CategoryManager extends Manager
             DAO::select($sql, ['categoryName' => $nameCategory], true),
             $this->className
         );
-        // return DAO::select($sql, ['categoryName' => $nameCategory], false);
     }
 }
