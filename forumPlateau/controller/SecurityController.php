@@ -167,12 +167,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
                                 move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
 
-                                /* Generating a hash of the user's password using the bcrypt algorithm. 
-                                This is a one-way hashing function that is commonly used for password hashing in PHP. 
-                                The `password_hash()` function takes the user's password as the first parameter and 
-                                the algorithm to use as the second parameter. In this case, the algorithm used is `PASSWORD_BCRYPT`. 
-                                The resulting hash is then stored in the variable `passwordHash` for being stored it in the database for 
-                                password verification. */
+                                
+                                /* The above code is generating a password hash using the password_hash function in PHP. The
+                                password_hash function takes two parameters - the password to be hashed and the algorithm to be used
+                                for hashing. In this case, the PASSWORD_DEFAULT algorithm is used, which is currently bcrypt. The
+                                resulting password hash can be stored in a database or used for password verification. */
+                                
                                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
                                 $data = ['username' => $username, 'email' => $email, 'password' => $passwordHash, 'role' => json_encode(['ROLE_USER']), 'profilePicture' => $nameFile];
 
