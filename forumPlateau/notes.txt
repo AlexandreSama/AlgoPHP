@@ -21,9 +21,10 @@ Fonctionnalités :
 
 - Inscription/Connexion
 - Vérification du mot de passe
+- Vérification du type de fichier envoyé dans le form register (jpg, png)
 - honeyPot Login/register
 - Likes
 - Supprimer/Modifier
 - Changer le rôle d'un utilisateur
 - Permissions
-- Barre de recherche amenant directement a une catégorie spécifique (a voir pour un topic spécifique)
+- Barre de recherche amenant directement a une liste de catégorie ou une liste de topic

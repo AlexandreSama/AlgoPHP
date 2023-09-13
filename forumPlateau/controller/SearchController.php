@@ -14,9 +14,14 @@ use Model\Managers\UserManager;
 class SearchController extends AbstractController implements ControllerInterface
 {
 
+    
     /**
-     * This PHP function searches for a category by name and redirects to the list of topics in that
-     * category if found, otherwise it displays an error message and redirects to the forum home page.
+     * The index function takes user input for search and type, and based on the type, retrieves and
+     * returns data related to categories or topics.
+     * 
+     * @return array An array with two keys: "view" and "data". The value of the "view" key is the path to a
+     * view file, and the value of the "data" key is an array containing various data that will be
+     * passed to the view.
      */
     public function index()
     {
