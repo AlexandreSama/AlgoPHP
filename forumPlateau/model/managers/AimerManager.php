@@ -76,7 +76,7 @@ class AimerManager extends Manager
         WHERE a.topic_id = :id';
 
         return $this->getOneOrNullResult(
-            DAO::insert($sql, ['id' => $idTopic]),
+            DAO::select($sql, ['id' => $idTopic]),
             $this->className
         );
     }

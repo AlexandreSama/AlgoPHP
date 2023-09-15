@@ -97,10 +97,7 @@ class MessageManager extends Manager
         $sql = 'SELECT COUNT(*) AS count
             FROM message m
             WHERE m.user_id = :id';
-        return $this->getOneOrNullResult(
-            DAO::insert($sql, ['id' => $id]),
-            $this->className
-        );
+        return DAO::select($sql, ['id' => $id], false);
     }
 
     public function getTopicById($topicId)

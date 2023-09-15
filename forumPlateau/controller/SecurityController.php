@@ -227,7 +227,6 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $topicCount = $topicManager->countAllByUserId(Session::getUser()->getId());
         $messageCount = $messageManager->countAllByUserId(Session::getUser()->getId());
 
-
         return [
             "view" => VIEW_DIR . "/profile/profile.php",
             "data" => [

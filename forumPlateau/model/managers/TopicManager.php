@@ -51,10 +51,7 @@ class TopicManager extends Manager
         $sql = 'SELECT COUNT(*) AS count
             FROM topic t
             WHERE t.user_id = :id';
-        return $this->getOneOrNullResult(
-            DAO::insert($sql, ['id' => $id]),
-            $this->className
-        );
+        return DAO::select($sql, ['id' => $id], false);
     }
 
     /**

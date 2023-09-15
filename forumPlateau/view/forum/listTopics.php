@@ -43,9 +43,9 @@ if (isset($result["data"]['category'])) {
 
                             $likes = $aimerManager->getLikesByTopicId($topic->getId())["likes"];
                             $userLikeId = $aimerManager->checkUserLike($topic->getId());
-                            if (isset($userLikeId["user_id"])) {
+                            if ($userLikeId) {
 
-                                if ($userLikeId["user_id"] == App\Session::getUser()->getId()) {
+                                if ($userLikeId->getUser()->getId() == App\Session::getUser()->getId()) {
 
                                     echo '<p>Nombre de like : ' . $likes . ' <button class="button-1" role="button"><a href="index.php?ctrl=forum&action=unlikeTopic&id=' . $topic->getId() . '&catid=' . $topic->getCategory()->getId() . '">Unlike ce topic</a></button></p>';
                                 } else {
