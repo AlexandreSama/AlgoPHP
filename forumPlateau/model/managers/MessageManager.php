@@ -35,7 +35,10 @@ class MessageManager extends Manager
             WHERE m.topic_id = :id
             ORDER BY m.creationDate DESC
             LIMIT 1';
-        return DAO::select($sql, ['id' => $id], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
     }
 
     /**
@@ -54,7 +57,10 @@ class MessageManager extends Manager
             FROM message m
             WHERE m.topic_id = :id
             ORDER BY m.creationDate ASC';
-        return DAO::select($sql, ['id' => $id], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
     }
 
     /**
@@ -72,7 +78,10 @@ class MessageManager extends Manager
             WHERE m.topic_id = :idtopic AND u.id_user = m.user_id
             ORDER BY m.creationDate DESC
             LIMIT 1';
-        return DAO::select($sql, ['idtopic' => $id], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['idtopic' => $id]),
+            $this->className
+        );
     }
 
     /**
@@ -88,10 +97,14 @@ class MessageManager extends Manager
         $sql = 'SELECT COUNT(*) AS count
             FROM message m
             WHERE m.user_id = :id';
-        return DAO::select($sql, ['id' => $id], false);
+        return $this->getOneOrNullResult(
+            DAO::insert($sql, ['id' => $id]),
+            $this->className
+        );
     }
 
-    public function getTopicById($topicId){
+    public function getTopicById($topicId)
+    {
         $sql = 'SELECT *
         FROM topic t
         INNER JOIN message m ON t.id_topic = m.topic_id

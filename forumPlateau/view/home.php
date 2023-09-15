@@ -52,7 +52,7 @@ $messagesManager = $result["data"]['messages'];
             }
         } else {
 
-            echo '<td>Pas de topics pour le moment !</td>';
+            echo '<td class="infoHolder">Pas de topics pour le moment !</td>';
         }
 
         echo '</tr>

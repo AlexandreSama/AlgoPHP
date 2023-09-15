@@ -32,7 +32,10 @@ class UserManager extends Manager
         $sql = 'SELECT *
             FROM user u
             WHERE u.id_user = :id';
-        return DAO::select($sql, ['id' => $id], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
     }
 
     /**

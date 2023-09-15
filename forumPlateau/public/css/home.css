@@ -8,12 +8,13 @@
 }
 .holder{
   width: 100%;
-  padding: 10px 10px 10px;
+  padding: 0px 10px 10px;
   background-color: black;
   margin-top: 20px;
   color: white;
   height: 20%;
   border-radius: 10px;
+  padding-left: 0px;
 }
 .topicInfoHolder{
   background-color: rgba(44, 45, 51, 1.7);
@@ -37,7 +38,7 @@
   padding-right: 15px;
 }
 .titleTopic, .infoLastMessage{
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid black;
 }
 .modifyLink{
   padding-left: 15px;

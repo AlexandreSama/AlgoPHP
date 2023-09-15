@@ -29,15 +29,15 @@ $messages = $result["data"]['messages'];
     </thead>
     <tbody>
         <?php foreach ($messages as $message) : ?>
-            <?php $users = $userManager->getUsersByMessages($message['user_id']); ?>
+            <?php $users = $userManager->getUsersByMessages($message->getUser()->getId()); ?>
             <?php foreach ($users as $user) : ?>
                 <tr class="infoHolder">
                     <td class="messageTopic">
-                        <?php echo $message['messageText']; ?>
+                        <?php echo $message->getMessageText(); ?>
                     </td>
                     <td class="infoLastMessage">
-                        <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user['id_user'] ?>"><?php echo $user['username'] ?></a></p>
-                        <p>Le : <?php echo $message['creationDate'] ?></p>
+                        <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
+                        <p>Le : <?php echo $message->getCreationDate() ?></p>
                         <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user['username'] == App\Session::getUser()->getUsername())) : ?>
 
                             <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message['id_message']; ?>&type=message"><i class="fa-solid fa-pen"></i></a>

@@ -35,8 +35,8 @@ if (isset($result["data"]['category'])) {
                 </td>';
                 foreach ($lastMessageUser as $lastMessage) {
                     echo '<td class="infoLastMessage">
-                    <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=' . $lastMessage['id_user'] . '">' . $lastMessage['username'] . '</a></p>
-                    <p>Le : ' . $lastMessage['creationDate'] . '</p>';
+                    <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=' . $lastMessage->getUser()->getId() . '">' . $lastMessage->getUser()->getUsername() . '</a></p>
+                    <p>Le : ' . $lastMessage->getCreationDate() . '</p>';
                     if (App\Session::getUser()) {
 
                         if ($aimerManager->getLikesByTopicId($topic->getId())["likes"] !== null) {
