@@ -4,7 +4,7 @@ $topicManager = $result["data"]['topics'];
 $messagesManager = $result["data"]['messages'];
 ?>
 <link rel="stylesheet" href="./public/css/home.css">
-<div class="tableHolder">
+<div class="tableHolder" id="tableHolder">
     <?php
 
     foreach ($categories as $valueCategory) {
@@ -64,17 +64,44 @@ $messagesManager = $result["data"]['messages'];
 <div class="widgetHolder">
     <div class="firstBox">
         <p>Rechercher...</p>
-        <form class="search" action="index.php?ctrl=search&action=index" method="post">
-            <input type="text" placeholder="Taper votre recherche" name='searchInput' id="searchInput">
+        <form class="search" action="" method="get" id="searchform">
+            <input type="text" placeholder="Taper votre recherche" name='searchInput' id="searchInput" data-search>
             <select name="typeInput" id="type-select">
-                <option value="">--Choisissez un type--</option>
-                <option value="category">Catégorie</option>
-                <option value="topic">Topic</option>
+                <option data-type value="">--Choisissez un type--</option>
+                <option data-type value="category">Catégorie</option>
+                <option data-type value="topic">Topic</option>
             </select>
-            <button class="searchButton">Chercher</button>
+            <!-- <button type="submit" class="searchButton" id="search">Chercher</button> -->
+            <button id="submitInput">Envoyer
         </form>
     </div>
     <div class="discordWidget">
         <iframe class="discord" src="https://discord.com/widget?id=744159443046105138&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 </div>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+<script>
+    $('#submitInput').on('click', function(e) {
+        e.preventDefault();
+        let searchValue = document.getElementById('searchInput').value;
+        let typeValue = document.getElementById('type-select').value;
+
+        $.get(
+            "index.php?action=ajax", {
+                search: searchValue,
+                type: typeValue
+            },
+            function(data) {
+                document.getElementById('tableHolder').innerHTML = '';
+                document.getElementById('tableHolder').innerHTML = data
+                // Traitement de la réponse ici
+            }
+        ).fail(function(xhr, textStatus, errorThrown) {
+            console.error("Erreur AJAX : " + textStatus, errorThrown);
+        });
+    });
+</script>

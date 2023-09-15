@@ -26,53 +26,56 @@ class SearchController extends AbstractController implements ControllerInterface
     public function index()
     {
 
+        Session::addFlash('success', 'Called !');
         //We get all the value in the inputs from the form and filter it.
-        $search = filter_input(INPUT_POST, 'searchInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $type = filter_input(INPUT_POST, 'typeInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        // $search = filter_input(INPUT_POST, 'searchInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        // $type = filter_input(INPUT_POST, 'typeInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        return [
+            "view" => VIEW_DIR . "security/login.php"
+        ];
+        // switch ($type) {
+        //     case 'category':
 
-        switch ($type) {
-            case 'category':
+        //         $categoryManager = new CategoryManager();
+        //         $topicManager = new TopicManager();
+        //         $messageManager = new MessageManager();
 
-                $categoryManager = new CategoryManager();
-                $topicManager = new TopicManager();
-                $messageManager = new MessageManager();
+        //         $categories = $categoryManager->findOneByName($search);
 
-                $categories = $categoryManager->findOneByName($search);
+        //         return [
+        //             "view" => VIEW_DIR . "home.php",
+        //             "data" => [
+        //                 "categories" => $categories,
+        //                 "topics" => $topicManager,
+        //                 "messages" => $messageManager,
+        //             ]
+        //         ];
 
-                return [
-                    "view" => VIEW_DIR . "home.php",
-                    "data" => [
-                        "categories" => $categories,
-                        "topics" => $topicManager,
-                        "messages" => $messageManager,
-                    ]
-                ];
+        //         break;
+        //     case 'topic':
 
-                break;
-            case 'topic':
+        //         $topicManager = new TopicManager();
+        //         $aimerManager = new AimerManager();
+        //         $userManager = new UserManager();
+        //         $messageManager = new MessageManager();
 
-                $topicManager = new TopicManager();
-                $aimerManager = new AimerManager();
-                $userManager = new UserManager();
-                $messageManager = new MessageManager();
+        //         $topics = $topicManager->findOneByName($search);
 
-                $topics = $topicManager->findOneByName($search);
+        //         return [
+        //             "view" => VIEW_DIR . "forum/listTopics.php",
+        //             "data" => [
+        //                 "aimerManager" => $aimerManager,
+        //                 "topics" => $topics,
+        //                 "userManager" => $userManager,
+        //                 "message" => $messageManager,
+        //             ]
+        //         ];
 
-                return [
-                    "view" => VIEW_DIR . "forum/listTopics.php",
-                    "data" => [
-                        "aimerManager" => $aimerManager,
-                        "topics" => $topics,
-                        "userManager" => $userManager,
-                        "message" => $messageManager,
-                    ]
-                ];
-
-                break;
-            default:
-                Session::addFlash('error', 'Veuillez choisir un type !');
-                $this->redirectTo('forum', 'home');
-                break;
-        }
+        //         break;
+        //     default:
+        //         Session::addFlash('error', 'Veuillez choisir un type !');
+        //         $this->redirectTo('forum', 'home');
+        //         break;
+        // }
     }
 }

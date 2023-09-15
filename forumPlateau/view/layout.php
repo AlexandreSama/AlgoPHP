@@ -55,14 +55,15 @@
         ?>
     </div>
     </nav>
-
+    <?php
+    var_dump(App\Session::getFlash('success'));
+    var_dump(App\Session::getFlash('error'));
+    if (App\Session::getFlash('success') || App\Session::getFlash('error')) {
+        echo '<h3 class="message" style="color: red">' . App\Session::getFlash('error') .
+            '</h3><h3 class="message" style="color: green">' . App\Session::getFlash('success') . '</h3>';
+    }
+    ?>
     <main class="main-content">
-        <?php
-        if (App\Session::getFlash('success') || App\Session::getFlash('error')) {
-            echo '<h3 class="message" style="color: red">' . App\Session::getFlash('error') .
-                '</h3><h3 class="message" style="color: green">' . App\Session::getFlash('success') . '</h3>';
-        }
-        ?>
         <?= $page ?>
     </main>
 
