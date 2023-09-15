@@ -143,13 +143,12 @@ class ForumController extends AbstractController implements ControllerInterface
     public function showTopic($topicId)
     {
 
-        $topicManager = new TopicManager();
         $messageManager = new MessageManager();
         $userManager = new UserManager();
 
-        $messages = $messageManager->getTopicByIdAscendant($topicId);
-        $topic = $topicManager->findOneById($topicId);
+        $messages = $messageManager->getMessageByTopicIdAscendant($topicId);
 
+        $topic = $messageManager->getTopicById($topicId)->getTopic();
 
         return [
             "view" => VIEW_DIR . "forum/topic.php",
@@ -244,13 +243,12 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function addTopicForm()
     {
-
-        $categoryManager = new CategoryManager();
+        $catid = $_GET['catid'];
 
         return [
             "view" => VIEW_DIR . "forum/addTopic.php",
             "data" => [
-                "categories" => $categoryManager->findAll()
+                "catid" => $catid
             ]
         ];
     }
@@ -269,7 +267,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $categoryId = filter_input(INPUT_POST, 'categoryInput', FILTER_VALIDATE_INT);
+        $categoryId = $_GET['catid'];
 
         if ($topicName && $messageText && $categoryId) {
 
@@ -302,7 +300,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $id = Session::getUser()->getId();
 
-        $topicId = filter_input(INPUT_POST, 'topicId', FILTER_VALIDATE_INT);
+        $topicId = $_GET['topicid'];
         $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ($topicId && $messageContent) {
@@ -311,7 +309,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
             $messageData = ['messageText' => $messageContent, 'user_id' => $id, 'topic_id' => $topicId];
             $messageManager->add($messageData);
-            $this->redirectTo('forum', 'home');
+            $this->redirectTo('forum', 'showTopic', $topicId);
         } else {
 
             return $this->showTopic($topicId);

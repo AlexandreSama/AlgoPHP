@@ -28,7 +28,7 @@ class MessageManager extends Manager
      * @return topic The result of the SQL query, which is an array of message records that have a
      * topic_id matching the provided .
      */
-    public function getTopicById($id)
+    public function getMessageByTopicId($id)
     {
         $sql = 'SELECT *
             FROM message m
@@ -48,7 +48,7 @@ class MessageManager extends Manager
      * @return array The result of the SQL query, which is an array of message objects that belong to the
      * specified topic ID, ordered by their creation date in ascending order.
      */
-    public function getTopicByIdAscendant($id)
+    public function getMessageByTopicIdAscendant($id)
     {
         $sql = 'SELECT *
             FROM message m
@@ -89,5 +89,17 @@ class MessageManager extends Manager
             FROM message m
             WHERE m.user_id = :id';
         return DAO::select($sql, ['id' => $id], false);
+    }
+
+    public function getTopicById($topicId){
+        $sql = 'SELECT *
+        FROM topic t
+        INNER JOIN message m ON t.id_topic = m.topic_id
+        WHERE t.id_topic = :id';
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['id' => $topicId], false),
+            $this->className
+        );
+        // return DAO::select($sql, ['id' => $topicId], false);
     }
 }

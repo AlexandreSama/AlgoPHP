@@ -50,9 +50,8 @@ $messages = $result["data"]['messages'];
 </table>
 <?php if (App\Session::getUser() && !$topic->getClosed()) : ?>
 
-    <form method='post' action="index.php?ctrl=forum&action=addMessage" class="addMessage">
+    <form method='post' action="index.php?ctrl=forum&action=addMessage&topicid=<?php echo $topic->getId(); ?>" class="addMessage">
         <textarea class="full-width-height" name='messageContent'></textarea>
-        <input type="text" name='topicId' style="display: none;" value="<?php echo $topic->getId(); ?>">
         <button class="formButton">Envoyer</button>
     </form>
 <?php endif; ?>
