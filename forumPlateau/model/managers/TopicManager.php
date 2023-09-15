@@ -19,21 +19,23 @@ class TopicManager extends Manager
     }
 
 
-
     /**
-     * The function retrieves a topic by its category ID from the database.
+     * The function retrieves topics based on a given category ID.
      * 
-     * @param string $id The parameter "id" is a string representing the category ID.
+     * @param id The parameter "id" is the category ID that is used to filter the topics. It is passed
+     * to the function as an argument when calling the function.
      * 
-     * @return array The result of the SQL query, which is an array of topic records that have a
-     * category_id matching the provided .
+     * @return multiple results of topics that have a category ID matching the provided ID.
      */
     public function getTopicByCategoryId($id)
     {
         $sql = 'SELECT *
             FROM topic t
             WHERE t.category_id = :id';
-        return DAO::select($sql, ['id' => $id], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
     }
 
     /**
@@ -139,13 +141,14 @@ class TopicManager extends Manager
     }
 
     /**
-     * The function findOneByName retrieves a category from the database based on its name.
+     * The function findOneByName searches for a topic in the database based on its name and returns
+     * the result.
      * 
-     * @param string $topicName The parameter "topicName" is a string that represents the name of the
-     * category you want to find.
+     * @param topicName The parameter `topicName` is a string that represents the name of the topic you
+     * want to find.
      * 
-     * @return array the result of the SQL query, which is a single row from the "category" table that
-     * matches the given category name.
+     * @return the result of the `getMultipleResults` method, which is the result of the SQL query
+     * executed in the `DAO::select` method.
      */
     public function findOneByName($topicName)
     {
@@ -153,7 +156,9 @@ class TopicManager extends Manager
         $sql = 'SELECT *
         FROM topic t
         WHERE t.title LIKE "%' . $nameTopic . '%"';
-
-        return DAO::select($sql, ['nameTopic' => $nameTopic], true);
+        return $this->getMultipleResults(
+            DAO::select($sql, ['nameTopic' => $nameTopic]),
+            $this->className
+        );
     }
 }

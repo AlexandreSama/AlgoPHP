@@ -33,12 +33,12 @@ $messagesManager = $result["data"]['messages'];
             foreach ($topics as $topic) {
 
                 echo '<tr class="infoHolder">
-            <td class="titleTopic"><a href="index.php?ctrl=forum&action=showTopic&id=' . $topic['id_topic'] . '">' . $topic['title'] . '</a>
+            <td class="titleTopic"><a href="index.php?ctrl=forum&action=showTopic&id=' . $topic->getId() . '">' . $topic->getTitle() . '</a>
             </td>';
-                $messages = $messagesManager->getTopicById($topic["id_topic"]);
+                $messages = $messagesManager->getTopicById($topic->getId());
                 if ($messages) {
 
-                    $users = $messagesManager->getLastMessageFromTopicId($topic["id_topic"]);
+                    $users = $messagesManager->getLastMessageFromTopicId($topic->getId());
                     foreach ($messages as $message) {
 
                         foreach ($users as $user) {
