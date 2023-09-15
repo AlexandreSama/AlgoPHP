@@ -76,7 +76,9 @@ class ForumController extends AbstractController implements ControllerInterface
         $userManager = new UserManager();
         $messageManager = new MessageManager();
 
+        //We search the category from his id
         $category = $categoryManager->findOneById($categoryId);
+        //We get all the topics paired with the category id
         $topics = $topicManager->getTopicByCategoryId($categoryId);
 
         return [
@@ -102,9 +104,12 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicManager = new TopicManager();
 
+        //We search the specific topic by his id
         $topic = $topicManager->findOneById($id);
+        //We get the category id from the param catid in the URL
         $catid = $_GET['catid'];
 
+        //We add a like with the topic & the user
         $topicManager->addLike($topic, Session::getUser());
 
         $this->redirectTo('forum', 'listTopics', $catid);
@@ -146,7 +151,9 @@ class ForumController extends AbstractController implements ControllerInterface
         $messageManager = new MessageManager();
         $userManager = new UserManager();
 
+        //We get all the messages ordered by ascendant with the topic id
         $messages = $messageManager->getMessageByTopicIdAscendant($topicId);
+        //We get the specific topic by his id with the messageManager
         $topic = $messageManager->getTopicById($topicId)->getTopic();
 
         return [
@@ -169,6 +176,7 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         $topicManager = new TopicManager();
+        //We lock the topic by his id
         $topicManager->lockTopic($id);
         Session::addFlash('success', 'Ce topic a bien été lock');
         $this->redirectTo('forum', 'showTopic', $id);
@@ -270,6 +278,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        //$id is the category id from the url
         $categoryId = $id;
 
         if ($topicName && $messageText && $categoryId) {
@@ -277,9 +286,11 @@ class ForumController extends AbstractController implements ControllerInterface
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
 
+            //We create the first params for the sql add topic
             $topicData = ['title' => $topicName, 'user_id' => 2, 'category_id' => $categoryId];
             $topicId = $topicManager->add($topicData);
 
+            //And the second params array for the sql add message
             $messageData = ['messageText' => $messageText, 'user_id' => 2, 'topic_id' => $topicId];
             $messageManager->add($messageData);
 
@@ -301,6 +312,7 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addMessage($id)
     {
 
+        //We get the id from the user registered in the session
         $id = Session::getUser()->getId();
 
         //$id is the topic Id
@@ -398,7 +410,9 @@ class ForumController extends AbstractController implements ControllerInterface
                 if ($categoryName) {
 
                     $categoryManager = new CategoryManager();
+                    //We create the params array for the update
                     $data = ["id_category" => $id, "categoryName" => $categoryName];
+                    //And we call the updateCategory function
                     $categoryManager->updateCategory($data);
 
                     Session::addFlash('success', 'La catégorie a bien été modifié ! Félicitation !');

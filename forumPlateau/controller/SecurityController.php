@@ -137,30 +137,38 @@ class SecurityController extends AbstractController implements ControllerInterfa
      */
     public function register()
     {
-        
+        //We get all the input value from the form and filter it.
         $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'emailInput', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $passwordValidator = filter_input(INPUT_POST, 'passwordVerificatorInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+        //If the honeyPot is empty
         if (empty($honeyPot)) {
 
+            //And the variables are set
             if ($username && $email && $password && $passwordValidator) {
 
+                //If the visitor add an profilePicture
                 if ($_FILES['avatarInput']) {
 
+                    //We get the tmp_name from the file and get his extension
                     $tmpName = $_FILES['avatarInput']['tmp_name'];
                     $mimetype = mime_content_type($tmpName);
 
+                    //If the extension is in the array
                     if (in_array($mimetype, array('image/jpeg', 'image/png'))) {
 
                         $userManager = new UserManager();
 
+                        //If the username given is not used in the DB
                         if (!$userManager->getUserByUsername($username)) {
 
+                            //If the password is the same twice and match with the RegEx
                             if ($password == $passwordValidator && preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/", $password)) {
 
+                                //We give an uniqueID to the file and save it in our uploads folder
                                 $uniqueName = uniqid('', true);
                                 $nameFile = $uniqueName . "." . $_FILES['avatarInput']['name'];
                                 move_uploaded_file($tmpName, '././public/uploads/' . $nameFile);
@@ -219,12 +227,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
     {
         $topicManager = new TopicManager();
         $messageManager = new MessageManager();
-
         $userManager = new UserManager();
 
+        //We get all the users saved in the DB
         $users = $userManager->findAll();
 
+        //Here, we get the total number of topic created by the user registered in the session
         $topicCount = $topicManager->countAllByUserId(Session::getUser()->getId());
+        //And here, his messages
         $messageCount = $messageManager->countAllByUserId(Session::getUser()->getId());
 
         return [
@@ -236,14 +246,6 @@ class SecurityController extends AbstractController implements ControllerInterfa
             ]
         ];
     }
-
-    // public function changeProfilePicture($id){
-    //     $userManager = new UserManager();
-    //     $user = $userManager->findOneById($id);
-
-    //     $oldProfilePicture = $user->getProfilePicture();
-
-    // }
 
     /**
      * The function "showProfile" retrieves user information, topic count, and message count for a given
@@ -293,8 +295,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         $userManager = new UserManager();
 
+        //We find the user by his id
         $profileViewer = $userManager->findOneById($id);
 
+        //We check is actual role & create a variable with his new role
         $oldRole = $profileViewer->getRole();
         if ($oldRole == '"ROLE_ADMIN"') {
             $newRole = "ROLE_USER";
@@ -302,6 +306,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $newRole = "ROLE_ADMIN";
         }
 
+        //Then we change his role
         $userManager->changeRole($newRole, $id);
         Session::addFlash('success', 'Le role a bien été modifié !');
         $this->redirectTo('security', 'showProfile', $id);

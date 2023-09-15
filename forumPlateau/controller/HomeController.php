@@ -26,41 +26,4 @@ class HomeController extends AbstractController implements ControllerInterface
         ];
     }
 
-
-    /**
-     * The function "listUsers" retrieves a list of users from the database and returns the view
-     * and data needed to display the list.
-     * 
-     * @return array an array with two elements. The first element is a string representing the path to a
-     * view file, and the second element is an array containing the users data.
-     */
-    public function listUsers()
-    {
-
-        $userManager = new UserManager();
-
-        $users = $userManager->findAll(['inscriptionDate', 'DESC']);
-
-        return [
-            "view" => VIEW_DIR . "security/listUsers.php",
-            "data" => [
-                "users" => $users
-            ]
-        ];
-    }
-
-
-    public function forumRules()
-    {
-
-        return [
-            "view" => VIEW_DIR . "rules.php"
-        ];
-    }
-
-    /*public function ajax(){
-            $nb = $_GET['nb'];
-            $nb++;
-            include(VIEW_DIR."ajax.php");
-        }*/
 }

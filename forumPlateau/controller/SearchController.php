@@ -26,6 +26,7 @@ class SearchController extends AbstractController implements ControllerInterface
     public function index()
     {
 
+        //We get all the value in the inputs from the form and filter it.
         $search = filter_input(INPUT_POST, 'searchInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $type = filter_input(INPUT_POST, 'typeInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -35,7 +36,7 @@ class SearchController extends AbstractController implements ControllerInterface
                 $categoryManager = new CategoryManager();
                 $topicManager = new TopicManager();
                 $messageManager = new MessageManager();
-                $user = Session::getUser();
+
                 $categories = $categoryManager->findOneByName($search);
 
                 return [
@@ -44,9 +45,6 @@ class SearchController extends AbstractController implements ControllerInterface
                         "categories" => $categories,
                         "topics" => $topicManager,
                         "messages" => $messageManager,
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error'),
-                        "user" => $user
                     ]
                 ];
 
@@ -58,8 +56,6 @@ class SearchController extends AbstractController implements ControllerInterface
                 $userManager = new UserManager();
                 $messageManager = new MessageManager();
 
-                $user = Session::getUser();
-
                 $topics = $topicManager->findOneByName($search);
 
                 return [
@@ -69,9 +65,6 @@ class SearchController extends AbstractController implements ControllerInterface
                         "topics" => $topics,
                         "userManager" => $userManager,
                         "message" => $messageManager,
-                        "user" => $user,
-                        "successMessage" => Session::getFlash('success'),
-                        "errorMessage" => Session::getFlash('error')
                     ]
                 ];
 
