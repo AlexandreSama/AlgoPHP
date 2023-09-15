@@ -218,11 +218,14 @@ class ForumController extends AbstractController implements ControllerInterface
     public function addCategory()
     {
 
+        //We get the value from the input and filter 
         $categoryName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+        //We check if the variable contain something 
         if ($categoryName) {
 
             $categoryManager = new CategoryManager();
+            //We create the param for the SQL
             $data = ["categoryName" => $categoryName];
             $categoryManager->add($data);
 
@@ -242,6 +245,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function addTopicForm($id)
     {
+        //$id is the categoryId
         $catid = $id;
 
         return [
