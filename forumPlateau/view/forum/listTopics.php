@@ -15,7 +15,7 @@ $aimerManager = $result["data"]['aimerManager'];
                     echo 'Liste de recherche : ';
                 }
                 ?>
-                <button><a href="index.php?ctrl=forum&action=addTopicForm&id=<?php echo $result["data"]['category']->getId() ?>">Créer un topic</a></button>
+                <button class="createTopicButton"><a href="index.php?ctrl=forum&action=addTopicForm&id=<?php echo $result["data"]['category']->getId() ?>">Créer un topic</a></button>
             </th>
         </tr>
     </thead>

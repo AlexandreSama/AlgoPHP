@@ -6,6 +6,7 @@
   color: white;
   height: 100%;
   overflow: scroll;
+  border-radius: 10px;
 }
 .topicInfoHolder {
   background-color: rgba(44, 45, 51, 1.7);

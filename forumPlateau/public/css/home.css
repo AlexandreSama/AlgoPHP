@@ -1,9 +1,19 @@
+.main-content{
+  flex-direction: row!important;
+  justify-content: space-between!important;
+}
+.tableHolder{
+  width: 75%;
+  height: 100%;
+}
 .holder{
   width: 100%;
   padding: 10px 10px 10px;
   background-color: black;
   margin-top: 20px;
   color: white;
+  height: 20%;
+  border-radius: 10px;
 }
 .topicInfoHolder{
   background-color: rgba(44, 45, 51, 1.7);
@@ -31,4 +41,33 @@
 }
 .modifyLink{
   padding-left: 15px;
+}
+
+.widgetHolder{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20%;
+  height: 80%;
+  border: 2px solid black;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(44, 45, 51, 1.7);
+  color: white;
+}
+.firstBox{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 35%;
+  text-align: center;
+}
+.discordWidget{
+  display: flex;
+  justify-content: center;
+  height: 65%;
+}
+.discord{
+  width: 100%;
+  height: 100%;
 }

@@ -147,7 +147,6 @@ class ForumController extends AbstractController implements ControllerInterface
         $userManager = new UserManager();
 
         $messages = $messageManager->getMessageByTopicIdAscendant($topicId);
-
         $topic = $messageManager->getTopicById($topicId)->getTopic();
 
         return [

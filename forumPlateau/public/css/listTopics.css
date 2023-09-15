@@ -4,6 +4,7 @@
   background-color: black;
   margin-top: 20px;
   color: white;
+  border-radius: 10px;
 }
 .topicInfoHolder{
   background-color: rgba(44, 45, 51, 1.7);
@@ -61,4 +62,8 @@
 .button-1:hover,
 .button-1:focus {
   background-color: #F082AC;
+}
+
+.createTopicButton{
+  background-color: black;
 }

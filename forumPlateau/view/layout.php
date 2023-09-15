@@ -19,15 +19,6 @@
             </div>
             <div class="navbar-title">
                 <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
-                <form class="search" action="index.php?ctrl=search&action=index" method="post">
-                    <input type="text" placeholder="Vous chercher un titre ?" name='searchInput' id="searchInput">
-                    <select name="typeInput" id="type-select">
-                        <option value="">--Choisissez un type--</option>
-                        <option value="category">Catégorie</option>
-                        <option value="topic">Topic</option>
-                    </select>
-                    <button class="searchButton">Chercher</button>
-                </form>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">
