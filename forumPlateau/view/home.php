@@ -75,6 +75,6 @@ $messagesManager = $result["data"]['messages'];
         </form>
     </div>
     <div class="discordWidget">
-        <iframe class="discord" src="https://discord.com/widget?id=963463738369929256&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <iframe class="discord" src="https://discord.com/widget?id=744159443046105138&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 </div>
