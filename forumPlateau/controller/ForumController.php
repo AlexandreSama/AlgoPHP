@@ -300,13 +300,14 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $id = Session::getUser()->getId();
 
+        //$id is the topic Id
         $topicId = $id;
         $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ($topicId && $messageContent) {
 
             $messageManager = new MessageManager();
-
+            //Create the param array for the sql
             $messageData = ['messageText' => $messageContent, 'user_id' => $id, 'topic_id' => $topicId];
             $messageManager->add($messageData);
             $this->redirectTo('forum', 'showTopic', $topicId);
@@ -331,6 +332,8 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         $type = $_GET['type'];
+        //When we get the type (category, topic, message), we make a switch & send him
+        //To the specific modify Form. The modify Form is changed from each case.
         switch ($type) {
             case 'category':
 
@@ -383,6 +386,7 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         $type = $_GET['type'];
+        //Again the same switch, each of them have a proper update function
         switch ($type) {
             case 'category':
 
