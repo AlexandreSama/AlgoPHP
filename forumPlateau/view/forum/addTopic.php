@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="./public/css/form.css">
 <div class="login-box">
     <h2>Créer un topic</h2>
-    <form method="post" action="index.php?ctrl=forum&action=addTopic&catid=<?php echo $result["data"]['catid'] ?>">
+    <form method="post" action="index.php?ctrl=forum&action=addTopic&id=<?php echo $result["data"]['catid'] ?>">
         <div class="user-box">
             <input type="text" name="categoryNameInput" required=true>
             <label>Titre</label>

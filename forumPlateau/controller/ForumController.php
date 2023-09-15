@@ -241,9 +241,9 @@ class ForumController extends AbstractController implements ControllerInterface
      * 
      * @return array An array is being returned with two elements: "view" and "data".
      */
-    public function addTopicForm()
+    public function addTopicForm($id)
     {
-        $catid = $_GET['catid'];
+        $catid = $id;
 
         return [
             "view" => VIEW_DIR . "forum/addTopic.php",
@@ -262,12 +262,12 @@ class ForumController extends AbstractController implements ControllerInterface
      * the forum home page. If any of the variables are not set or not valid, the function will
      * return the addTopicForm.
      */
-    public function addTopic()
+    public function addTopic($id)
     {
 
         $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $categoryId = $_GET['catid'];
+        $categoryId = $id;
 
         if ($topicName && $messageText && $categoryId) {
 
@@ -284,7 +284,7 @@ class ForumController extends AbstractController implements ControllerInterface
             $this->redirectTo('forum', 'home');
         } else {
 
-            return $this->addTopicForm();
+            return $this->addTopicForm($id);
         }
     }
 
@@ -295,12 +295,12 @@ class ForumController extends AbstractController implements ControllerInterface
      * @return void the `$topicId` and `$messageContent` are both valid, the function will call the
      * `add()` method of the `$messageMananger` object and pass in the `$messageData` array.
      */
-    public function addMessage()
+    public function addMessage($id)
     {
 
         $id = Session::getUser()->getId();
 
-        $topicId = $_GET['topicid'];
+        $topicId = $id;
         $messageContent = filter_input(INPUT_POST, 'messageContent', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if ($topicId && $messageContent) {
