@@ -33,7 +33,6 @@ class HomeController extends AbstractController implements ControllerInterface
     public function ajax()
     {
 
-        Session::addFlash('success', 'Called !');
         //We get all the value in the inputs from the form and filter it.
         $search = $_GET['search'];
         $type = $_GET['type'];
@@ -56,8 +55,8 @@ class HomeController extends AbstractController implements ControllerInterface
                         "topics" => $topicManager,
                         "messages" => $messageManager,
                     ]
-                    ];
-                include(VIEW_DIR . 'home.php');
+                ];
+                // include(VIEW_DIR . 'home.php');
 
                 break;
             case 'topic':

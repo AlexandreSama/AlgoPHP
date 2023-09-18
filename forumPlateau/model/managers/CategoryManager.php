@@ -35,7 +35,7 @@ class CategoryManager extends Manager
         WHERE c.categoryName LIKE "%' . $nameCategory . '%"';
 
         return $this->getMultipleResults(
-            DAO::select($sql, ['categoryName' => $nameCategory], true),
+            DAO::select($sql),
             $this->className
         );
     }

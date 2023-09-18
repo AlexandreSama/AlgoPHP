@@ -10,10 +10,8 @@ $messagesManager = $result["data"]['messages'];
     foreach ($categories as $valueCategory) {
 
         $topics = $topicManager->getTopicByCategoryId($valueCategory->getId());
-
         echo '<table class="holder" cellspacing="0">
-            <thead class="topicInfoHolder">
-            <tr>
+            <tr class="topicInfoHolder">
                 <th colspan="2" class="holderTitle">
                 <a href="index.php?ctrl=forum&action=listTopics&id=' .
             $valueCategory->getId() . '">'
@@ -24,9 +22,7 @@ $messagesManager = $result["data"]['messages'];
             echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";
         }
 
-        echo '</th></tr>
-            </thead>
-            <tbody>';
+        echo '</th></tr>';
 
         if ($topics) {
 
@@ -56,7 +52,6 @@ $messagesManager = $result["data"]['messages'];
         }
 
         echo '</tr>
-    </tbody>
     </table>';
     }
     ?>
@@ -79,11 +74,8 @@ $messagesManager = $result["data"]['messages'];
         <iframe class="discord" src="https://discord.com/widget?id=744159443046105138&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </div>
 </div>
-<script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous">
-    </script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+</script>
 <script>
     $('#submitInput').on('click', function(e) {
         e.preventDefault();
@@ -98,7 +90,7 @@ $messagesManager = $result["data"]['messages'];
             function(data) {
                 document.getElementById('tableHolder').innerHTML = '';
                 document.getElementById('tableHolder').innerHTML = data
-                // Traitement de la réponse ici
+                console.log(data)
             }
         ).fail(function(xhr, textStatus, errorThrown) {
             console.error("Erreur AJAX : " + textStatus, errorThrown);
