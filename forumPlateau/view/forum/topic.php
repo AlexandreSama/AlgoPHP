@@ -11,7 +11,7 @@ $messages = $result["data"]['messages'];
     <thead class="topicInfoHolder">
         <tr>
             <th colspan="2" class="holderTitle">
-                <p><?php echo $topic->getTitle() ?></p>
+                <p><strong><?php echo $topic->getTitle() ?></strong></p>
                 <?php if (App\Session::isAdmin()) : ?>
 
                     <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $topic->getId() ?>&type=topic"><i class="fa-solid fa-pen"></i></a>

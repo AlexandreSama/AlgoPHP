@@ -31,7 +31,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
     {
 
         return [
-            "view" => VIEW_DIR . "/security/login.php"
+            "view" => VIEW_DIR . "/security/login.php",
+            "data" => [
+                "description" => "Formulaire de connexion au forum Phenix Division"
+            ]
         ];
     }
 
@@ -124,6 +127,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         return [
             "view" => VIEW_DIR . "/security/register.php",
+            "data" => [
+                "description" => "Formulaire d'inscription au forum Phenix Division"
+            ]
         ];
     }
 

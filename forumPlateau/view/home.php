@@ -1,3 +1,5 @@
+<!-- <meta name="robots" content="index, follow"> -->
+
 <?php
 $categories = $result["data"]['categories'];
 $topicManager = $result["data"]['topics'];
@@ -14,9 +16,9 @@ $messagesManager = $result["data"]['messages'];
             <tr class="topicInfoHolder">
                 <th colspan="2" class="holderTitle">
                 <a href="index.php?ctrl=forum&action=listTopics&id=' .
-            $valueCategory->getId() . '">'
+            $valueCategory->getId() . '"><strong>'
             . $valueCategory->getCategoryName()
-            . '</a>';
+            . '</strong></a>';
         if (App\Session::isAdmin()) {
 
             echo "<a class='modifyLink' href='index.php?ctrl=forum&action=modifyForm&id=" . $valueCategory->getId() .  "&type=category'><i class='fa-solid fa-pen'></i></a>";

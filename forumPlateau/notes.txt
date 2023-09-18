@@ -4,8 +4,10 @@ Abstraite => Récupérer des méthodes de cet class qui sont réutiliser plusieu
 Autoloader => Cherche et donne le chemin physique d'une class
 Implements => Oblige une class a avoir le/les noms de fonctions de la class implémenté
 \ => Class native de php
+SEO => Référencement Naturel
+SEA => Référencement payant
 
-
+Mettre un fil d'ariane
 
 
 

@@ -27,7 +27,10 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         return [
-            "view" => VIEW_DIR . "404.php"
+            "view" => VIEW_DIR . "404.php",
+            "data" => [
+                "description" => "Erreur 404 du forum Phenix Division"
+            ]
         ];
     }
 
@@ -51,7 +54,8 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "categories" => $categoryManager->findAll(),
                 "topics" => $topicManager,
-                "messages" => $messageManager
+                "messages" => $messageManager,
+                "description" => "Page d'accueil du forum Phenix Division"
             ]
         ];
     }
@@ -88,7 +92,8 @@ class ForumController extends AbstractController implements ControllerInterface
                 "topics" => $topics,
                 "category" => $category,
                 "userManager" => $userManager,
-                "message" => $messageManager
+                "message" => $messageManager,
+                "description" => "Liste des topics du forum Phenix Division"
             ]
         ];
     }
@@ -161,7 +166,8 @@ class ForumController extends AbstractController implements ControllerInterface
             "data" => [
                 "topic" => $topic,
                 "userManager" => $userManager,
-                "messages" => $messages
+                "messages" => $messages,
+                "description" => "Topic spécifique du forum Phenix Division"
             ]
         ];
     }
@@ -211,7 +217,10 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         return [
-            "view" => VIEW_DIR . "forum/addCategory.php"
+            "view" => VIEW_DIR . "forum/addCategory.php",
+            "data" => [
+                "description" => "Formulaire d'ajout d'une catégorie au forum Phenix Division"
+            ]
         ];
     }
 
@@ -259,7 +268,8 @@ class ForumController extends AbstractController implements ControllerInterface
         return [
             "view" => VIEW_DIR . "forum/addTopic.php",
             "data" => [
-                "catid" => $catid
+                "catid" => $catid,
+                "description" => "Formulaire d'ajout d'un topic au forum Phenix Division"
             ]
         ];
     }
@@ -357,7 +367,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "category" => $categoryManager->findOneById($id),
-                        "formtype" => "category"
+                        "formtype" => "category",
+                        "description" => "Formulaire de modification d'une catégorie au forum Phenix Division"
                     ]
                 ];
                 break;
@@ -368,7 +379,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "topics" => $topicManager->findOneById($id),
-                        "formtype" => "topic"
+                        "formtype" => "topic",
+                        "description" => "Formulaire de modification d'un topic au forum Phenix Division"
                     ]
                 ];
                 break;
@@ -379,7 +391,8 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/modify.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message"
+                        "formtype" => "message",
+                        "description" => "Formulaire de modification d'un message au forum Phenix Division"
                     ]
                 ];
                 break;
@@ -482,7 +495,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "category" => $categoryManager->findAll(),
-                        "formtype" => "category"
+                        "formtype" => "category",
+                        "description" => "Formulaire de suppression d'une catégorie au forum Phenix Division"
+
                     ]
                 ];
                 break;
@@ -493,7 +508,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "topics" => $topicManager->findAll(),
-                        "formtype" => "topic"
+                        "formtype" => "topic",
+                        "description" => "Formulaire de suppression d'un topic au forum Phenix Division"
+
                     ]
                 ];
                 break;
@@ -504,7 +521,9 @@ class ForumController extends AbstractController implements ControllerInterface
                     "view" => VIEW_DIR . "forum/delete.php",
                     "data" => [
                         "message" => $messageManager->findOneById($id),
-                        "formtype" => "message"
+                        "formtype" => "message",
+                        "description" => "Formulaire de suppression d'un message au forum Phenix Division"
+
                     ]
                 ];
                 break;

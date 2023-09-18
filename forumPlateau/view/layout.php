@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="<?php echo $result["data"]['description'] ?>">
+    <meta name="keywords" content="forum, the division 2, phenixmg, discord, jeux-vidéos">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <!-- <meta name="robots" content="index, follow"> -->
     <link rel="stylesheet" href="./public/css/layout.css">
     <script src="https://kit.fontawesome.com/eec634434d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -18,7 +21,7 @@
                 <img src="./public/img/td2logo.png" alt="Logo Phenix Division">
             </div>
             <div class="navbar-title">
-                <a href="index.php?ctrl=forum&action=home">Phenix Division</a>
+                <h1><a href="index.php?ctrl=forum&action=home"><strong>Phenix Division</strong></a></h1>
             </div>
             <div class="navbar-dropdown">
                 <button class="dropdown-button">
@@ -28,7 +31,7 @@
                     <?php
                     if (App\Session::getUser()) {
                     ?>
-                        <a href="index.php?ctrl=security&action=profile">Profile</a>
+                        <a href="index.php?ctrl=security&action=profile" rel=“nofollow”>Profile</a>
                         <?php
                         if (App\Session::isAdmin()) {
                         ?>
@@ -42,7 +45,7 @@
                             <?php
                         }
                             ?>
-                            <a href="index.php?ctrl=security&action=disconnect">Se déconnecter</a>
+                            <a href="index.php?ctrl=security&action=disconnect" rel=“nofollow”>Se déconnecter</a>
                 </div>
             <?php
                     } else {
@@ -56,8 +59,6 @@
     </div>
     </nav>
     <?php
-    var_dump(App\Session::getFlash('success'));
-    var_dump(App\Session::getFlash('error'));
     if (App\Session::getFlash('success') || App\Session::getFlash('error')) {
         echo '<h3 class="message" style="color: red">' . App\Session::getFlash('error') .
             '</h3><h3 class="message" style="color: green">' . App\Session::getFlash('success') . '</h3>';
@@ -72,7 +73,7 @@
             <a href="#">Contact</a>
         </div>
         <div class="footer-center">
-            Made With Love By Alex
+            <a href="#">Sitemap</a>
         </div>
         <div class="footer-right">
             <a href="#">Mentions Légales</a>
