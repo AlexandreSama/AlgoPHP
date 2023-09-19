@@ -72,3 +72,41 @@
   width: 100%;
   height: 100%;
 }
+
+@media (max-width: 1250px) { 
+
+  .main-content{
+    flex-direction: column!important;
+  }
+
+  .tableHolder{
+    width: 100%;
+    height: 60%;
+    overflow: scroll;
+    margin-bottom: 20px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .tableHolder::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .widgetHolder{
+    width: 50%;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 1250px) { 
+
+
+  .navbar-title{
+    width: 100%;
+  }
+  .widgetHolder{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+}
