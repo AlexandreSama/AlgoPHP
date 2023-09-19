@@ -163,31 +163,35 @@ class TopicManager extends Manager
     }
 
     /**
-     * The function `sendDiscordPayload` sends a POST request to a specified URL with a title,
-     * username, and message as parameters.
-     * @return mixed A boolean or a string as the response from the server after sending the Discord payload.
+     * The function `sendDiscordPayload` sends a JSON payload to a specified URL using cURL in PHP.
+     * 
+     * @param string title The `title` of the payload, which will be displayed as the title of the message in
+     * Discord.
+     * @param string username The `username` parameter is a string that represents the name of the user who
+     * is sending the Discord payload.
+     * @param string message The `message` parameter is a string that represents the content of the message
+     * you want to send to Discord. It can be any text or information that you want to include in the
+     * message.
+     * 
+     * @return string The output of the cURL request, which is stored in the variable .
      */
     public function sendDiscordPayload(string $title, string $username, string $message)
     {
 
         $url = 'https://kashirbot.kashir.fr/api/newTopic';
 
-        // Créez un tableau associatif avec les données
         $data = array(
             "title" => $title,
             "from" => $username,
             "message" => $message
         );
 
-        // Convertissez le tableau associatif en une chaîne JSON
         $json_data = json_encode($data);
 
         $ch = curl_init($url);
 
-        // Définissez l'en-tête Content-Type pour indiquer que vous envoyez du JSON
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-        // Modifiez la façon dont vous envoyez les données en utilisant CURLOPT_POSTFIELDS
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");

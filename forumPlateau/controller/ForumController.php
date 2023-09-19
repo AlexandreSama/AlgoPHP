@@ -310,8 +310,10 @@ class ForumController extends AbstractController implements ControllerInterface
             $messageData = ['messageText' => $newMessageText, 'user_id' => Session::getUser()->getId(), 'topic_id' => $topicId];
             $messageManager->add($messageData);
 
+            //We send a cURL to an external API (kashirbot.kashir.fr) who send an embed
+            //In a specific channel
             $topicManager->sendDiscordPayload($newTopicName, Session::getUser()->getUsername(), $newMessageText);
-            // Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
+            Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
             $this->redirectTo('forum', 'home');
         } else {
 
