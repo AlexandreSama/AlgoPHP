@@ -38,7 +38,7 @@ $messages = $result["data"]['messages'];
                     <td class="infoLastMessage">
                         <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
                         <p>Le : <?php echo $message->getCreationDate() ?></p>
-                        <?php if (App\Session::getUser() !== false && App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername()) : ?>
+                        <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername())) : ?>
                             <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
                             <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
                         <?php endif; ?>
@@ -48,7 +48,7 @@ $messages = $result["data"]['messages'];
         <?php endforeach; ?>
     </tbody>
 </table>
-<?php if (App\Session::getUser() && !$topic->getClosed()) : ?>
+<?php if (App\Session::getUser() && !$topic->getClosed() || App\Session::isAdmin()) : ?>
 
     <form method='post' action="index.php?ctrl=forum&action=addMessage&id=<?php echo $topic->getId(); ?>" class="addMessage">
         <textarea class="full-width-height" name='messageContent'></textarea>

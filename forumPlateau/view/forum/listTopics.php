@@ -31,8 +31,15 @@ if (isset($result["data"]['category'])) {
                 echo '<tr class="infoHolder">
                 <td class="titleTopic">
                     <a href="index.php?ctrl=forum&action=showTopic&id=' . $topic->getId() . '">' . $topic->getTitle() . '</a>
-                    <p>De : <a href="index.php?ctrl=security&action=showProfile&id=' . $user->getId() . '">' . $user->getUsername() . '<a/></p>
-                </td>';
+                    <p>De : <a href="index.php?ctrl=security&action=showProfile&id=' . $user->getId() . '">' . $user->getUsername() . '<a/></p>';
+
+                    if($topic->getClosed() == '1'){
+                        echo '<p>Status : Fermé</p>
+                        </td>';
+                    }else{
+                        echo '<p>Status : Ouvert</p>
+                        </td>';
+                    }
                 foreach ($lastMessageUser as $lastMessage) {
                     echo '<td class="infoLastMessage">
                     <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=' . $lastMessage->getUser()->getId() . '">' . $lastMessage->getUser()->getUsername() . '</a></p>
