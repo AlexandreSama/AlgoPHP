@@ -162,24 +162,39 @@ class TopicManager extends Manager
         );
     }
 
-    public function sendDiscordPayload($title, $username, $message)
+    /**
+     * The function `sendDiscordPayload` sends a POST request to a specified URL with a title,
+     * username, and message as parameters.
+     * @return mixed A boolean or a string as the response from the server after sending the Discord payload.
+     */
+    public function sendDiscordPayload(string $title, string $username, string $message)
     {
-        $url = 'https://kashirbot/api/newTopic';
 
-        $data = '
-                    {
-                    "title": ' . $title . ',
-                    "from":' . $username .',
-                    "message":' . $message . '
-                    }
-                ';
+        $url = 'https://kashirbot.kashir.fr/api/newTopic';
 
+        // Créez un tableau associatif avec les données
+        $data = array(
+            "title" => $title,
+            "from" => $username,
+            "message" => $message
+        );
+
+        // Convertissez le tableau associatif en une chaîne JSON
+        $json_data = json_encode($data);
 
         $ch = curl_init($url);
+
+        // Définissez l'en-tête Content-Type pour indiquer que vous envoyez du JSON
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        // Modifiez la façon dont vous envoyez les données en utilisant CURLOPT_POSTFIELDS
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $server_output = curl_exec($ch);
+
+        return $server_output;
     }
 }

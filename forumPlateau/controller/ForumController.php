@@ -288,29 +288,34 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicName = filter_input(INPUT_POST, 'categoryNameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $messageText = filter_input(INPUT_POST, 'messageInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        $newTopicName = html_entity_decode($topicName, ENT_QUOTES, "UTF-8");
+        $newMessageText = html_entity_decode($messageText, ENT_QUOTES, "UTF-8");
         //$id is the category id from the url
         $categoryId = $id;
 
-        if ($topicName && $messageText && $categoryId) {
+        // var_dump($newTopicName);
+        // die;
+
+        if ($newTopicName && $newMessageText && $categoryId) {
 
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
 
             //We create the first params for the sql add topic
-            $topicData = ['title' => $topicName, 'user_id' => Session::getUser()->getId(), 'category_id' => $categoryId];
+            $topicData = ['title' => $newTopicName, 'user_id' => Session::getUser()->getId(), 'category_id' => $categoryId];
             $topicId = $topicManager->add($topicData);
 
             //And the second params array for the sql add message
-            $messageData = ['messageText' => $messageText, 'user_id' => Session::getUser()->getId(), 'topic_id' => $topicId];
+            $messageData = ['messageText' => $newMessageText, 'user_id' => Session::getUser()->getId(), 'topic_id' => $topicId];
             $messageManager->add($messageData);
 
-            Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
+            $topicManager->sendDiscordPayload($newTopicName, Session::getUser()->getUsername(), $newMessageText);
+            // Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
             $this->redirectTo('forum', 'home');
-
-            // $topicManager->sendDiscordPayload($topicName, Session::getUser()->getUsername(), $messageText);
         } else {
 
-            return $this->addTopicForm($id);
+            $this->redirectTo('forum', 'listTopics', $categoryId);
         }
     }
 
