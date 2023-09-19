@@ -175,7 +175,7 @@ class TopicManager extends Manager
      * 
      * @return string The output of the cURL request, which is stored in the variable .
      */
-    public function sendDiscordPayload(string $title, string $username, string $message)
+    public function sendDiscordPayloadOnCreatedTopic(string $title, string $username, string $message)
     {
 
         $url = 'https://kashirbot.kashir.fr/api/newTopic';
@@ -184,6 +184,32 @@ class TopicManager extends Manager
             "title" => $title,
             "from" => $username,
             "message" => $message
+        );
+
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        return $server_output;
+    }
+
+    public function sendDiscordPayloadOnDeletedTopic(string $title, string $username)
+    {
+
+        $url = 'https://kashirbot.kashir.fr/api/deletedTopic';
+
+        $data = array(
+            "title" => $title,
+            "by" => $username
         );
 
         $json_data = json_encode($data);

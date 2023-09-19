@@ -312,7 +312,8 @@ class ForumController extends AbstractController implements ControllerInterface
 
             //We send a cURL to an external API (kashirbot.kashir.fr) who send an embed
             //In a specific channel
-            $topicManager->sendDiscordPayload($newTopicName, Session::getUser()->getUsername(), $newMessageText);
+            $topicManager->sendDiscordPayloadOnCreatedTopic($newTopicName, Session::getUser()->getUsername(), $newMessageText);
+
             Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
             $this->redirectTo('forum', 'home');
         } else {
@@ -575,6 +576,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 if ($topicId) {
 
                     $topicManager = new TopicManager();
+                    $topic = $topicManager->findOneById($topicId);
                     $messageManager = new MessageManager();
                     $result = $messageManager->findAll();
                     foreach ($result as $value) {
@@ -582,10 +584,13 @@ class ForumController extends AbstractController implements ControllerInterface
                             $message = $value;
                         }
                     }
+
+                    $topicManager->sendDiscordPayloadOnDeletedTopic($topic->getTitle(), Session::getUser()->getUsername());
+
                     $messageManager->delete($message->getId());
                     $topicManager->delete($topicId);
 
-                    Session::addFlash('success', 'Le topic a bien été modifié ! Félicitation !');
+                    Session::addFlash('success', 'Le topic a bien été supprimé ! Félicitation !');
                     $this->redirectTo('forum', 'home');
                 } else {
 
