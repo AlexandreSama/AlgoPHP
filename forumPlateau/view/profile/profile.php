@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="./public/css/profile.css">
 <div class="inner-div">
-    <div class="titleHolder">
-        <h3 class="title">Profile</h3>
-    </div>
     <div class="profileInfo">
+        <h3 class="title">Profile</h3>
         <div class="imageHolder">
             <img src="./public/uploads/<?php echo App\Session::getUser()->getProfilePicture() ?>" alt="">
         </div>
@@ -27,6 +25,11 @@
             ?>
                 <div class="infoAdmin">
                     <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Liste des utilisateurs</th>
+                            </tr>
+                        </thead>
                         <tr>
                             <th class="infoAdminValue">Pseudonyme</th>
                             <th class="infoAdminValue">Date de création de compte</th>

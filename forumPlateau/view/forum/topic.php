@@ -38,9 +38,8 @@ $messages = $result["data"]['messages'];
                     <td class="infoLastMessage">
                         <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
                         <p>Le : <?php echo $message->getCreationDate() ?></p>
-                        <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername())) : ?>
-
-                            <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message['id_message']; ?>&type=message"><i class="fa-solid fa-pen"></i></a>
+                        <?php if (App\Session::getUser() !== false && App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername()) : ?>
+                            <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>
