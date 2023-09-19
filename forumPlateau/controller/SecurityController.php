@@ -331,6 +331,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $userManager->banUser($id);
             Session::addFlash('success', 'La personne a bien été banni !');
             $this->redirectTo('security', 'showProfile', $id);
+        }else{
+            Session::addFlash('error', 'Attention, on ne modifie pas l\'URL !');
+            $this->redirectTo('forum', 'home');
         }
     }
 
@@ -349,6 +352,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $userManager->unbanUser($id);
             Session::addFlash('success', 'La personne a bien été débanni !');
             $this->redirectTo('security', 'showProfile', $id);
+        }else{
+            Session::addFlash('error', 'Attention, on ne modifie pas l\'URL !');
+            $this->redirectTo('forum', 'home');
         }
     }
 }

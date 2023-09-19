@@ -38,9 +38,9 @@
                         foreach ($result["data"]['users'] as $value) {
 
                             echo "<tr>
-                                    <td class='infoAdminValue'>" . $value->getUsername() . "</td>
+                                    <td class='infoAdminValue'><a href='index.php?ctrl=security&action=showProfile&id=" . $value->getId() . "'>" . $value->getUsername() . "</a></td>
                                     <td class='infoAdminValue'>" . $value->getInscriptionDate() . "</td>
-                                    </tr>";
+                                </tr>";
                         }
                         ?>
                     </table>
