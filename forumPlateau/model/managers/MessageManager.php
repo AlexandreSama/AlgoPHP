@@ -111,4 +111,15 @@ class MessageManager extends Manager
             $this->className
         );
     }
+
+    public function updateMessageOnDeleteAccount($userId)
+    {
+        $sql = 'UPDATE message m
+        SET m.user_id = null
+        WHERE m.user_id = :userid';
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['userid' => $userId], false),
+            $this->className
+        );
+    }
 }

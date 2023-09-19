@@ -162,6 +162,16 @@ class TopicManager extends Manager
         );
     }
 
+    public function updateTopicsOnDeleteAccount($userId){
+        $sql = 'UPDATE topic t
+        SET t.user_id = null
+        WHERE t.user_id = :userid';
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['userid' => $userId], false),
+            $this->className
+        );
+    }
+
     /**
      * The function `sendDiscordPayload` sends a JSON payload to a specified URL using cURL in PHP.
      * 
@@ -202,6 +212,16 @@ class TopicManager extends Manager
         return $server_output;
     }
 
+    /**
+     * The function sends a POST request to a Discord webhook with a JSON payload containing the title
+     * and username of a deleted topic.
+     * 
+     * @param string title The title of the deleted topic.
+     * @param string username The username parameter is a string that represents the name of the user
+     * who deleted the topic.
+     * 
+     * @return string The response from the server after sending the Discord payload.
+     */
     public function sendDiscordPayloadOnDeletedTopic(string $title, string $username)
     {
 

@@ -333,7 +333,7 @@ class ForumController extends AbstractController implements ControllerInterface
     {
 
         //We get the id from the user registered in the session
-        $id = Session::getUser()->getId();
+        $idUser = Session::getUser()->getId();
 
         //$id is the topic Id
         $topicId = $id;
@@ -343,7 +343,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
             $messageManager = new MessageManager();
             //Create the param array for the sql
-            $messageData = ['messageText' => $messageContent, 'user_id' => $id, 'topic_id' => $topicId];
+            $messageData = ['messageText' => $messageContent, 'user_id' => $idUser, 'topic_id' => $topicId];
             $messageManager->add($messageData);
             $this->redirectTo('forum', 'showTopic', $topicId);
         } else {

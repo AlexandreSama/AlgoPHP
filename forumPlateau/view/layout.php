@@ -47,6 +47,7 @@
                         }
                             ?>
                             <a href="index.php?ctrl=security&action=disconnect" rel=“nofollow”>Se déconnecter</a>
+                            <a href="index.php?ctrl=security&action=deleteAccount" rel=“nofollow”>Supprimer mon compte</a>
                 </div>
             <?php
                     } else {

@@ -112,6 +112,23 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $this->redirectTo('forum', 'home');
     }
 
+    public function deleteAccount(){
+        $userManager = new UserManager();
+        $messageManager = new MessageManager();
+        $topicManager = new TopicManager();
+    
+        $userId = Session::getUser()->getId();
+
+        $messageManager->updateMessageOnDeleteAccount($userId);
+        $topicManager->updateTopicsOnDeleteAccount($userId);
+
+        $userManager->delete(Session::getUser()->getId());
+        
+        unset($_SESSION['user']);
+        Session::addFlash('success', 'Vous avez bien été désinscrit !');
+        $this->redirectTo('forum', 'home');
+    }
+
     /**
      * The function returns the view and data needed for a registration form, including success and
      * error messages and the current user.

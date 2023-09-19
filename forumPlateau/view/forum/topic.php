@@ -29,22 +29,39 @@ $messages = $result["data"]['messages'];
     </thead>
     <tbody>
         <?php foreach ($messages as $message) : ?>
-            <?php $users = $userManager->getUsersByMessages($message->getUser()->getId()); ?>
-            <?php foreach ($users as $user) : ?>
+            <?php
+            if ($message->getUser()) {
+                $users = $userManager->getUsersByMessages($message->getUser()->getId());
+                foreach ($users as $user) { ?>
+                    <tr class="infoHolder">
+                        <td class="messageTopic">
+                            <?php echo $message->getMessageText(); ?>
+                        </td>
+                        <td class="infoLastMessage">
+                            <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
+                            <p>Le : <?php echo $message->getCreationDate() ?></p>
+                            <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername())) : ?>
+                                <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
+                                <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php }
+            } else { ?>
                 <tr class="infoHolder">
                     <td class="messageTopic">
                         <?php echo $message->getMessageText(); ?>
                     </td>
                     <td class="infoLastMessage">
-                        <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
+                        <p>Dernier message de : Anonyme</p>
                         <p>Le : <?php echo $message->getCreationDate() ?></p>
-                        <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername())) : ?>
+                        <?php if (App\Session::isAdmin()) : ?>
                             <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
                             <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
         <?php endforeach; ?>
     </tbody>
 </table>
