@@ -317,4 +317,18 @@ class SecurityController extends AbstractController implements ControllerInterfa
         Session::addFlash('success', 'Le role a bien été modifié !');
         $this->redirectTo('security', 'showProfile', $id);
     }
+
+    public function banUser(){
+
+        $userId = filter_input(INPUT_POST, 'ban', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        $userManager = new UserManager();
+
+        if($userId){
+            $userManager->banUser($userId);
+            Session::addFlash('success', 'La personne a bien été banni !');
+            $this->redirectTo('security', 'showProfile', $userId);
+        }
+
+    }
 }

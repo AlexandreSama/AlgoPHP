@@ -74,4 +74,11 @@ class UserManager extends Manager
         WHERE u.id_user = :id';
         return DAO::update($sql, ['id' => $id, 'role' => json_encode($role)], false);
     }
+
+    public function banUser($id){
+        $sql = 'UPDATE user u
+        SET isBanned = 1
+        WHERE u.id_user = :id';
+        return DAO::update($sql, ['id' => $id], false);
+    }
 }
