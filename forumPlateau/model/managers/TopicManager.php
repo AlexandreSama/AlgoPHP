@@ -161,4 +161,25 @@ class TopicManager extends Manager
             $this->className
         );
     }
+
+    public function sendDiscordPayload($title, $username, $message)
+    {
+        $url = 'https://kashirbot/api/newTopic';
+
+        $data = '
+                    {
+                    "title": ' . $title . ',
+                    "from":' . $username .',
+                    "message":' . $message . '
+                    }
+                ';
+
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+    }
 }

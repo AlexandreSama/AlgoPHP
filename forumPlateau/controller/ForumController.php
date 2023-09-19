@@ -297,15 +297,17 @@ class ForumController extends AbstractController implements ControllerInterface
             $messageManager = new MessageManager();
 
             //We create the first params for the sql add topic
-            $topicData = ['title' => $topicName, 'user_id' => 2, 'category_id' => $categoryId];
+            $topicData = ['title' => $topicName, 'user_id' => Session::getUser()->getId(), 'category_id' => $categoryId];
             $topicId = $topicManager->add($topicData);
 
             //And the second params array for the sql add message
-            $messageData = ['messageText' => $messageText, 'user_id' => 2, 'topic_id' => $topicId];
+            $messageData = ['messageText' => $messageText, 'user_id' => Session::getUser()->getId(), 'topic_id' => $topicId];
             $messageManager->add($messageData);
 
             Session::addFlash('success', 'Le topic a bien été ajouté ! Félicitation !');
             $this->redirectTo('forum', 'home');
+
+            // $topicManager->sendDiscordPayload($topicName, Session::getUser()->getUsername(), $messageText);
         } else {
 
             return $this->addTopicForm($id);
