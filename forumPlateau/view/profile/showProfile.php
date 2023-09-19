@@ -33,6 +33,13 @@
                 ?></p>
             <p>Nombre de messages : <?php echo $result['data']["messageCount"]['count'] ?></p>
             <p>Topics ouverts : <?php echo $result['data']["topicCount"]['count'] ?></p>
+            <?php
+                if($result['data']["profileViewer"]->getIsBanned() == "0"){
+                    echo "<button class='actionBanOrUnban'><a href='index.php?ctrl=security&action=banUser&id=" . $result['data']["profileViewer"]->getId() . "'>Bannir</a></button>";
+                }else{
+                    echo "<button class='actionBanOrUnban'><a href='index.php?ctrl=security&action=unbanUser&id=" . $result['data']["profileViewer"]->getId() . "'>Débannir</a></button>";
+                }
+            ?>
         </div>
     </div>
 </div>

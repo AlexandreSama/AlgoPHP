@@ -75,9 +75,33 @@ class UserManager extends Manager
         return DAO::update($sql, ['id' => $id, 'role' => json_encode($role)], false);
     }
 
+    /**
+     * The banUser function updates the isBanned field of a user in the database to 1, indicating that
+     * the user is banned.
+     * 
+     * @param string $id The id parameter is the unique identifier of the user that needs to be banned.
+     * 
+     * @return bool The result of the update operation, which is a boolean value indicating whether the
+     * update was successful or not.
+     */
     public function banUser($id){
         $sql = 'UPDATE user u
         SET isBanned = 1
+        WHERE u.id_user = :id';
+        return DAO::update($sql, ['id' => $id], false);
+    }
+
+    /**
+     * The unbanUser function updates the isBanned field of a user in the database to 0, effectively
+     * unbanning the user.
+     * 
+     * @param string $id The id parameter is the unique identifier of the user that needs to be unbanned.
+     * 
+     * @return bool The result of the update query.
+     */
+    public function unbanUser($id){
+        $sql = 'UPDATE user u
+        SET isBanned = 0
         WHERE u.id_user = :id';
         return DAO::update($sql, ['id' => $id], false);
     }

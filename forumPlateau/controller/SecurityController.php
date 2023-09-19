@@ -318,17 +318,37 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $this->redirectTo('security', 'showProfile', $id);
     }
 
-    public function banUser(){
-
-        $userId = filter_input(INPUT_POST, 'ban', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    /**
+     * The function `banUser` bans a user by their ID and redirects to the user's profile page.
+     * 
+     * @param string $id The parameter "id" is the unique identifier of the user that needs to be banned.
+     */
+    public function banUser($id){
 
         $userManager = new UserManager();
 
-        if($userId){
-            $userManager->banUser($userId);
+        if($id){
+            $userManager->banUser($id);
             Session::addFlash('success', 'La personne a bien été banni !');
-            $this->redirectTo('security', 'showProfile', $userId);
+            $this->redirectTo('security', 'showProfile', $id);
         }
+    }
 
+    /**
+     * The function unbanUser takes an ID as a parameter, calls the unbanUser method of the UserManager
+     * class with that ID, adds a success flash message to the session, and redirects to the
+     * showProfile method of the security controller with the same ID.
+     * 
+     * @param string $id The parameter "id" is the unique identifier of the user that needs to be unbanned.
+     */
+    public function unbanUser($id){
+
+        $userManager = new UserManager();
+
+        if($id){
+            $userManager->unbanUser($id);
+            Session::addFlash('success', 'La personne a bien été débanni !');
+            $this->redirectTo('security', 'showProfile', $id);
+        }
     }
 }

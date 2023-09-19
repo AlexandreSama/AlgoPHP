@@ -24,33 +24,26 @@
             if (App\Session::isAdmin()) {
             ?>
                 <div class="infoAdmin">
-                    <form action="index.php?ctrl=security&action=banUser" method="post">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Liste des utilisateurs</th>
-                                </tr>
-                            </thead>
+                    <table>
+                        <thead>
                             <tr>
-                                <th class="infoAdminValue">Pseudonyme</th>
-                                <th class="infoAdminValue">Date de création de compte</th>
-                                <th class="infoAdminValue">Bannir ?</th>
+                                <th colspan="2">Liste des utilisateurs</th>
                             </tr>
-                            <?php
-                            foreach ($result["data"]['users'] as $value) {
+                        </thead>
+                        <tr>
+                            <th class="infoAdminValue">Pseudonyme</th>
+                            <th class="infoAdminValue">Date de création de compte</th>
+                        </tr>
+                        <?php
+                        foreach ($result["data"]['users'] as $value) {
 
-                                echo "<tr>
+                            echo "<tr>
                                     <td class='infoAdminValue'>" . $value->getUsername() . "</td>
-                                    <td class='infoAdminValue'>" . $value->getInscriptionDate() . "</td>";
-                                    if($value->getIsBanned() !== "1"){
-                                        echo "<td class='infoAdminValue'><input type='radio' name='ban' value='" . $value->getId() . "' /></td>";
-                                    }
-                                echo "</tr>";
-                            }
-                            ?>
-                        </table>
-                        <button >Valider</button>
-                    </form>
+                                    <td class='infoAdminValue'>" . $value->getInscriptionDate() . "</td>
+                                    </tr>";
+                        }
+                        ?>
+                    </table>
                 </div>
             <?php
             }
