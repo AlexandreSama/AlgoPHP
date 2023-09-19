@@ -68,7 +68,6 @@ $messagesManager = $result["data"]['messages'];
                 <option data-type value="category">Catégorie</option>
                 <option data-type value="topic">Topic</option>
             </select>
-            <!-- <button type="submit" class="searchButton" id="search">Chercher</button> -->
             <button id="submitInput">Envoyer
         </form>
     </div>

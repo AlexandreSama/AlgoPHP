@@ -110,6 +110,5 @@ class MessageManager extends Manager
             DAO::select($sql, ['id' => $topicId], false),
             $this->className
         );
-        // return DAO::select($sql, ['id' => $topicId], false);
     }
 }

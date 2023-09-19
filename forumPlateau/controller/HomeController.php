@@ -36,10 +36,7 @@ class HomeController extends AbstractController implements ControllerInterface
         //We get all the value in the inputs from the form and filter it.
         $search = $_GET['search'];
         $type = $_GET['type'];
-        // include(VIEW_DIR . 'security/login.php');
-        // return [
-        //     "view" => VIEW_DIR . "security/login.php"
-        // ];
+        
         switch ($type) {
             case 'category':
 

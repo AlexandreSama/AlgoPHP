@@ -317,10 +317,4 @@ class SecurityController extends AbstractController implements ControllerInterfa
         Session::addFlash('success', 'Le role a bien été modifié !');
         $this->redirectTo('security', 'showProfile', $id);
     }
-
-    /*public function ajax(){
-            $nb = $_GET['nb'];
-            $nb++;
-            include(VIEW_DIR."ajax.php");
-        }*/
 }

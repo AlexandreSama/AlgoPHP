@@ -145,28 +145,6 @@ final class Topic extends Entity
         {
                 return $this->getTitle() . $this->getUser() . $this->getCreationdate() . $this->getClosed();
         }
-
-       
-
-        // /**
-        //  * Get the value of like
-        //  */ 
-        // public function getLike()
-        // {
-        //         return $this->userLikes;
-        // }
-
-        // /**
-        //  * Set the value of like
-        //  *
-        //  * @return  self
-        //  */ 
-        // public function addLike(User $userLike)
-        // {
-        //         $this->userLikes[] = $userLike;
-
-        //         return $this;
-        // }
         
 
           /**

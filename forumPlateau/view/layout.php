@@ -109,19 +109,6 @@
             content_css: '//www.tiny.cloud/css/codepen.min.css'
         });
     })
-
-    /*
-    $("#ajaxbtn").on("click", function(){
-        $.get(
-            "index.php?action=ajax",
-            {
-                nb : $("#nbajax").text()
-            },
-            function(result){
-                $("#nbajax").html(result)
-            }
-        )
-    })*/
 </script>
 
 </html>
