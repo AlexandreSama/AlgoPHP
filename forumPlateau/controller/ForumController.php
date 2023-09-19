@@ -596,10 +596,12 @@ class ForumController extends AbstractController implements ControllerInterface
     public function deleteMessage($id)
     {
 
+        $topicId = $_GET['topic'];
+
         $messageManager = new MessageManager();
         $messageManager->delete($id);
 
         Session::addFlash('success', 'Le message a bien été modifié ! Félicitation !');
-        $this->redirectTo('forum', 'home');
+        $this->redirectTo('forum', 'showTopic', $topicId);
     }
 }

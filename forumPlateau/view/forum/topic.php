@@ -40,6 +40,7 @@ $messages = $result["data"]['messages'];
                         <p>Le : <?php echo $message->getCreationDate() ?></p>
                         <?php if (App\Session::getUser() !== false && App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername()) : ?>
                             <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
+                            <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>
