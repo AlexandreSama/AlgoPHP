@@ -118,12 +118,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $topicManager = new TopicManager();
     
         $userId = Session::getUser()->getId();
+        unlink('././public/uploads/' . Session::getUser()->getProfilePicture());
 
         $messageManager->updateMessageOnDeleteAccount($userId);
         $topicManager->updateTopicsOnDeleteAccount($userId);
 
         $userManager->delete(Session::getUser()->getId());
-        
+
         unset($_SESSION['user']);
         Session::addFlash('success', 'Vous avez bien été désinscrit !');
         $this->redirectTo('forum', 'home');
