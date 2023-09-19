@@ -595,7 +595,7 @@ class ForumController extends AbstractController implements ControllerInterface
      */
     public function deleteMessage($id)
     {
-
+        //We get the topic id for the redirection after the delete
         $topicId = $_GET['topic'];
 
         $messageManager = new MessageManager();
