@@ -499,10 +499,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
             if(($password && $passwordValidator) && ($password == $passwordValidator) && preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/", $password) && password_verify($password, $user->getPassword())){
                 $newPassword = password_hash($password, PASSWORD_DEFAULT);
                 $update = $userManager->updatePassword($newPassword, $user->getId());
+
                 if($update){
+
                     Session::addFlash('success', 'Votre mot de passe a bien été modifié');
                     $this->redirectTo('security', 'loginForm');
                 }else{
+                    
                     Session::addFlash('error', 'Impossible de modifier votre mot de passe, réessayez plus tard');
                     $this->redirectTo('security', 'loginForm');
                 }
