@@ -14,13 +14,15 @@
       <input type="password" name="passwordInput" require>
       <label>Mot de passe</label>
     </div>
-    <button href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Se connecter
-    </button>
-    <a href="index.php?ctrl=security&action=forgotPasswordForm">J'ai oublié mon mot de passe ?</a>
+    <div class="box">
+      <button href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Se connecter
+      </button>
+      <a href="index.php?ctrl=security&action=forgotPasswordForm">J'ai oublié mon mot de passe ?</a>
+    </div>
   </form>
 </div>
