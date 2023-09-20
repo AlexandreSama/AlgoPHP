@@ -100,6 +100,15 @@ class MessageManager extends Manager
         return DAO::select($sql, ['id' => $id], false);
     }
 
+    /**
+     * The function retrieves a topic and its associated messages from the database based on the given
+     * topic ID.
+     * 
+     * @param string topicId The parameter `topicId` is the ID of the topic that you want to retrieve from the
+     * database.
+     * 
+     * @return object The result of the `getOneOrNullResult` method.
+     */
     public function getTopicById($topicId)
     {
         $sql = 'SELECT *
@@ -112,6 +121,14 @@ class MessageManager extends Manager
         );
     }
 
+    /**
+     * The function updates the user_id field to null in the message table for a given user ID.
+     * 
+     * @param string userId The userId parameter is the ID of the user whose messages need to be updated.
+     * 
+     * @return object The result of the SQL query, which is the updated message object with the user_id set to
+     * null.
+     */
     public function updateMessageOnDeleteAccount($userId)
     {
         $sql = 'UPDATE message m

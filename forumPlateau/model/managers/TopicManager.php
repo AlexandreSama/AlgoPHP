@@ -162,6 +162,14 @@ class TopicManager extends Manager
         );
     }
 
+    /**
+     * The function updates the user_id field to null for all topics associated with a specific user
+     * when their account is deleted.
+     * 
+     * @param string userId The userId parameter is the ID of the user whose account is being deleted.
+     * 
+     * @return object the result of the `getOneOrNullResult` method, which is the result of the SQL query.
+     */
     public function updateTopicsOnDeleteAccount($userId){
         $sql = 'UPDATE topic t
         SET t.user_id = null

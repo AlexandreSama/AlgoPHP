@@ -112,6 +112,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $this->redirectTo('forum', 'home');
     }
 
+    /**
+     * The deleteAccount function deletes a user account, including their profile picture, messages,
+     * topics, and user data, and redirects them to the forum home page.
+     */
     public function deleteAccount(){
         $userManager = new UserManager();
         $messageManager = new MessageManager();
