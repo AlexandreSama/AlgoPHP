@@ -5,6 +5,8 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
+use PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Model\Managers\MessageManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
@@ -379,6 +381,130 @@ class SecurityController extends AbstractController implements ControllerInterfa
         }else{
             Session::addFlash('error', 'Attention, on ne modifie pas l\'URL !');
             $this->redirectTo('forum', 'home');
+        }
+    }
+
+    /**
+     * The function returns an array containing the view file path and data for the forgot password
+     * form.
+     * 
+     * @return view.
+     */
+    public function forgotPasswordForm(){
+
+        return [
+            "view" => VIEW_DIR . "/security/forgotPassword.php",
+            "data" => [
+                "description" => "Formulaire de récupération de mot de passe au forum Phenix Division"
+            ]
+        ];
+    }
+
+    /**
+     * The function sends a password reset email to the user if the username is valid and the honeyPot
+     * input is empty.
+     */
+    public function forgotPasswordMail(){
+
+        $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $username = filter_input(INPUT_POST, 'usernameInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        if(empty($honeyPot)){
+            if($username){
+                $userManager = new UserManager();
+
+                $user = $userManager->getUserByUsername($username);
+
+                if($user){
+                    // The message
+                    $message = "Bonjour\r\n\r\n
+                    Si vous souhaitez changer de mot de passe, cliquez sur ce lien : http://localhost/AlgoPHP/forumPlateau/index.php?ctrl=security&action=changePassword&id=" . $user->getId() . "\r\n\r\n
+                    Cordialement, \r\n\r\n
+                    Alexandre - Administrateur chez Phenix Division";
+
+                    // In case any of our lines are larger than 70 characters, we should use wordwrap()
+                    $to = $user->getEmail();
+
+                    $subject = "Essai de PHP Mail";
+                    $message = wordwrap($message, 70, "\r\n");
+                    $headers = "From: xdriver67@gmail.com" . "\r\n" .
+                    "Reply-To: alexandrehainy12@gmail.com" . "\r\n" .
+                    "X-Mailer: PHP/" . phpversion();
+                    mail($to,$subject,$message, $headers);
+
+                    // Send
+                    // mail($user->getEmail(), 'Récupération de mot de passe pour le forum Phenix Division', $message);
+                    Session::addFlash('success', 'Allez vérifier vos mails !');
+                    $this->redirectTo('security', 'loginForm');
+                }else{
+                    Session::addFlash('error', 'Veuillez vérifier votre pseudonyme !');
+                    $this->redirectTo('security', 'loginForm');
+                }
+            }else{
+                Session::addFlash('error', 'Veuillez entrer votre pseudonyme !');
+                $this->redirectTo('security', 'loginForm');
+            }
+        }else{
+            Session::addFlash('error', 'Dégage le bot !');
+            $this->redirectTo('security', 'loginForm');
+        }
+    }
+
+    /**
+     * The function returns an array containing the path to a view file and data to be passed to the
+     * view, including the user ID and a description.
+     * 
+     * @param string id The parameter "id" is the user ID of the user for whom the password change form is
+     * being generated.
+     * 
+     * @return view 
+     */
+    public function changePasswordForm($id){
+
+        return [
+            "view" => VIEW_DIR . "/security/changePassword.php",
+            "data" => [
+                "userId" => $id,
+                "description" => "Formulaire de récupération de mot de passe au forum Phenix Division"
+            ]
+        ];
+    }
+
+    /**
+     * The function "changePassword" checks if the submitted password meets certain criteria, verifies
+     * it against the user's current password, and updates the password in the database if all
+     * conditions are met.
+     * 
+     * @param string id The "id" parameter is the unique identifier of the user whose password needs to be
+     * changed. It is used to retrieve the user from the database and update their password.
+     */
+    public function changePassword($id){
+        $honeyPot = filter_input(INPUT_POST, 'honeyPotInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $password = filter_input(INPUT_POST, 'passwordInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $passwordValidator = filter_input(INPUT_POST, 'passwordVerificatorInput', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        if(empty($honeyPot)){
+            $userManager = new UserManager();
+
+            $user = $userManager->findOneById($id);
+
+            if(($password && $passwordValidator) && ($password == $passwordValidator) && preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/", $password) && password_verify($password, $user->getPassword())){
+                $newPassword = password_hash($password, PASSWORD_DEFAULT);
+                $update = $userManager->updatePassword($newPassword, $user->getId());
+                if($update){
+                    Session::addFlash('success', 'Votre mot de passe a bien été modifié');
+                    $this->redirectTo('security', 'loginForm');
+                }else{
+                    Session::addFlash('error', 'Impossible de modifier votre mot de passe, réessayez plus tard');
+                    $this->redirectTo('security', 'loginForm');
+                }
+            }else{
+                Session::addFlash('error', 'Veuillez écrire les mêmes mots de passe, faisant + ou = 12 caractères et ayant un chiffre et un caractère spécial');
+                $this->redirectTo('security', 'loginForm');
+            }
+        }else{
+            Session::addFlash('error', 'Dégage le bot');
+            $this->redirectTo('security', 'loginForm');
         }
     }
 }

@@ -105,4 +105,20 @@ class UserManager extends Manager
         WHERE u.id_user = :id';
         return DAO::update($sql, ['id' => $id], false);
     }
+
+    /**
+     * The function updates the password of a user in the database.
+     * 
+     * @param password The new password that you want to update for the user.
+     * @param id The id parameter represents the user's unique identifier in the database. It is used
+     * to identify the specific user whose password needs to be updated.
+     * 
+     * @return boolean result of the DAO::update() method.
+     */
+    public function updatePassword($password, $id){
+        $sql = 'UPDATE user u
+        SET password = :pass
+        WHERE u.id_user = :id';
+        return DAO::update($sql, ['id' => $id, 'pass' => $password], false);
+    }
 }
