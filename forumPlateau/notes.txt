@@ -7,18 +7,6 @@ Implements => Oblige une class a avoir le/les noms de fonctions de la class impl
 SEO => Référencement Naturel
 SEA => Référencement payant
 
-Mettre un fil d'ariane
-
-
-
-Visiteur peut lire mais pas écrire | V
-(Sujets plus likés)
-Lock un sujet | V
-Administration => Posts, Utilisateurs | V
-Page d'accueil only CSS (Pas Bootstrap) => Ergonomies avant tout ! | V
-
-Quand utilisateur créer un Topic => Premier post est celui de l'utilisateur | V
-
 Fonctionnalités : 
 
 - Inscription/Connexion
@@ -30,3 +18,7 @@ Fonctionnalités :
 - Changer le rôle d'un utilisateur
 - Permissions
 - Barre de recherche amenant directement a une liste de catégorie ou une liste de topic
+- Bannir / Débannir un utilisateur
+- Supprimer son compte
+- Widget Discord
+- Envoi de requête cURL vers une API externe
