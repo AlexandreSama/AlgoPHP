@@ -129,6 +129,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $messageManager->updateMessageOnDeleteAccount($userId);
         $topicManager->updateTopicsOnDeleteAccount($userId);
 
+        $userManager->sendDiscordPayloadOnUserDelete(Session::getUser()->getUsername());
         $userManager->delete(Session::getUser()->getId());
 
         unset($_SESSION['user']);
@@ -354,6 +355,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $userManager = new UserManager();
 
         if($id){
+
+            $user = $userManager->findOneById($id);
+
+            $userManager->sendDiscordPayloadOnUserBan($user->getUsername(), Session::getUser()->getUsername());
             $userManager->banUser($id);
             Session::addFlash('success', 'La personne a bien été banni !');
             $this->redirectTo('security', 'showProfile', $id);
@@ -375,6 +380,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
         $userManager = new UserManager();
 
         if($id){
+            $user = $userManager->findOneById($id);
+
+            $userManager->sendDiscordPayloadOnUserUnban($user->getUsername(), Session::getUser()->getUsername());
             $userManager->unbanUser($id);
             Session::addFlash('success', 'La personne a bien été débanni !');
             $this->redirectTo('security', 'showProfile', $id);

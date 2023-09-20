@@ -121,4 +121,137 @@ class UserManager extends Manager
         WHERE u.id_user = :id';
         return DAO::update($sql, ['id' => $id, 'pass' => $password], false);
     }
+
+    /**
+     * The function sends a POST request to a Discord webhook URL with a JSON payload containing the
+     * username parameter.
+     * 
+     * @param username The username parameter is the username of the user that is being created. It is
+     * used to send the username information to the Discord API endpoint for user creation.
+     * 
+     * @return the server output, which is the response received from the API endpoint after sending
+     * the Discord payload.
+     */
+    public function sendDiscordPayloadOnUserCreate($username){
+        $url = 'https://kashirbot.kashir.fr/api/userCreate';
+
+        $data = array(
+            "username" => $username
+        );
+
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        return $server_output;
+    }
+
+    /**
+     * The function sends a POST request to a Discord webhook URL with a JSON payload containing the
+     * username of a deleted user.
+     * 
+     * @param username The username parameter is the username of the user that has been deleted. It is
+     * used to identify the user in the Discord payload that will be sent to the specified URL.
+     * 
+     * @return the server output from the cURL request.
+     */
+    public function sendDiscordPayloadOnUserDelete($username){
+        $url = 'https://kashirbot.kashir.fr/api/userDelete';
+
+        $data = array(
+            "username" => $username
+        );
+
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        return $server_output;
+    }
+
+    /**
+     * The function sends a POST request to a Discord webhook URL with the username and the username of
+     * the person who banned them as payload data.
+     * 
+     * @param username The username of the user who is being banned.
+     * @param usernameBy The parameter "usernameBy" represents the username of the person who performed
+     * the ban action.
+     * 
+     * @return the response from the server after sending the Discord payload on user ban.
+     */
+    public function sendDiscordPayloadOnUserBan($username, $usernameBy){
+        $url = 'https://kashirbot.kashir.fr/api/userBan';
+
+        $data = array(
+            "username" => $username,
+            "by" => $usernameBy
+        );
+
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        return $server_output;
+    }
+
+    /**
+     * The function sends a Discord payload to a specified URL when a user is unbanned, providing the
+     * username and the username of the person who performed the unban.
+     * 
+     * @param username The username of the user who was unbanned.
+     * @param usernameBy The parameter "usernameBy" represents the username of the person who performed
+     * the unban action.
+     * 
+     * @return the response from the server after sending the Discord payload on user unban.
+     */
+    public function sendDiscordPayloadOnUserUnban($username, $usernameBy){
+        $url = 'https://kashirbot.kashir.fr/api/userUnban';
+
+        $data = array(
+            "username" => $username,
+            "by" => $usernameBy
+        );
+
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        return $server_output;
+    }
 }
