@@ -63,8 +63,8 @@
     <main class="main-content">
         <?php
         if (App\Session::getFlash('success') || App\Session::getFlash('error')) {
-            echo '<h3 class="message" style="color: red">' . App\Session::getFlash('error') .
-                '</h3><h3 class="message" style="color: green">' . App\Session::getFlash('success') . '</h3>';
+            echo '<h3 class="flashMessage" style="color: red">' . App\Session::getFlash('error') .
+                '</h3><h3 class="flashMessage" style="color: green">' . App\Session::getFlash('success') . '</h3>';
         }
         ?>
         <?= $page ?>
@@ -86,7 +86,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        $(".message").each(function() {
+        $(".flashMessage").each(function() {
             if ($(this).text().length > 0) {
                 $(this).slideDown(500, function() {
                     $(this).delay(3000).slideUp(500)

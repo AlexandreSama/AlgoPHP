@@ -2,73 +2,121 @@
 $topic = $result["data"]['topic'];
 $userManager = $result["data"]['userManager'];
 $messages = $result["data"]['messages'];
+$i = 0;
 ?>
 
 <link rel="stylesheet" href="./public/css/topic.css">
-
-
-<table class="holder" cellspacing="0">
-    <thead class="topicInfoHolder">
-        <tr>
-            <th colspan="2" class="holderTitle">
-                <p><strong><?php echo $topic->getTitle() ?></strong></p>
-                <?php if (App\Session::isAdmin()) : ?>
-
-                    <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $topic->getId() ?>&type=topic"><i class="fa-solid fa-pen"></i></a>
-                    <?php if ($topic->getClosed()) : ?>
-
-                        <a class="modifyLink" href="index.php?ctrl=forum&action=unlockTopic&id=<?php echo $topic->getId() ?>"><i class="fa-solid fa-lock-open"></i></a>
-                    <?php else : ?>
-
-                        <a class="modifyLink" href="index.php?ctrl=forum&action=lockTopic&id=<?php echo $topic->getId() ?>"><i class="fa-solid fa-lock"></i></a>
-                    <?php endif; ?>
-
-                <?php endif; ?>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($messages as $message) : ?>
-            <?php
-            if ($message->getUser()) {
-                $users = $userManager->getUsersByMessages($message->getUser()->getId());
-                foreach ($users as $user) { ?>
-                    <tr class="infoHolder">
-                        <td class="messageTopic">
-                            <?php echo $message->getMessageText(); ?>
-                        </td>
-                        <td class="infoLastMessage">
-                            <p>Dernier message de : <a href="index.php?ctrl=security&action=showProfile&id=<?php echo $user->getId() ?>"><?php echo $user->getUsername() ?></a></p>
-                            <p>Le : <?php echo $message->getCreationDate() ?></p>
-                            <?php if (App\Session::getUser() !== false && (App\Session::isAdmin() || $user->getUsername() == App\Session::getUser()->getUsername())) : ?>
-                                <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
-                                <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php }
-            } else { ?>
-                <tr class="infoHolder">
-                    <td class="messageTopic">
-                        <?php echo $message->getMessageText(); ?>
-                    </td>
-                    <td class="infoLastMessage">
-                        <p>Dernier message de : Anonyme</p>
-                        <p>Le : <?php echo $message->getCreationDate() ?></p>
-                        <?php if (App\Session::isAdmin()) : ?>
-                            <a class="modifyLink" href="index.php?ctrl=forum&action=modifyForm&id=<?php echo $message->getId(); ?>&type=message"><i class="fa-solid fa-pen"></i></a>
-                            <a class="modifyLink" href="index.php?ctrl=forum&action=deleteMessage&id=<?php echo $message->getId(); ?>&topic=<?php echo $topic->getId() ?>"><i class="fa-solid fa-x"></i></a>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php } ?>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<?php if (App\Session::getUser() && !$topic->getClosed() || App\Session::isAdmin()) : ?>
-
-    <form method='post' action="index.php?ctrl=forum&action=addMessage&id=<?php echo $topic->getId(); ?>" class="addMessage">
-        <textarea class="full-width-height" name='messageContent'></textarea>
-        <button class="formButton">Envoyer</button>
-    </form>
-<?php endif; ?>
+<div class="container">
+    <header class="header">
+        <nav class="breadcrumb">
+            <ol class="breadcrumb-product">
+                <li class="breadcrumb-item"><a href="index.php?ctrl=forum&action=home">Forum ></a></li>
+                <li class="breadcrumb-item"><a href="index.php?ctrl=forum&action=listTopics&id=<?php echo $topic->getCategory()->getId() ?>"><?php echo $topic->getCategory()->getCategoryName() ?> ></a></li>
+                <li class="breadcrumb-item"> <?php echo $topic->getTitle() ?></li>
+            </ol>
+        </nav>
+        <div class="titleTopic">
+            <a href="#" class="categoryButton"><?php echo $topic->getCategory()->getCategoryName() ?></a>
+            <h2 class="topicTitle"><?php echo $topic->getTitle() ?></h2>
+        </div>
+    </header>
+    <div class="topic">
+        <div class="holder">
+            <!-- On commence ici le foreach des messages !-->
+            <?php foreach ($messages as $key => $message) : ?>
+            <div class="message">
+                <div class="border">
+                    <div class="messageInfos">
+                        <span class="dateMessage"><?php echo $topic->getCreationDate() ?></span>
+                        <span class="messageCount">#<?php $i = $i + 1; echo $i; ?></span>
+                    </div>
+                    <div class="messageComponents">
+                        <div class="userInfo">
+                            <div class="userInfoHolder">
+                                <div class="infoUser">
+                                    <?php 
+                                    if($message->getUser()){
+                                        echo '<a href="index.php?ctrl=security&action=showProfile&id=' . $message->getUser()->getId() . '" class="username">';
+                                        echo $message->getUser()->getUsername();
+                                        echo "</a>";
+                                    }else{
+                                        echo "Anonyme";
+                                    }?>
+                                </div>
+                                <div class="infoUser">
+                                    <img src="./public/uploads/<?php 
+                                    if($message->getUser() && $message->getUser()->getProfilePicture() !== null){
+                                        echo $message->getUser()->getProfilePicture();
+                                    }else{
+                                        echo "149071.png";
+                                    }?>" alt="profilePicture" class="profilePicture">
+                                </div>
+                                <div class="userSecrets">
+                                    <span class="dateJoinUser"><?php
+                                    if($message->getUser()){
+                                        echo "Rejoins le : " . $message->getUser()->getInscriptionDate();
+                                    }else{
+                                        echo "Rejoins le : ???";
+                                    }?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messageContents">
+                            <div class="messageContentsHolder">
+                                <div class="content">
+                                    <p><?php echo $message->getMessageText() ?></p>
+                                </div>
+                                <div class="messageInfo">
+                                    <span class="editedInfo">
+                                        <?php
+                                        if($message->getUser()){
+                                            echo 'Le : ' . $message->getCreationDate();
+                                        }else{
+                                            echo "Le : " . $message->getCreationDate();
+                                        }
+                                        ?> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach ?>
+            <!-- Et ca se finis ici -->
+        </div>
+    </div>
+    <?php if(App\Session::getUser()) : ?>
+        <div>
+            <div class="responseTerms">
+                <h4 class="respondTopic">Répondre a ce topic</h4>
+                <span>Lorsque vous répondez, soyez certain que le contenu
+                    ne viole pas nos Termes de Service
+                </span>
+            </div>
+            <div class="messageBox">
+                <form action="index.php?ctrl=forum&action=addMessage&id=<?php echo $topic->getId() ?>" class="input-transparent" method="post">
+                    <div class="form-row">
+                        <div class="firstGroup">
+                            <img src="./public/uploads/<?php
+                            if(App\Session::getUser()->getProfilePicture() !== null){
+                                echo App\Session::getUser()->getProfilePicture();
+                            }else{
+                                echo "149071.png";
+                            }
+                            ?>" alt="" class="roundedImg">
+                        </div>
+                        <div class="secondGroup">
+                            <div class="holderText">
+                                <textarea name="messageContent" rows="4" class="form-messageContent" required></textarea>
+                            </div>
+                            <div class="holderButton">
+                                <button class="btn" type="submit">Envoyer le message</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php endif ?>
+</div>

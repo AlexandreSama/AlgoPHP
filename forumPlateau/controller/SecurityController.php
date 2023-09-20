@@ -270,7 +270,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "data" => [
                 "topicCount" => $topicCount,
                 "messageCount" => $messageCount,
-                "users" => $users
+                "users" => $users,
+                "description" => "Page affichant le profile de l'utilisateur connecté !"
             ]
         ];
     }
@@ -306,7 +307,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "data" => [
                 "topicCount" => $topicCount,
                 "messageCount" => $messageCount,
-                "profileViewer" => $profileViewer
+                "profileViewer" => $profileViewer,
+                "description" => "Page affichant un utilisateur du forum !"
             ]
         ];
     }
